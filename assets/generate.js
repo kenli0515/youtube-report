@@ -408,12 +408,12 @@
       if (stamp === null) {
         var failure = await getFile('work/' + creds.id + '/error.txt');
         if (failure !== null) {
-          log('上一次抓字幕失败了：', 'error');
-          failure.split('\n').slice(0, 5).forEach(function (line) { log('  ' + line, 'error'); });
+          log('上一次没抓到字幕（换一个 runner 会换一个出口 IP，再排一次）：', 'error');
+          failure.split('\n').slice(0, 3).forEach(function (line) { log('  ' + line, 'error'); });
           offerPaste();
-          throw new Error('字幕不可用：可以展开下面的「自己贴一份」，或者改用本地的 skill');
+        } else {
+          log('① 排队：让 Actions 去抓字幕…');
         }
-        log('① 排队：让 Actions 去抓字幕…');
         await putFile('requests/' + creds.id + '.json',
           JSON.stringify({ url: creds.url, requestedAt: new Date().toISOString() }, null, 2) + '\n',
           'request: ' + creds.id);
