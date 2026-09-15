@@ -27,11 +27,20 @@ jobs:
           python3 --version; node --version; ffmpeg -version | head -1
           command -v deno || echo "deno: not installed"
 
+      # yt-dlp needs a JavaScript runtime to solve YouTube's n/sig challenges. Its default is
+      # deno, which the runner image does not ship - without this the download half of the
+      # pipeline reports "No video formats found!".
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      # The python package with its default extras, which is what a local install uses. The
+      # JS challenge solver ships as the yt-dlp-ejs extra, so [default] matters here.
       - name: Install yt-dlp
         run: |
-          curl -fsSL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o /usr/local/bin/yt-dlp
-          chmod +x /usr/local/bin/yt-dlp
-          yt-dlp --version
+          pipx install "yt-dlp[default]"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/yt-dlp" --version
 
       - name: Probe YouTube from the runner
         continue-on-error: true

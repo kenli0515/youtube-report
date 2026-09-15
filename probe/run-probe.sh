@@ -63,6 +63,24 @@ check() {  # check <label> <slug> <cmd...>
 
 note() { row "$1" "$2" "—"; }
 
+clip_check() {  # clip_check <label> <slug> <outfile> <url> <extra args...>
+  local label="$1" slug="$2" outfile="$3" url="$4"; shift 4
+  check "$label" "$slug" \
+    yt-dlp --no-warnings --ignore-no-formats-error --merge-output-format mp4 -f "$FORMAT" \
+      --download-sections "*00:00:10-00:00:16" -o "${outfile%.mp4}.%(ext)s" "$@" "$url"
+  if [ -f "$outfile" ]; then
+    local probe="$LOGS/$slug-probe.log"
+    if ffprobe -v error -show_entries format=format_name,duration \
+         -show_entries stream=codec_name,codec_type "$outfile" >"$probe" 2>&1 &&
+       grep -q codec_type=audio "$probe"; then
+      row "$label · 含音轨" "✅" "$(grep -m1 duration "$probe" | tr -d 'duration=')s"
+    else
+      row "$label · 含音轨" "❌ 无音轨" "—"
+      fail_block "$label · 片段探针" "$probe"
+    fi
+  fi
+}
+
 for entry in "${VIDEOS[@]}"; do
   IFS='|' read -r name url subs <<<"$entry"
 
@@ -74,8 +92,12 @@ for entry in "${VIDEOS[@]}"; do
     yt-dlp --no-warnings --skip-download --ignore-no-formats-error \
       --print "%(title)s|%(duration)s|%(view_count)s" "$url"
 
+  # No --ignore-no-formats-error here: an empty format list is exactly what we are hunting for.
   check "$name · format list" "$name-formats" \
-    yt-dlp --no-warnings --skip-download --ignore-no-formats-error -F "$url"
+    yt-dlp --no-warnings --skip-download -F "$url"
+  video_formats=$(grep -cE "^[0-9]+ +mp4 +(1920x1080|1280x720|[0-9]+x[0-9]+)" "$LOGS/$name-formats.log" 2>/dev/null || echo 0)
+  avc=$(grep -c "avc1" "$LOGS/$name-formats.log" 2>/dev/null || echo 0)
+  note "$name · 可用视频格式" "${video_formats} 条（其中 avc1 ${avc} 条）"
 
   check "$name · verbose run" "$name-verbose" \
     yt-dlp --skip-download --ignore-no-formats-error -J --verbose "$url"
@@ -88,21 +110,11 @@ for entry in "${VIDEOS[@]}"; do
     yt-dlp --no-warnings --skip-download --ignore-no-formats-error --write-auto-subs \
       --sub-langs "$subs" --sub-format vtt -o "$MEDIA/%(id)s.%(ext)s" "$url"
 
-  check "$name · 6s section (video+audio)" "$name-clip" \
-    yt-dlp --no-warnings --ignore-no-formats-error --merge-output-format mp4 -f "$FORMAT" \
-      --download-sections "*00:00:10-00:00:16" -o "$MEDIA/$name-clip.%(ext)s" "$url"
-
-  if [ -f "$MEDIA/$name-clip.mp4" ]; then
-    if ffprobe -v error -show_entries format=format_name,duration \
-         -show_entries stream=codec_name,codec_type "$MEDIA/$name-clip.mp4" \
-         >"$LOGS/$name-clip-probe.log" 2>&1 &&
-       grep -q codec_type=audio "$LOGS/$name-clip-probe.log"; then
-      note "$name · 片段含音轨" "是（$(grep -m1 duration "$LOGS/$name-clip-probe.log" | tr -d 'duration=')s）"
-    else
-      note "$name · 片段含音轨" "❌ 无音轨"
-      fail_block "$name · 片段探针" "$LOGS/$name-clip-probe.log"
-    fi
-  fi
+  # The whole pipeline hangs on this one: without a JS runtime yt-dlp lists formats but cannot
+  # produce a downloadable URL ("No video formats found!"), which looks like a block and is not.
+  clip_check "$name · 片段（默认 JS 运行时）" "$name-clip-default" "$MEDIA/$name-clip-default.mp4" "$url"
+  clip_check "$name · 片段（--js-runtimes node）" "$name-clip-node" "$MEDIA/$name-clip-node.mp4" "$url" \
+    --js-runtimes node
 
   for client in "${CLIENTS[@]}"; do
     if [ "$client" = default ]; then
