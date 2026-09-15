@@ -1,0 +1,4 @@
+fetch_transcript.py failed for https://www.youtube.com/watch?v=3r4NsCJOm34
+runner time: 2026-09-15 16:34 UTC
+
+error: no caption track is exposed for this video, so there is nothing to transcribe
