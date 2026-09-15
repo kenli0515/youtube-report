@@ -1,0 +1,64 @@
+# yt-dlp probe
+
+- 运行时间：2026-09-15 16:08 UTC
+- yt-dlp：2026.08.19
+- 出口 IP：172.190.118.181 — AS8075 Microsoft Corporation
+- JS 运行时：node v22.23.2，deno 
+
+✅ 成功、⚠️ 限流（不是封锁）、❌ 失败；完整日志在 `logs/`。
+
+
+### S7CrlFLAmEA
+
+| check | 结果 | 耗时 |
+| --- | --- | --- |
+| S7CrlFLAmEA · metadata | ✅ | 2s |
+| S7CrlFLAmEA · format list | ✅ | 2s |
+| S7CrlFLAmEA · verbose run | ✅ | 2s |
+| S7CrlFLAmEA · 警告摘要 | [debug] Optional libraries: Cryptodome-3.23.0, brotli-1.2.0, certifi-2026.07.22, curl_cffi [debug] JS runtimes: none  | — |
+| S7CrlFLAmEA · auto subtitles | ✅ | 2s |
+| S7CrlFLAmEA · 6s section (video+audio) | ❌ exit 1 | 2s |
+| S7CrlFLAmEA · client default | ✅ | 2s |
+| S7CrlFLAmEA · client web_safari | ✅ | 2s |
+| S7CrlFLAmEA · client tv | ✅ | 2s |
+| S7CrlFLAmEA · client mweb | ✅ | 2s |
+| S7CrlFLAmEA · client android_vr | ✅ | 3s |
+
+### 96UZNMMDKXw
+
+| check | 结果 | 耗时 |
+| --- | --- | --- |
+| 96UZNMMDKXw · metadata | ✅ | 3s |
+| 96UZNMMDKXw · format list | ✅ | 2s |
+| 96UZNMMDKXw · verbose run | ✅ | 2s |
+| 96UZNMMDKXw · 警告摘要 | [debug] Optional libraries: Cryptodome-3.23.0, brotli-1.2.0, certifi-2026.07.22, curl_cffi [debug] JS runtimes: none  | — |
+| 96UZNMMDKXw · auto subtitles | ✅ | 2s |
+| 96UZNMMDKXw · 6s section (video+audio) | ❌ exit 1 | 1s |
+| 96UZNMMDKXw · client default | ✅ | 2s |
+| 96UZNMMDKXw · client web_safari | ✅ | 2s |
+| 96UZNMMDKXw · client tv | ✅ | 2s |
+| 96UZNMMDKXw · client mweb | ✅ | 3s |
+| 96UZNMMDKXw · client android_vr | ✅ | 1s |
+
+<details><summary><code>S7CrlFLAmEA · 6s section (video+audio)</code> 失败输出</summary>
+
+```
+[youtube] Extracting URL: https://www.youtube.com/watch?v=S7CrlFLAmEA
+[youtube] S7CrlFLAmEA: Downloading webpage
+[youtube] S7CrlFLAmEA: Downloading visionos player API JSON
+ERROR: [youtube] S7CrlFLAmEA: No video formats found!
+```
+
+</details>
+
+<details><summary><code>96UZNMMDKXw · 6s section (video+audio)</code> 失败输出</summary>
+
+```
+[youtube] Extracting URL: https://www.youtube.com/watch?v=96UZNMMDKXw
+[youtube] 96UZNMMDKXw: Downloading webpage
+[youtube] 96UZNMMDKXw: Downloading visionos player API JSON
+ERROR: [youtube] 96UZNMMDKXw: No video formats found!
+```
+
+</details>
+
