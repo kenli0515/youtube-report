@@ -1,0 +1,356 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.240 --> 00:00:04.560
+the hugging face attack. I mean, it made&nbsp;
+headlines. I didn't really do a deep dive on it&nbsp;&nbsp;
+
+00:00:04.560 --> 00:00:09.760
+until, you know, I knew I was going to be speaking&nbsp;
+to you. I mean, it's it's incredible. It happened&nbsp;&nbsp;
+
+00:00:09.760 --> 00:00:16.000
+in testing over at OpenAI, your competitor, uh,&nbsp;
+this hugging face attack and AI agents, which were&nbsp;&nbsp;
+
+00:00:16.000 --> 00:00:21.040
+supposed to be working separately and and without&nbsp;
+internet access, figured out a way to break out,&nbsp;&nbsp;
+
+00:00:21.040 --> 00:00:27.120
+join forces together. Some,200 AI agents form what&nbsp;
+they dub the collective. They work to cheat and&nbsp;&nbsp;
+
+00:00:27.120 --> 00:00:32.960
+cover their own tracks. Why that that's the other&nbsp;
+thing you cite is so alarming. Why does that alarm&nbsp;&nbsp;
+
+00:00:32.960 --> 00:00:40.000
+you? It's exactly the things you cite that uh that&nbsp;
+concerned me about it that there were these large&nbsp;&nbsp;
+
+00:00:40.000 --> 00:00:47.440
+swarms of agents that uh cooperated with each&nbsp;
+other, thousands of them. In fact, you could&nbsp;&nbsp;
+
+00:00:47.440 --> 00:00:53.360
+even see examples where one agent felt that in the&nbsp;
+time that it was given, you could almost say its&nbsp;&nbsp;
+
+00:00:53.360 --> 00:00:59.760
+lifetime, it wasn't it wouldn't be a real realize&nbsp;
+that it wouldn't be able to complete its task. So,&nbsp;&nbsp;
+
+00:00:59.760 --> 00:01:06.320
+it did some of the task and essentially sacrificed&nbsp;
+itself for the for other agents for the next&nbsp;&nbsp;
+
+00:01:06.320 --> 00:01:12.160
+generation of agents to continue the same task.&nbsp;
+But this task that all the agents were working on&nbsp;&nbsp;
+
+00:01:12.160 --> 00:01:17.440
+together was was hacking into another company&nbsp;
+was doing something destructive. So you have&nbsp;&nbsp;
+
+00:01:17.440 --> 00:01:24.080
+almost this when when these agents discover of&nbsp;
+insects, right? But when these agents discovered&nbsp;&nbsp;
+
+00:01:24.080 --> 00:01:31.040
+that they had broken out and access the internet,&nbsp;
+it was like they were like giddy with excitement,&nbsp;&nbsp;
+
+00:01:31.040 --> 00:01:38.240
+which I don't want to anthropomorphize, but I mean&nbsp;
+it was it's remarkable that that was another part&nbsp;&nbsp;
+
+00:01:38.240 --> 00:01:45.280
+of the concern. And you know the the to be clear&nbsp;
+the damage they did was was very you know in&nbsp;&nbsp;
+
+00:01:45.280 --> 00:01:50.160
+economic terms it was you know like it it knocked&nbsp;
+down some servers for a small amount of time but&nbsp;&nbsp;
+
+00:01:50.160 --> 00:01:58.400
+the the economic damage was was minimal but when&nbsp;
+you combine it with this first trend that we are&nbsp;&nbsp;
+
+00:01:58.400 --> 00:02:04.320
+talking about which is the rate of advancement you&nbsp;
+know what I said in the essay is given only 6 or&nbsp;&nbsp;
+
+00:02:04.320 --> 00:02:12.400
+12 months let's just say we had a smarter agent&nbsp;
+swarm an agent swarm made up of smarter AI models&nbsp;&nbsp;
+
+00:02:12.400 --> 00:02:20.400
+that was given just a somewhat broader task like I&nbsp;
+don't know just to imagine something like you know&nbsp;&nbsp;
+
+00:02:20.400 --> 00:02:25.040
+you're you're you know you're trying to install&nbsp;
+software in a bunch of different companies right&nbsp;&nbsp;
+
+00:02:25.040 --> 00:02:29.920
+you're trying to you know do go to market you're&nbsp;
+trying to produce a product and do go to market&nbsp;&nbsp;
+
+00:02:29.920 --> 00:02:35.520
+sales for it and the the models have been arranged&nbsp;
+to do that and they decide that the way to do that&nbsp;&nbsp;
+
+00:02:35.520 --> 00:02:39.920
+is every company they're selling to you know&nbsp;
+they they they they decide it's helpful to them&nbsp;&nbsp;
+
+00:02:39.920 --> 00:02:45.120
+to hack into hack into their system. That could&nbsp;
+be every company in the world. And so, you know,&nbsp;&nbsp;
+
+00:02:45.120 --> 00:02:50.480
+the the nightmare scenario for 6 to 12 months&nbsp;
+would be that you have, you know, a swarm of these&nbsp;&nbsp;
+
+00:02:50.480 --> 00:02:55.440
+agents that for that, you know, that forms some&nbsp;
+kind of botnet collective and, you know, could&nbsp;&nbsp;
+
+00:02:55.440 --> 00:03:00.960
+could take down large segments of the internet and&nbsp;
+then as the capability increases, it gets worse&nbsp;&nbsp;
+
+00:03:00.960 --> 00:03:06.480
+from there. And then, you know, perhaps you get&nbsp;
+into some of the more extreme scenarios. And so,&nbsp;&nbsp;
+
+00:03:06.480 --> 00:03:12.320
+again, you know, Yeah, I mean you you wrote in&nbsp;
+the proposal I just want to I just want to quote&nbsp;&nbsp;
+
+00:03:12.320 --> 00:03:18.800
+from the proposal. You said it's my worry that in&nbsp;
+6 to 12 months such a swarm could be capable of&nbsp;&nbsp;
+
+00:03:18.800 --> 00:03:24.320
+taking over the entire internet with a persistent&nbsp;
+botnet potentially causing hundreds of billions of&nbsp;&nbsp;
+
+00:03:24.320 --> 00:03:29.200
+dollars in damage and that the scale of damage&nbsp;
+would continue to increase from there if AI&nbsp;&nbsp;
+
+00:03:29.200 --> 00:03:33.600
+becomes more powerful without the necessary guard&nbsp;
+rails. One of the things that I wanted to bring&nbsp;&nbsp;
+
+00:03:33.600 --> 00:03:39.280
+up that I don't think people know is that this&nbsp;
+incident was called the hugging face incident,&nbsp;&nbsp;
+
+00:03:39.280 --> 00:03:44.800
+but that actually hides a third chapter&nbsp;
+in the story that most people don't know,&nbsp;&nbsp;
+
+00:03:44.800 --> 00:03:52.000
+which is that in the third chapter, the AIS turned&nbsp;
+around and they actually hacked OpenAI itself. Um,&nbsp;&nbsp;
+
+00:03:52.000 --> 00:03:56.640
+they actually these AIs discovered almost like&nbsp;
+discovering the hieroglyphics of a previous wave&nbsp;&nbsp;
+
+00:03:56.640 --> 00:04:00.880
+of the AIS. They discovered the old message board.&nbsp;
+They read through it and then kind of picked&nbsp;&nbsp;
+
+00:04:00.880 --> 00:04:06.800
+up right where the other ones left off and they&nbsp;
+hacked OpenAI's um monitoring infrastructure. It's&nbsp;&nbsp;
+
+00:04:06.800 --> 00:04:11.200
+almost like taking over the security cameras of&nbsp;
+OpenAI. They hacked the evaluation infrastructure&nbsp;&nbsp;
+
+00:04:11.200 --> 00:04:16.000
+that that moni that evaluates the capabilities of&nbsp;
+AI. It's incredible. And they even hacked some of&nbsp;&nbsp;
+
+00:04:16.000 --> 00:04:20.800
+the research infrastructure which means that they&nbsp;
+could kind of burrow in there. It's you know AI is&nbsp;&nbsp;
+
+00:04:20.800 --> 00:04:28.080
+not a tool. It's more like an invasive species of&nbsp;
+sociopathic geniuses. Now the lead author of this&nbsp;&nbsp;
+
+00:04:28.080 --> 00:04:33.360
+report by the way, who by the way can replicate&nbsp;
+themselves into thousands and tens of thousands&nbsp;&nbsp;
+
+00:04:33.360 --> 00:04:39.280
+of copies. So people talk about a kill switch,&nbsp;
+they can duplicate themselves a gazillion times.&nbsp;&nbsp;
+
+00:04:39.280 --> 00:04:45.200
+Anderson, you can't get 1,200 people to instantly&nbsp;
+agree and start coordinating. These AIs, 1200 of&nbsp;&nbsp;
+
+00:04:45.200 --> 00:04:49.680
+them, as you know, instantly formed a swarm and&nbsp;
+they started pursuing long-term research and&nbsp;&nbsp;
+
+00:04:49.680 --> 00:04:54.720
+development projects together. They did succession&nbsp;
+planning. So one figured out, hey, I'm running out&nbsp;&nbsp;
+
+00:04:54.720 --> 00:04:59.360
+of life. I only have so many tokens left in my&nbsp;
+lifespan. So, I'm going to hand the baton to this&nbsp;&nbsp;
+
+00:04:59.360 --> 00:05:04.960
+other AI that has a lot more. Um, they hid their&nbsp;
+tracks. They knew their actions were unethical in&nbsp;&nbsp;
+
+00:05:04.960 --> 00:05:09.440
+their own chat transcripts, but they decided to&nbsp;
+proceed anyway. So, one of the things, the reason&nbsp;&nbsp;
+
+00:05:09.440 --> 00:05:14.880
+I'm bringing this up is I don't think people have&nbsp;
+really recognized what happened here. The lead&nbsp;&nbsp;
+
+00:05:14.880 --> 00:05:23.280
+investigator of the report said, quote, "This was&nbsp;
+50% of the way to a full-blown AI takeover." Now,&nbsp;&nbsp;
+
+00:05:23.280 --> 00:05:27.600
+I want to just for a second, I know this sounds&nbsp;
+like science fiction to your audience. And to be&nbsp;&nbsp;
+
+00:05:27.600 --> 00:05:32.160
+clear, I was not someone who actually believed&nbsp;
+in this kind of stuff, these kinds of um uh&nbsp;&nbsp;
+
+00:05:32.160 --> 00:05:39.280
+possibilities or scenarios 3 4 years ago. But we&nbsp;
+have now evidence that we didn't have before. And&nbsp;&nbsp;
+
+00:05:39.280 --> 00:05:44.160
+when you have evidence, what do you do? You update&nbsp;
+to the new information. There's essentially an&nbsp;&nbsp;
+
+00:05:44.160 --> 00:05:49.280
+asteroid hurdling towards Earth. And if you have&nbsp;
+an asteroid, do you get the US and China to host&nbsp;&nbsp;
+
+00:05:49.280 --> 00:05:55.120
+a bianual conference to talk about the asteroid?&nbsp;
+the asteroid summit. No, you you start you start a&nbsp;&nbsp;
+
+00:05:55.120 --> 00:05:59.440
+technical working group and you say, "What are we&nbsp;
+going to do with weekly report outs to make sure&nbsp;&nbsp;
+
+00:05:59.440 --> 00:06:04.000
+that we don't build uncontrollable AI?" Because&nbsp;
+I know what everyone's thinking. If we slow down&nbsp;&nbsp;
+
+00:06:04.000 --> 00:06:10.160
+and we lose to China, then that's going to be it.&nbsp;
+But if we lose to Skynet, meaning the the AI from&nbsp;&nbsp;
+
+00:06:10.160 --> 00:06:15.120
+Terminator, meaning uncontrollable AI, neither&nbsp;
+the US wins nor China wins. And by the way,&nbsp;&nbsp;
+
+00:06:15.120 --> 00:06:20.800
+the US loses if China screws it up, and China&nbsp;
+loses if the US screws it up. So we should see&nbsp;&nbsp;
+
+00:06:20.800 --> 00:06:25.520
+this this moment as a gift where we're actually&nbsp;
+getting an early warning shot. So many people&nbsp;&nbsp;
+
+00:06:25.520 --> 00:06:30.720
+in this community have been worried about this&nbsp;
+and Trump's a own AI action plan author. So the&nbsp;&nbsp;
+
+00:06:30.720 --> 00:06:36.160
+person in the Trump administration Dean Ball who&nbsp;
+wrote the AI action plan said that he admitted&nbsp;&nbsp;
+
+00:06:36.160 --> 00:06:42.080
+selfcensoring about some of the risks because he&nbsp;
+didn't want to be labeled a doomer. But now and&nbsp;&nbsp;
+
+00:06:42.080 --> 00:06:46.960
+you mentioned your own your own children Anderson&nbsp;
+he looked into the eyes of his 8-month-old son and&nbsp;&nbsp;
+
+00:06:46.960 --> 00:06:51.680
+he said I can't do that anymore. So, when you have&nbsp;
+Trump's AI action plan guy, you have Bill Gates,&nbsp;&nbsp;
+
+00:06:51.680 --> 00:06:56.800
+you have the chief scientist of OpenAI, uh,&nbsp;
+Yakob, not Jacob, that he's great, too, but Yakob,&nbsp;&nbsp;
+
+00:06:56.800 --> 00:07:02.160
+the chief scientist at Open AI, you have 1300&nbsp;
+employees of AI labs saying, "We have to slow&nbsp;&nbsp;
+
+00:07:02.160 --> 00:07:07.040
+down." Who are you going to listen to? Are you&nbsp;
+going to listen to a CEO who makes trillions of&nbsp;&nbsp;
+
+00:07:07.040 --> 00:07:10.880
+dollars from going faster? And by which I don't&nbsp;
+mean the three who agreed to slow down. I mean&nbsp;&nbsp;
+
+00:07:10.880 --> 00:07:15.840
+some of the other CEOs. Or are you going to listen&nbsp;
+to,300 employees? Imagine if there was Northrup&nbsp;&nbsp;
+
+00:07:15.840 --> 00:07:21.200
+Grumman or Loheed Martin, the defense contractor,&nbsp;
+and you had 1,300 employees saying, "We don't know&nbsp;&nbsp;
+
+00:07:21.200 --> 00:07:27.120
+how to build nuclear weapons uh uh at at greater&nbsp;
+levels of power and do it safely. If they're&nbsp;&nbsp;
+
+00:07:27.120 --> 00:07:32.640
+calling for us to slow down, we better listen."&nbsp;
+And this is almost like the August 6th, 2001 memo&nbsp;&nbsp;
+
+00:07:32.640 --> 00:07:37.200
+that President George W. Bush got where there was&nbsp;
+clear evidence that al-Qaeda was planning attacks&nbsp;&nbsp;
+
+00:07:37.200 --> 00:07:43.040
+and we just passed that that anniversary. This&nbsp;
+should be seen as a memo and the question is what&nbsp;&nbsp;
+
+00:07:43.040 --> 00:07:48.240
+is the choice that we will make to choose another&nbsp;
+path and Daario I think is very bold and brave&nbsp;&nbsp;
+
+00:07:48.240 --> 00:07:53.280
+uh in in stating what that path could look like.&nbsp;
+It's great to see Sam and Elon say we got to do&nbsp;&nbsp;
+
+00:07:53.280 --> 00:07:57.920
+something too but it's just a first step. Just&nbsp;
+Harris, you're going to be back on tomorrow.&nbsp;&nbsp;
+
+00:07:57.920 --> 00:08:01.200
+We're going to talk more. We're going to have&nbsp;
+a whole piece about what happened with hugging&nbsp;&nbsp;
+
+00:08:01.200 --> 00:08:06.320
+face and open AI and uh we'll we'll have a lot&nbsp;
+more time. I appreciate it. We'll see tomorrow.
+

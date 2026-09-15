@@ -1,0 +1,88 @@
+[0] 00:00:00 the hugging face attack. I mean, it made headlines. I didn't really do a deep dive on it
+[4] 00:00:04 until, you know, I knew I was going to be speaking to you. I mean, it's it's incredible. It happened
+[9] 00:00:09 in testing over at OpenAI, your competitor, uh, this hugging face attack and AI agents, which were
+[16] 00:00:16 supposed to be working separately and and without internet access, figured out a way to break out,
+[21] 00:00:21 join forces together. Some,200 AI agents form what they dub the collective. They work to cheat and
+[27] 00:00:27 cover their own tracks. Why that that's the other thing you cite is so alarming. Why does that alarm
+[32] 00:00:32 you? It's exactly the things you cite that uh that concerned me about it that there were these large
+[40] 00:00:40 swarms of agents that uh cooperated with each other, thousands of them. In fact, you could
+[47] 00:00:47 even see examples where one agent felt that in the time that it was given, you could almost say its
+[53] 00:00:53 lifetime, it wasn't it wouldn't be a real realize that it wouldn't be able to complete its task. So,
+[59] 00:00:59 it did some of the task and essentially sacrificed itself for the for other agents for the next
+[66] 00:01:06 generation of agents to continue the same task. But this task that all the agents were working on
+[72] 00:01:12 together was was hacking into another company was doing something destructive. So you have
+[77] 00:01:17 almost this when when these agents discover of insects, right? But when these agents discovered
+[84] 00:01:24 that they had broken out and access the internet, it was like they were like giddy with excitement,
+[91] 00:01:31 which I don't want to anthropomorphize, but I mean it was it's remarkable that that was another part
+[98] 00:01:38 of the concern. And you know the the to be clear the damage they did was was very you know in
+[105] 00:01:45 economic terms it was you know like it it knocked down some servers for a small amount of time but
+[110] 00:01:50 the the economic damage was was minimal but when you combine it with this first trend that we are
+[118] 00:01:58 talking about which is the rate of advancement you know what I said in the essay is given only 6 or
+[124] 00:02:04 12 months let's just say we had a smarter agent swarm an agent swarm made up of smarter AI models
+[132] 00:02:12 that was given just a somewhat broader task like I don't know just to imagine something like you know
+[140] 00:02:20 you're you're you know you're trying to install software in a bunch of different companies right
+[145] 00:02:25 you're trying to you know do go to market you're trying to produce a product and do go to market
+[149] 00:02:29 sales for it and the the models have been arranged to do that and they decide that the way to do that
+[155] 00:02:35 is every company they're selling to you know they they they they decide it's helpful to them
+[159] 00:02:39 to hack into hack into their system. That could be every company in the world. And so, you know,
+[165] 00:02:45 the the nightmare scenario for 6 to 12 months would be that you have, you know, a swarm of these
+[170] 00:02:50 agents that for that, you know, that forms some kind of botnet collective and, you know, could
+[175] 00:02:55 could take down large segments of the internet and then as the capability increases, it gets worse
+[180] 00:03:00 from there. And then, you know, perhaps you get into some of the more extreme scenarios. And so,
+[186] 00:03:06 again, you know, Yeah, I mean you you wrote in the proposal I just want to I just want to quote
+[192] 00:03:12 from the proposal. You said it's my worry that in 6 to 12 months such a swarm could be capable of
+[198] 00:03:18 taking over the entire internet with a persistent botnet potentially causing hundreds of billions of
+[204] 00:03:24 dollars in damage and that the scale of damage would continue to increase from there if AI
+[209] 00:03:29 becomes more powerful without the necessary guard rails. One of the things that I wanted to bring
+[213] 00:03:33 up that I don't think people know is that this incident was called the hugging face incident,
+[219] 00:03:39 but that actually hides a third chapter in the story that most people don't know,
+[224] 00:03:44 which is that in the third chapter, the AIS turned around and they actually hacked OpenAI itself. Um,
+[232] 00:03:52 they actually these AIs discovered almost like discovering the hieroglyphics of a previous wave
+[236] 00:03:56 of the AIS. They discovered the old message board. They read through it and then kind of picked
+[240] 00:04:00 up right where the other ones left off and they hacked OpenAI's um monitoring infrastructure. It's
+[246] 00:04:06 almost like taking over the security cameras of OpenAI. They hacked the evaluation infrastructure
+[251] 00:04:11 that that moni that evaluates the capabilities of AI. It's incredible. And they even hacked some of
+[256] 00:04:16 the research infrastructure which means that they could kind of burrow in there. It's you know AI is
+[260] 00:04:20 not a tool. It's more like an invasive species of sociopathic geniuses. Now the lead author of this
+[268] 00:04:28 report by the way, who by the way can replicate themselves into thousands and tens of thousands
+[273] 00:04:33 of copies. So people talk about a kill switch, they can duplicate themselves a gazillion times.
+[279] 00:04:39 Anderson, you can't get 1,200 people to instantly agree and start coordinating. These AIs, 1200 of
+[285] 00:04:45 them, as you know, instantly formed a swarm and they started pursuing long-term research and
+[289] 00:04:49 development projects together. They did succession planning. So one figured out, hey, I'm running out
+[294] 00:04:54 of life. I only have so many tokens left in my lifespan. So, I'm going to hand the baton to this
+[299] 00:04:59 other AI that has a lot more. Um, they hid their tracks. They knew their actions were unethical in
+[304] 00:05:04 their own chat transcripts, but they decided to proceed anyway. So, one of the things, the reason
+[309] 00:05:09 I'm bringing this up is I don't think people have really recognized what happened here. The lead
+[314] 00:05:14 investigator of the report said, quote, "This was 50% of the way to a full-blown AI takeover." Now,
+[323] 00:05:23 I want to just for a second, I know this sounds like science fiction to your audience. And to be
+[327] 00:05:27 clear, I was not someone who actually believed in this kind of stuff, these kinds of um uh
+[332] 00:05:32 possibilities or scenarios 3 4 years ago. But we have now evidence that we didn't have before. And
+[339] 00:05:39 when you have evidence, what do you do? You update to the new information. There's essentially an
+[344] 00:05:44 asteroid hurdling towards Earth. And if you have an asteroid, do you get the US and China to host
+[349] 00:05:49 a bianual conference to talk about the asteroid? the asteroid summit. No, you you start you start a
+[355] 00:05:55 technical working group and you say, "What are we going to do with weekly report outs to make sure
+[359] 00:05:59 that we don't build uncontrollable AI?" Because I know what everyone's thinking. If we slow down
+[364] 00:06:04 and we lose to China, then that's going to be it. But if we lose to Skynet, meaning the the AI from
+[370] 00:06:10 Terminator, meaning uncontrollable AI, neither the US wins nor China wins. And by the way,
+[375] 00:06:15 the US loses if China screws it up, and China loses if the US screws it up. So we should see
+[380] 00:06:20 this this moment as a gift where we're actually getting an early warning shot. So many people
+[385] 00:06:25 in this community have been worried about this and Trump's a own AI action plan author. So the
+[390] 00:06:30 person in the Trump administration Dean Ball who wrote the AI action plan said that he admitted
+[396] 00:06:36 selfcensoring about some of the risks because he didn't want to be labeled a doomer. But now and
+[402] 00:06:42 you mentioned your own your own children Anderson he looked into the eyes of his 8-month-old son and
+[406] 00:06:46 he said I can't do that anymore. So, when you have Trump's AI action plan guy, you have Bill Gates,
+[411] 00:06:51 you have the chief scientist of OpenAI, uh, Yakob, not Jacob, that he's great, too, but Yakob,
+[416] 00:06:56 the chief scientist at Open AI, you have 1300 employees of AI labs saying, "We have to slow
+[422] 00:07:02 down." Who are you going to listen to? Are you going to listen to a CEO who makes trillions of
+[427] 00:07:07 dollars from going faster? And by which I don't mean the three who agreed to slow down. I mean
+[430] 00:07:10 some of the other CEOs. Or are you going to listen to,300 employees? Imagine if there was Northrup
+[435] 00:07:15 Grumman or Loheed Martin, the defense contractor, and you had 1,300 employees saying, "We don't know
+[441] 00:07:21 how to build nuclear weapons uh uh at at greater levels of power and do it safely. If they're
+[447] 00:07:27 calling for us to slow down, we better listen." And this is almost like the August 6th, 2001 memo
+[452] 00:07:32 that President George W. Bush got where there was clear evidence that al-Qaeda was planning attacks
+[457] 00:07:37 and we just passed that that anniversary. This should be seen as a memo and the question is what
+[463] 00:07:43 is the choice that we will make to choose another path and Daario I think is very bold and brave
+[468] 00:07:48 uh in in stating what that path could look like. It's great to see Sam and Elon say we got to do
+[473] 00:07:53 something too but it's just a first step. Just Harris, you're going to be back on tomorrow.
+[477] 00:07:57 We're going to talk more. We're going to have a whole piece about what happened with hugging
+[481] 00:08:01 face and open AI and uh we'll we'll have a lot more time. I appreciate it. We'll see tomorrow.

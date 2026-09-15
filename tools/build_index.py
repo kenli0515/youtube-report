@@ -222,7 +222,9 @@ def find_reports(root: Path):
         parts = path.relative_to(root).parts[:-1]
         if len(parts) > MAX_DEPTH:
             continue
-        if any(p.startswith(".") or p.startswith("_") or p in SKIP_DIRS for p in parts):
+        # Only hidden folders are skipped: a video id may well start with an underscore
+        # (YouTube's own ids do), and dropping those would silently hide a real report.
+        if any(p.startswith(".") or p in SKIP_DIRS for p in parts):
             continue
         reports.append(path)
     return reports
