@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「我找你，是为了见你」：11 年老友聊边界与内耗｜要点报告</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --ink:#14161c; --ink-soft:#3d424e; --muted:#6b7280;
+  --line:#e6e7ef; --line-strong:#d8dae6;
+  --accent:#4f6ef7; --accent-2:#8b5cf6; --accent-soft:#eef1fe;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.13);
+  --shadow:0 1px 2px rgba(16,18,27,.04),0 8px 24px -18px rgba(16,18,27,.28);
+  --shadow-lift:0 18px 40px -22px rgba(16,18,27,.38);
+  --radius:18px; --radius-sm:12px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+  --line:#242733; --line-strong:#31364a;
+  --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+    --line:#242733; --line-strong:#31364a;
+    --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+    --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background-color:var(--bg);
+  background-image:
+    radial-gradient(900px 340px at 10% -80px,var(--glow-a),transparent 70%),
+    radial-gradient(760px 300px at 92% -110px,var(--glow-b),transparent 72%);
+  background-repeat:no-repeat;
+  font:16px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--accent);color:#fff}
+
+/* reading progress + back to top */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .12s linear}
+#totop{position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font-size:1.05rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#totop.on{opacity:1;visibility:visible;transform:none}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding:58px 0 26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.toolbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:.78rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+h1{font-size:clamp(1.55rem,3.1vw,2.3rem);line-height:1.3;margin:0 0 22px;
+  letter-spacing:-.022em;font-weight:800}
+.sub{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:650;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.pill:hover{text-decoration:none;filter:brightness(.97);border-color:var(--accent)}
+.pill.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550}
+
+/* table of contents */
+.toc{margin:36px 0 0;padding:22px 26px 24px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.toc-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.toc h2{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0;font-weight:750}
+.toc .count{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc ol{columns:2;column-gap:14px;margin:0;padding:0;list-style:none}
+@media (max-width:720px){.toc ol{columns:1}}
+.toc li{break-inside:avoid;margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:5px 9px;border-radius:9px;
+  color:var(--ink);font-size:.93rem;line-height:1.5}
+.toc a:hover{background:var(--accent-soft);color:var(--accent);text-decoration:none}
+.toc .stamp{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.82rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.toc a:hover .stamp{color:var(--accent)}
+
+/* section headings */
+h2.section{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:750;
+  margin:60px 0 20px;letter-spacing:-.01em}
+h2.section .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;
+  font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;
+  padding:3px 8px;letter-spacing:.02em}
+h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* point cards */
+.point{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 18px;margin:16px 0;box-shadow:var(--shadow);
+  transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+.point:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px);
+  border-color:var(--line-strong)}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h3{font-size:1.06rem;line-height:1.5;margin:0;font-weight:700;flex:1;min-width:60%;
+  letter-spacing:-.005em}
+.head .stamp{background:var(--accent-soft);color:var(--accent);border-radius:9px;
+  padding:3px 10px;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.head .stamp:hover{text-decoration:none;filter:brightness(.95)}
+.toggle{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:3px 11px;font-size:.77rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.point.collapsed .media{display:none}
+.point.collapsed{padding-bottom:16px}
+
+/* media */
+.media{position:relative;margin:16px 0 0;line-height:0}
+video{display:block;width:100%;height:auto;border-radius:var(--radius-sm);background:#000}
+img{display:block;width:100%;height:auto;border-radius:var(--radius-sm);
+  border:1px solid var(--line)}
+.chip-dur{position:absolute;top:10px;right:10px;pointer-events:none;line-height:1.5;
+  background:rgba(8,10,16,.62);color:#fff;font-size:.74rem;font-weight:600;
+  padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;padding:0 0 0 4px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:1.05rem;line-height:1;color:#fff;
+  border:1.5px solid rgba(255,255,255,.7);background:rgba(8,10,16,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .18s ease,opacity .25s ease,background .18s ease}
+.play:hover{transform:translate(-50%,-50%) scale(1.07);background:rgba(8,10,16,.72)}
+/* YouTube facade: the poster is what loads first, the player only appears on click. */
+.media.facade{aspect-ratio:16/9;background:#07080c}
+.media.facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border:0;border-radius:var(--radius-sm)}
+.media.facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+  border-radius:var(--radius-sm);background:#000}
+/* With no still frame to show, the player says what it is instead of showing an empty box. */
+.facade-hint{position:absolute;left:0;right:0;top:calc(50% + 48px);text-align:center;
+  color:#98a0b0;font-size:.82rem;letter-spacing:.03em;pointer-events:none}
+.media.playing .facade-hint{display:none}
+.media.playing img{opacity:1}
+.media.playing .play{opacity:0;visibility:hidden}
+.media.playing .chip-dur{opacity:0;transition:opacity .25s ease}
+
+.note{margin:16px 0 0;color:var(--ink-soft);font-size:.97rem}
+.actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;padding-top:12px;
+  border-top:1px dashed var(--line);font-size:.84rem}
+.actions a{color:var(--muted)}
+.actions a:hover{color:var(--accent)}
+.actions a::before{content:"↗ ";font-size:.8em}
+
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.83rem;line-height:1.95}
+footer a{color:var(--muted);text-decoration:underline}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:560px){
+  .wrap{padding:0 16px 80px}
+  .point{padding:18px 16px 14px}
+  h2.section{margin-top:44px}
+  #totop{right:16px;bottom:16px}
+}
+@media print{
+  #bar,#totop,.toolbtn,.toggle,.play{display:none}
+  body{background:#fff}
+  .point{break-inside:avoid;box-shadow:none}
+}
+</style>
+<noscript><style>.point.collapsed .media{display:block}.toggle,.toolbtn{display:none}</style></noscript>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+<header class="hero">
+<div class="hero-top">
+<span class="eyebrow">视频要点报告</span>
+<div class="tools">
+<button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
+<button id="clips" class="toolbtn" type="button">展开全部视频</button>
+</div>
+</div>
+<h1>「我找你，是为了见你」：11 年老友聊边界与内耗｜要点报告</h1>
+<div class="sub">
+<span class="pill">AK‘s Tech Studio</span>
+<span class="pill ghost">51:58</span>
+<span class="pill ghost">2026-09-14</span>
+<span class="pill ghost">1.9 万次观看</span>
+<span class="pill ghost">29 个要点</span>
+<a class="pill ghost" href="https://www.youtube.com/watch?v=3r4NsCJOm34">在 YouTube 打开原视频 ↗</a>
+</div>
+</header>
+<nav class="toc">
+<div class="toc-head">
+<h2>目录</h2>
+<span class="count">29 个要点 · 全长 51:58</span>
+</div>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=0s"><span class="stamp">00:00:00</span><span class="ttl">十年独处之后的一次主动</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=46s"><span class="stamp">00:00:46</span><span class="ttl">现在的内容缺「活人感」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=92s"><span class="stamp">00:01:32</span><span class="ttl">一次没有稿子的实验</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=138s"><span class="stamp">00:02:18</span><span class="ttl">主动联系换来了什么</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=183s"><span class="stamp">00:03:03</span><span class="ttl">不同的人带来新的视角</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=229s"><span class="stamp">00:03:49</span><span class="ttl">主动还是被动，不如真诚开放</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=275s"><span class="stamp">00:04:35</span><span class="ttl">同频的另一面是信息茧房</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=322s"><span class="stamp">00:05:22</span><span class="ttl">吸引力与摩擦力</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=460s"><span class="stamp">00:07:40</span><span class="ttl">「课题分离你自己都没做好」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=553s"><span class="stamp">00:09:13</span><span class="ttl">把生活当任务管理</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=600s"><span class="stamp">00:10:00</span><span class="ttl">内耗是瞬间的，不会长期存在</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=690s"><span class="stamp">00:11:30</span><span class="ttl">有些事可以就搁在那儿</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=828s"><span class="stamp">00:13:48</span><span class="ttl">理性驱动与工具控</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=925s"><span class="stamp">00:15:25</span><span class="ttl">我在不同人面前是不同的面</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1109s"><span class="stamp">00:18:29</span><span class="ttl">欣赏是维系关系的一部分</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1156s"><span class="stamp">00:19:16</span><span class="ttl">十一年里互相改变了什么</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1481s"><span class="stamp">00:24:41</span><span class="ttl">「OK 就好」，不过度讲究精致</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1617s"><span class="stamp">00:26:57</span><span class="ttl">风险意识的反差</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1711s"><span class="stamp">00:28:31</span><span class="ttl">去西藏：人生清单上的一项</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1756s"><span class="stamp">00:29:16</span><span class="ttl">身体会先提醒你</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1848s"><span class="stamp">00:30:48</span><span class="ttl">「都是过程」与负面归因</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1939s"><span class="stamp">00:32:19</span><span class="ttl">三十岁之后反而更轻松</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2217s"><span class="stamp">00:36:57</span><span class="ttl">时间为什么越过越快</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2359s"><span class="stamp">00:39:19</span><span class="ttl">写日记的好处</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2545s"><span class="stamp">00:42:25</span><span class="ttl">「我的缺点是爱管身边的人」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2591s"><span class="stamp">00:43:11</span><span class="ttl">陪朋友吃饭却在修图</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2730s"><span class="stamp">00:45:30</span><span class="ttl">把朋友的利益放在自己前面</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2958s"><span class="stamp">00:49:18</span><span class="ttl">不把表达刻意做成人设</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=3051s"><span class="stamp">00:50:51</span><span class="ttl">不再看自己的回放</span></a></li>
+</ol>
+</nav>
+<main>
+<h2 class="section" id="s1"><span class="n">01</span><span class="t">开场：从独处到主动连接</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=0s">00:00:00</a>
+<h3>十年独处之后的一次主动</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=0&amp;end=5&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他说自己过去五到十年基本独处、不主动与人来往，在深圳几乎唯一的朋友就是这位认识十一年的老友；最近他开始主动去建立新的连接。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=0s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=46s">00:00:46</a>
+<h3>现在的内容缺「活人感」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=45&amp;end=51&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他觉得自己所在的内容赛道有一套约定俗成的流程——来了、评测、点评、告诉大家好在哪，但严重缺少「活人感」，因为大家都在做同一件很酷炫的事。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=46s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=92s">00:01:32</a>
+<h3>一次没有稿子的实验</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=91&amp;end=97&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他和朋友欧阳一起，以用户使用一个月的真实感受聊了两个半小时的新产品，没有稿子也没有预设，想看这样长的内容能不能真的帮到厂商推广好产品。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=92s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=138s">00:02:18</a>
+<h3>主动联系换来了什么</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=137&amp;end=143&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他主动去厂商公司拜访那位平时只在线上聊天的市场同事，两人聊了三四个小时，对方分享了投流策略、怎么找达人，他也讲了自己过去合作愉快与不愉快的经历。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=138s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s2"><span class="n">02</span><span class="t">连接、同频与摩擦力</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=183s">00:03:03</a>
+<h3>不同的人带来新的视角</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=182&amp;end=188&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">一个人待着的状态不会触发出这些部分；正是不同的人带来了他自己不会产生的视角。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=183s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=229s">00:03:49</a>
+<h3>主动还是被动，不如真诚开放</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=228&amp;end=234&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">她说不用强调主动还是被动，真正重要的是建立连接时你是否真诚、是否开放——抱着强观点去交流，对双方都没有增益。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=229s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=275s">00:04:35</a>
+<h3>同频的另一面是信息茧房</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=274&amp;end=280&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">同频意味着视角相近，容易一上来就有共鸣、甚至困在信息茧房里；而他们俩能聊很久，恰恰是因为彼此的视角完全不同。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=275s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=322s">00:05:22</a>
+<h3>吸引力与摩擦力</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=321&amp;end=327&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">关系很有意思：不同的人既会产生吸引力，也会产生摩擦力。抱着同理心和善意站在对方视角想一想，可能会收获完全不同的世界。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=322s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s3"><span class="n">03</span><span class="t">边界与内耗</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=460s">00:07:40</a>
+<h3>「课题分离你自己都没做好」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=459&amp;end=465&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">她举了一个例子：他出门忘带电脑，却一直由她帮着记着；她说这是你的事，你总跟我讲课题分离，其实你自己没做好。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=460s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=553s">00:09:13</a>
+<h3>把生活当任务管理</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=552&amp;end=558&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">她把这件事解读成：他有某种强迫症，把什么都当作任务来管理，所以事情不在自己手上时就会不舒服。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=553s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=600s">00:10:00</a>
+<h3>内耗是瞬间的，不会长期存在</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=599&amp;end=605&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他不太认为自己内耗，但承认在特定情形下会有那种瞬间的情绪；她的判断是：他的内耗来得快，也不会长期停在那里。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=600s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=690s">00:11:30</a>
+<h3>有些事可以就搁在那儿</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=689&amp;end=695&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">被她说中之后他承认：今天的事情你自己解决，没找到你就把事搁在那儿、可以不在乎——但现实中他很难真的做到。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=690s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s4"><span class="n">04</span><span class="t">彼此眼中的对方</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=828s">00:13:48</a>
+<h3>理性驱动与工具控</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=827&amp;end=833&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他自认非常以理性驱动，有一整套工具帮自己做到这些事，工作上也不太掺杂个人情感；她的印象则是他大大咧咧、毫无防备。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=828s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=925s">00:15:25</a>
+<h3>我在不同人面前是不同的面</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=924&amp;end=930&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">她说自己很明显：跟不同的人在一起呈现的面不一样。工作里有的人甚至会有点怕她，因为她平时要求很严。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=925s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1109s">00:18:29</a>
+<h3>欣赏是维系关系的一部分</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1108&amp;end=1114&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">她认为欣赏是维持任何关系很重要的部分，无论是友谊还是别的；这也是他们能相处十一年的原因之一。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1109s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1156s">00:19:16</a>
+<h3>十一年里互相改变了什么</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1155&amp;end=1161&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他注意到自己不经意间改变了她不少想法，也改变了她对自己的看法——最初的标签是「科技宅男」，后来慢慢被推翻。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1156s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s5"><span class="n">05</span><span class="t">生活秩序与风险感</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1481s">00:24:41</a>
+<h3>「OK 就好」，不过度讲究精致</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1480&amp;end=1486&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他承认自己能做到一个「OK 的水平」，但不会过度讲究秩序或精致感；现在他有一定的经济能力去做选择，比如请阿姨帮忙。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1481s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1617s">00:26:57</a>
+<h3>风险意识的反差</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1616&amp;end=1622&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">在她眼里他毫无风险意识，把世界当成不会出意外；所以每次他一个人出远门，她都会替他担心。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1617s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s6"><span class="n">06</span><span class="t">旅行、低谷与「都是过程」</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1711s">00:28:31</a>
+<h3>去西藏：人生清单上的一项</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1710&amp;end=1716&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他突然想去西藏，因为那是他人生清单上的一项；他说八月整个人的状态不太好，与其停在这种状态里，不如把生活继续往前过。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1711s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1756s">00:29:16</a>
+<h3>身体会先提醒你</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1755&amp;end=1761&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他说自己是对身体感知很敏感的人：当工作让他不舒服时，身体一直在提醒他——先是睡眠出问题。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1756s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1848s">00:30:48</a>
+<h3>「都是过程」与负面归因</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1847&amp;end=1853&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他给自己沉下来四个字：都是过程。他承认他们都有点负面归因——好事发生时，反而会觉得这件事跟自己没关系。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1848s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1939s">00:32:19</a>
+<h3>三十岁之后反而更轻松</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=1938&amp;end=1944&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他说过了三十岁以后越来越轻松、越来越乐观：一方面是个人能力的增长，另一方面是面对问题时不再沉在里面。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=1939s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s7"><span class="n">07</span><span class="t">时间、日记与正念</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2217s">00:36:57</a>
+<h3>时间为什么越过越快</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=2216&amp;end=2222&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">年轻时候每过一年是人生长度的五分之一、六分之一，所以觉得慢；而现在是信息太多，忙着忙着就忽略了时间的流逝。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2217s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2359s">00:39:19</a>
+<h3>写日记的好处</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=2358&amp;end=2364&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他说自己记忆力很差，所以养成了写日记的习惯：如果不记，你连这周一做了什么都想不起来。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2359s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s8"><span class="n">08</span><span class="t">关心与「爱管人」</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2545s">00:42:25</a>
+<h3>「我的缺点是爱管身边的人」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=2544&amp;end=2550&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他自评有一个缺点和一个优点：爱管身边的人，也就是某种控制欲；他自己也意识到了这一点。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2545s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2591s">00:43:11</a>
+<h3>陪朋友吃饭却在修图</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=2590&amp;end=2596&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他举了一个反例：有人和朋友吃饭时一直在修图——沉浸在自己的正念里没错，但她是来陪朋友吃饭的。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2591s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2730s">00:45:30</a>
+<h3>把朋友的利益放在自己前面</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=2729&amp;end=2735&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">维持良好的关系，很多时候是把朋友的利益放在自己前面，而这个过程里自己也从中得到了快乐。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2730s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s9"><span class="n">09</span><span class="t">收尾：不装人设</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2958s">00:49:18</a>
+<h3>不把表达刻意做成人设</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=2957&amp;end=2963&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他说这期节目的发心，是不把任何一种表达刻意做成一种人设。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=2958s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=3051s">00:50:51</a>
+<h3>不再看自己的回放</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/3r4NsCJOm34?start=3050&amp;end=3056&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">她以前上镜前会反复检查自己，今天他也想看一眼 iPad 里的回放，被她翻过去不让看；她说现在已经无所谓了。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=3r4NsCJOm34&t=3051s">在 YouTube 打开这一秒</a></div>
+</article>
+</main>
+<footer>
+原视频：<a href="https://www.youtube.com/watch?v=3r4NsCJOm34">https://www.youtube.com/watch?v=3r4NsCJOm34</a><br>
+每个要点直接内嵌 YouTube 播放器并从该秒开始播放，本报告没有下载任何视频文件。<br>
+本报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
+</footer>
+</div>
+<button id="totop" type="button" aria-label="回到顶部">↑</button>
+<script>
+(function(){
+  var root=document.documentElement;
+
+  var bar=document.getElementById('bar'), totop=document.getElementById('totop');
+  function onScroll(){
+    var h=root, max=h.scrollHeight-h.clientHeight, y=h.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+    if(totop) totop.classList.toggle('on', y>620);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  if(totop) totop.addEventListener('click',function(){
+    scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.querySelectorAll('.media').forEach(function(fig){
+    var video=fig.querySelector('video'), btn=fig.querySelector('.play');
+    if(!video) return;
+    if(btn) btn.addEventListener('click',function(){ video.play(); });
+    video.addEventListener('play',function(){ fig.classList.add('playing'); });
+    video.addEventListener('ended',function(){ fig.classList.remove('playing'); });
+  });
+
+  /* The facade keeps a page of embeds light: nothing is requested from YouTube until the
+     reader actually asks to watch something. */
+  document.querySelectorAll('.facade').forEach(function(fig){
+    var btn=fig.querySelector('.play');
+    if(!btn) return;
+    btn.addEventListener('click',function(){
+      var frame=document.createElement('iframe');
+      frame.src=fig.dataset.embed+(fig.dataset.embed.indexOf('?')<0?'?':'&')+'autoplay=1';
+      frame.title='YouTube player';
+      frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.setAttribute('allowfullscreen','');
+      fig.appendChild(frame);
+      fig.classList.add('playing');
+      btn.remove();
+    });
+  });
+
+  /* collapse and expand the clip players, so a long report stays readable */
+  var cards=[].slice.call(document.querySelectorAll('.point')).filter(function(card){
+    return !!card.querySelector('[data-toggle]');
+  });
+  function setCard(card,collapsed){
+    card.classList.toggle('collapsed',collapsed);
+    var btn=card.querySelector('[data-toggle]');
+    if(btn){
+      btn.textContent=collapsed?('展开视频 · '+btn.dataset.secs+' 秒'):'收起视频';
+      btn.setAttribute('aria-expanded',collapsed?'false':'true');
+    }
+    if(collapsed){
+      var v=card.querySelector('video');
+      if(v&&!v.paused) v.pause();
+    }
+  }
+  function anyExpanded(){
+    return cards.some(function(card){ return !card.classList.contains('collapsed'); });
+  }
+  var clipsBtn=document.getElementById('clips');
+  function syncClipsLabel(){
+    if(clipsBtn) clipsBtn.textContent=anyExpanded()?'收起全部视频':'展开全部视频';
+  }
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.point');
+      setCard(card,!card.classList.contains('collapsed'));
+      syncClipsLabel();
+    });
+  });
+  var clipKey='yt-report-clips';
+  if(clipsBtn){
+    clipsBtn.addEventListener('click',function(){
+      var collapse=anyExpanded();
+      cards.forEach(function(card){ setCard(card,collapse); });
+      try{ localStorage.setItem(clipKey,collapse?'collapsed':'expanded'); }catch(e){}
+      syncClipsLabel();
+    });
+  }
+  var clipPref=null;
+  try{ clipPref=localStorage.getItem(clipKey); }catch(e){}
+  if(clipPref==='expanded') cards.forEach(function(card){ setCard(card,false); });
+  syncClipsLabel();
+
+})();
+
+(function(){
+  var root=document.documentElement;
+  var key='yt-report-theme', saved=null;
+  try{ saved=localStorage.getItem(key); }catch(e){}
+  if(saved) root.setAttribute('data-theme',saved);
+  var btn=document.getElementById('theme');
+  if(!btn) return;
+  var order=['auto','light','dark'];
+  function paint(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    btn.textContent=cur==='dark'?'\u263e 深色':cur==='light'?'\u2600 浅色':'\u25d0 跟随系统';
+  }
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    var next=order[(order.indexOf(cur)+1)%order.length];
+    if(next==='auto'){ root.removeAttribute('data-theme');
+      try{ localStorage.removeItem(key); }catch(e){} }
+    else { root.setAttribute('data-theme',next);
+      try{ localStorage.setItem(key,next); }catch(e){} }
+    paint();
+  });
+  paint();
+})();</script>
+</body>
+</html>
