@@ -37,9 +37,20 @@ PROBE_CLIENTS = ["ios", "android_vr", "tv", "web_safari", "mweb"]
 ZH_LANGS = ("zh-hans", "zh-cn", "zh-sg", "zh-hans-cn")
 
 
-def ytdlp(args, quiet=True):
-    cmd = ["yt-dlp", "--no-update"] + args
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+def ytdlp(args, quiet=True, timeout=180):
+    """Run yt-dlp with both ends of the wait bounded.
+
+    A blocked IP does not always answer with an error; sometimes the connection just sits there,
+    and a job that hangs is worse than one that fails, because the reader is left on a spinner
+    until the job's own timeout kills it. The socket read and the whole process both get a
+    deadline, and retries are kept short for the same reason.
+    """
+    cmd = ["yt-dlp", "--no-update", "--socket-timeout", "15",
+           "--retries", "1", "--extractor-retries", "1"] + args
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return subprocess.CompletedProcess(cmd, 1, "", f"yt-dlp timed out after {timeout}s\n")
     if proc.returncode != 0 and not quiet:
         sys.stderr.write(proc.stderr)
     return proc
