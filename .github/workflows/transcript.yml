@@ -1,0 +1,51 @@
+name: Transcript
+
+# Step one of the report flow. Dropping a request file in requests/ queues a video; the runner
+# pulls its subtitles and metadata into work/<id>/, which the browser then turns into points.json
+# with the submitter's own DeepSeek key. Nothing here touches the video stream: a runner can read
+# YouTube subtitles but not YouTube video (see probe/standalone/summary.md).
+on:
+  push:
+    paths:
+      - "requests/*.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: transcript
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install yt-dlp
+        run: |
+          curl -fsSL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux \
+            -o /usr/local/bin/yt-dlp
+          chmod +x /usr/local/bin/yt-dlp
+          yt-dlp --version
+
+      - name: Turn every pending request into a transcript
+        run: bash tools/fetch-requests.sh
+
+      - name: Commit the transcripts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A work requests
+          git diff --cached --quiet && exit 0
+          git commit -m "transcript: fetch pending requests [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main && git push && break
+            echo "push attempt $attempt failed, retrying"; sleep 5
+          done
