@@ -6,7 +6,8 @@
 
 ## 目录结构
 
-- `index.html` — 报告库首页，由 `tools/build_index.py --root .` 生成，最新视频排在最上面
+- `index.html` — 报告库首页，由 `tools/build_index.py --root .` 生成，最新加入的报告排在最上面
+- `_added.json` — 索引自己记的「每份报告何时加入」，排序用它；重建报告不会改变它
 - `reports/<videoId>/report.html` — 单份报告，`assets/frames/` 里是每个要点的截图
 - `requests/<videoId>.json` — 待抓字幕的队列，`work/<videoId>/` 是抓下来的字幕与要点
 - `tools/` — skill（`youtube-timestamped-report`）脚本的副本，本机和 runner 跑同一份代码
@@ -27,6 +28,9 @@
 两个 key 都只活在你自己的浏览器里（Tampermonkey 的 `GM_setValue`，退化为 localStorage）：
 GitHub token 需要 fine-grained、只勾本仓库的 `Contents: Read and write`；DeepSeek key 由浏览器
 直接调用 `api.deepseek.com`，不经过任何服务器。
+
+首页按加入时间从新到旧排列，每张卡片右下角有「已读」按钮：点一下就把这份收起来，右上角的
+「显示已读 (n)」能把它们翻回来。已读状态只写在这台浏览器的 `localStorage` 里，没有账号也不上服务器。
 
 `requests/<videoId>.json` + Action「Transcript」那条旧链路还留着：手写一个文件丢进仓库，runner
 会替你去抓字幕。但 runner 是数据中心 IP，YouTube 经常要求它做人机验证，所以它只当备用。

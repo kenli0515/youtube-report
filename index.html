@@ -138,9 +138,22 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 .how{margin-top:14px;color:var(--muted);font-size:.86rem;line-height:1.7}
 .how a{color:var(--accent)}
 
+.rc-foot{flex-wrap:wrap}
+.rc-foot .rc-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px}
+.rc-foot .added{white-space:nowrap}
+.readbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  font:inherit;font-size:.76rem;font-weight:600;padding:3px 11px;border-radius:999px;
+  cursor:pointer;transition:color .15s ease,border-color .15s ease,background .15s ease}
+.readbtn:hover{color:var(--accent);border-color:var(--accent)}
+.rcard.is-read{opacity:.45}
+.rcard.is-read:hover{opacity:1}
+.rcard.is-read .readbtn{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+/* .rcard is display:flex, so the hidden attribute needs a rule of its own. */
+.rcard[hidden]{display:none}
+
 @media (max-width:560px){.grid{grid-template-columns:1fr}.wrap{padding:0 16px 80px}}
 </style>
-<noscript><style>.toolbtn{display:none}</style></noscript>
+<noscript><style>.toolbtn,.readbtn{display:none}</style></noscript>
 </head>
 <body>
 <div class="wrap">
@@ -148,6 +161,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 <div class="hero-top">
 <span class="eyebrow">报告库</span>
 <div class="tools">
+<button id="read-toggle" class="toolbtn" type="button" hidden>显示已读</button>
 <button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
 </div>
 </div>
@@ -162,99 +176,132 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 就行 —— 字幕由你自己的浏览器读取，不经过任何服务器。</p>
 </header>
 <main class="grid">
-<article class="rcard" data-q="anthropic ceo 警告 ai 智能体集群可能威胁人类 cnn _jbdz2rj2sa">
-<a class="cover" href="reports/_JbDZ2Rj2SA/report.html"><img src="https://i.ytimg.com/vi_webp/_JbDZ2Rj2SA/maxresdefault.webp" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/_JbDZ2Rj2SA/report.html">Anthropic CEO 警告 AI 智能体集群可能威胁人类</a></h3>
-<div class="tags"><span class="tag">CNN</span><span class="tag ghost">8:07</span><span class="tag ghost">2026-09-15</span><span class="tag ghost">25 个要点</span></div>
-<div class="rc-foot">
-<span class="id">_JbDZ2Rj2SA</span>
-<a href="https://www.youtube.com/watch?v=_JbDZ2Rj2SA">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论 ak‘s tech studio krolqfvchl4">
-<a class="cover" href="reports/kROlQfvcHl4/report.html"><img src="https://i.ytimg.com/vi/kROlQfvcHl4/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/kROlQfvcHl4/report.html">爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论</a></h3>
-<div class="tags"><span class="tag">AK‘s Tech Studio</span><span class="tag ghost">1:02:48</span><span class="tag ghost">2026-09-15</span><span class="tag ghost">30 个要点</span></div>
-<div class="rc-foot">
-<span class="id">kROlQfvcHl4</span>
-<a href="https://www.youtube.com/watch?v=kROlQfvcHl4">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="ai 末日是否更近？前大厂工程师的深度解析 asian dad energy gor5-pr6w5k">
-<a class="cover" href="reports/GOR5-pr6W5k/report.html"><img src="https://i.ytimg.com/vi/GOR5-pr6W5k/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/GOR5-pr6W5k/report.html">AI 末日是否更近？前大厂工程师的深度解析</a></h3>
-<div class="tags"><span class="tag">Asian Dad Energy</span><span class="tag ghost">17:43</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">25 个要点</span></div>
-<div class="rc-foot">
-<span class="id">GOR5-pr6W5k</span>
-<a href="https://www.youtube.com/watch?v=GOR5-pr6W5k">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="「我找你，是为了见你」：11 年老友聊边界与内耗｜要点报告 ak‘s tech studio 3r4nscjom34">
-<a class="cover" href="reports/3r4NsCJOm34/report.html"><img src="https://i.ytimg.com/vi/3r4NsCJOm34/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">29 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/3r4NsCJOm34/report.html">「我找你，是为了见你」：11 年老友聊边界与内耗｜要点报告</a></h3>
-<div class="tags"><span class="tag">AK‘s Tech Studio</span><span class="tag ghost">51:58</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">29 个要点</span></div>
-<div class="rc-foot">
-<span class="id">3r4NsCJOm34</span>
-<a href="https://www.youtube.com/watch?v=3r4NsCJOm34">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="黄仁勋谈 ai 末日论、开源与中国｜all-in podcast 访谈要点 all-in podcast s7crlflamea">
-<a class="cover" href="reports/S7CrlFLAmEA/report.html"><img src="https://i.ytimg.com/vi/S7CrlFLAmEA/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/S7CrlFLAmEA/assets/frames/00h00m55s_GPUJesus登场.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">28 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/S7CrlFLAmEA/report.html">黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</a></h3>
-<div class="tags"><span class="tag">All-In Podcast</span><span class="tag ghost">46:46</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">28 个要点</span></div>
-<div class="rc-foot">
-<span class="id">S7CrlFLAmEA</span>
-<a href="https://www.youtube.com/watch?v=S7CrlFLAmEA">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="ai十年內毀滅人類？美國警告與中國加速的危機 風雲谷 whirling clouds valley 5f4mrwj20ua">
+<article class="rcard" data-id="5f4MRwJ20UA" data-q="ai十年內毀滅人類？美國警告與中國加速的危機 風雲谷 whirling clouds valley 5f4mrwj20ua">
 <a class="cover" href="reports/5f4MRwJ20UA/report.html"><img src="https://i.ytimg.com/vi/5f4MRwJ20UA/hqdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
 <div class="rc-body">
 <h3><a href="reports/5f4MRwJ20UA/report.html">AI十年內毀滅人類？美國警告與中國加速的危機</a></h3>
 <div class="tags"><span class="tag">風雲谷 Whirling Clouds Valley</span><span class="tag ghost">37:01</span><span class="tag ghost">2026-09-12</span><span class="tag ghost">30 个要点</span></div>
 <div class="rc-foot">
 <span class="id">5f4MRwJ20UA</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T02:24:49+08:00">加入 09-16 02:24</span>
 <a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
 </div>
 </div>
 </article>
-<article class="rcard" data-q="anthropic ceo 与离职员工激辩 ai 灭绝风险 cnn hi6skj4wf5i">
+<article class="rcard" data-id="GOR5-pr6W5k" data-q="ai 末日是否更近？前大厂工程师的深度解析 asian dad energy gor5-pr6w5k">
+<a class="cover" href="reports/GOR5-pr6W5k/report.html"><img src="https://i.ytimg.com/vi/GOR5-pr6W5k/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/GOR5-pr6W5k/report.html">AI 末日是否更近？前大厂工程师的深度解析</a></h3>
+<div class="tags"><span class="tag">Asian Dad Energy</span><span class="tag ghost">17:43</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">25 个要点</span></div>
+<div class="rc-foot">
+<span class="id">GOR5-pr6W5k</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T02:04:57+08:00">加入 09-16 02:04</span>
+<a href="https://www.youtube.com/watch?v=GOR5-pr6W5k">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
+</div>
+</div>
+</article>
+<article class="rcard" data-id="HI6skJ4Wf5I" data-q="anthropic ceo 与离职员工激辩 ai 灭绝风险 cnn hi6skj4wf5i">
 <a class="cover" href="reports/HI6skJ4Wf5I/report.html"><img src="https://i.ytimg.com/vi/HI6skJ4Wf5I/hqdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
 <div class="rc-body">
 <h3><a href="reports/HI6skJ4Wf5I/report.html">Anthropic CEO 与离职员工激辩 AI 灭绝风险</a></h3>
 <div class="tags"><span class="tag">CNN</span><span class="tag ghost">2026-09-12</span><span class="tag ghost">30 个要点</span></div>
 <div class="rc-foot">
 <span class="id">HI6skJ4Wf5I</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T01:29:35+08:00">加入 09-16 01:29</span>
 <a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
 </div>
 </div>
 </article>
-<article class="rcard" data-q="一个离谱到像科幻的真实故事：hugging face 事故复盘｜要点报告 進擊的筆記 96uznmmdkxw">
+<article class="rcard" data-id="_JbDZ2Rj2SA" data-q="anthropic ceo 警告 ai 智能体集群可能威胁人类 cnn _jbdz2rj2sa">
+<a class="cover" href="reports/_JbDZ2Rj2SA/report.html"><img src="https://i.ytimg.com/vi_webp/_JbDZ2Rj2SA/maxresdefault.webp" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/_JbDZ2Rj2SA/report.html">Anthropic CEO 警告 AI 智能体集群可能威胁人类</a></h3>
+<div class="tags"><span class="tag">CNN</span><span class="tag ghost">8:07</span><span class="tag ghost">2026-09-15</span><span class="tag ghost">25 个要点</span></div>
+<div class="rc-foot">
+<span class="id">_JbDZ2Rj2SA</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T01:25:09+08:00">加入 09-16 01:25</span>
+<a href="https://www.youtube.com/watch?v=_JbDZ2Rj2SA">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
+</div>
+</div>
+</article>
+<article class="rcard" data-id="kROlQfvcHl4" data-q="爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论 ak‘s tech studio krolqfvchl4">
+<a class="cover" href="reports/kROlQfvcHl4/report.html"><img src="https://i.ytimg.com/vi/kROlQfvcHl4/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/kROlQfvcHl4/report.html">爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论</a></h3>
+<div class="tags"><span class="tag">AK‘s Tech Studio</span><span class="tag ghost">1:02:48</span><span class="tag ghost">2026-09-15</span><span class="tag ghost">30 个要点</span></div>
+<div class="rc-foot">
+<span class="id">kROlQfvcHl4</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T01:18:23+08:00">加入 09-16 01:18</span>
+<a href="https://www.youtube.com/watch?v=kROlQfvcHl4">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
+</div>
+</div>
+</article>
+<article class="rcard" data-id="3r4NsCJOm34" data-q="「我找你，是为了见你」：11 年老友聊边界与内耗｜要点报告 ak‘s tech studio 3r4nscjom34">
+<a class="cover" href="reports/3r4NsCJOm34/report.html"><img src="https://i.ytimg.com/vi/3r4NsCJOm34/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">29 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/3r4NsCJOm34/report.html">「我找你，是为了见你」：11 年老友聊边界与内耗｜要点报告</a></h3>
+<div class="tags"><span class="tag">AK‘s Tech Studio</span><span class="tag ghost">51:58</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">29 个要点</span></div>
+<div class="rc-foot">
+<span class="id">3r4NsCJOm34</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T00:38:41+08:00">加入 09-16 00:38</span>
+<a href="https://www.youtube.com/watch?v=3r4NsCJOm34">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
+</div>
+</div>
+</article>
+<article class="rcard" data-id="S7CrlFLAmEA" data-q="黄仁勋谈 ai 末日论、开源与中国｜all-in podcast 访谈要点 all-in podcast s7crlflamea">
+<a class="cover" href="reports/S7CrlFLAmEA/report.html"><img src="https://i.ytimg.com/vi/S7CrlFLAmEA/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/S7CrlFLAmEA/assets/frames/00h00m55s_GPUJesus登场.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">28 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/S7CrlFLAmEA/report.html">黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</a></h3>
+<div class="tags"><span class="tag">All-In Podcast</span><span class="tag ghost">46:46</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">28 个要点</span></div>
+<div class="rc-foot">
+<span class="id">S7CrlFLAmEA</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T00:16:58+08:00">加入 09-16 00:16</span>
+<a href="https://www.youtube.com/watch?v=S7CrlFLAmEA">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
+</div>
+</div>
+</article>
+<article class="rcard" data-id="96UZNMMDKXw" data-q="一个离谱到像科幻的真实故事：hugging face 事故复盘｜要点报告 進擊的筆記 96uznmmdkxw">
 <a class="cover" href="reports/96UZNMMDKXw/report.html"><img src="https://i.ytimg.com/vi/96UZNMMDKXw/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/96UZNMMDKXw/assets/frames/00h00m01s_一份官方声明的复盘.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">23 个要点</span></a>
 <div class="rc-body">
 <h3><a href="reports/96UZNMMDKXw/report.html">一个离谱到像科幻的真实故事：Hugging Face 事故复盘｜要点报告</a></h3>
 <div class="tags"><span class="tag">進擊的筆記</span><span class="tag ghost">10:47</span><span class="tag ghost">2026-09-04</span><span class="tag ghost">23 个要点</span></div>
 <div class="rc-foot">
 <span class="id">96UZNMMDKXw</span>
+<span class="rc-actions">
+<span class="added" title="加入于 2026-09-16T00:16:58+08:00">加入 09-16 00:16</span>
 <a href="https://www.youtube.com/watch?v=96UZNMMDKXw">原视频 ↗</a>
+<button class="readbtn" type="button">已读</button>
+</span>
 </div>
 </div>
 </article>
 </main>
 <p class="empty" id="empty" hidden>没有匹配的报告。</p>
 <footer>
-共 8 份报告，位于 <code>youtube-report/</code>。<br>
-索引生成于 2026-09-16 02:25；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
+共 8 份报告，位于 <code>youtube-report/</code>，按加入时间从新到旧排列。<br>
+「已读」只记在这台浏览器里（localStorage），换设备或清缓存就没了。<br>
+索引生成于 2026-09-16 02:31；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
 每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
 </footer>
 </div>
@@ -283,23 +330,65 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 })();
 
 (function(){
+  var KEY='yt-report-read';
   var box=document.getElementById('q');
-  if(!box) return;
   var cards=[].slice.call(document.querySelectorAll('.rcard'));
   var count=document.getElementById('count');
   var empty=document.getElementById('empty');
+  var toggle=document.getElementById('read-toggle');
+  if(!cards.length) return;
+
+  /* Read marks live in this browser and nowhere else: no account, no server, nothing to sync. */
+  var read={};
+  try{ read=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ read={}; }
+  var showRead=false;
+
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(read)); }catch(e){} }
+  function isRead(card){ return !!read[card.dataset.id]; }
+  function readTotal(){
+    var n=0;
+    cards.forEach(function(card){ if(isRead(card)) n++; });
+    return n;
+  }
+
   function apply(){
-    var needle=box.value.trim().toLowerCase(), shown=0;
+    var needle=box?box.value.trim().toLowerCase():'', shown=0, hidden=0;
     cards.forEach(function(card){
       var hit=!needle||(card.dataset.q||'').indexOf(needle)>=0;
-      card.style.display=hit?'':'none';
-      if(hit) shown++;
+      var mark=isRead(card);
+      card.classList.toggle('is-read',mark);
+      var button=card.querySelector('.readbtn');
+      if(button) button.textContent=mark?'标记未读':'已读';
+      var show=hit&&(showRead||!mark);
+      card.hidden=!show;
+      if(show) shown++;
+      else if(hit) hidden++;
     });
-    if(count) count.textContent='共 '+shown+' 份报告';
-    if(empty) empty.hidden=shown>0;
+    if(count) count.textContent='共 '+shown+' 份报告'+(hidden?'，其中已读 '+hidden+' 份':'');
+    if(toggle){
+      var total=readTotal();
+      toggle.hidden=!total;
+      toggle.textContent=(showRead?'隐藏已读':'显示已读')+(total?' ('+total+')':'');
+    }
+    if(empty){
+      empty.hidden=shown>0;
+      empty.textContent=needle?'没有匹配的报告。'
+        :(hidden?'都读完了 —— 点右上角「显示已读」可以翻回来。':'这里还没有报告。');
+    }
   }
-  box.addEventListener('input',apply);
-  box.addEventListener('search',apply);
+
+  cards.forEach(function(card){
+    var button=card.querySelector('.readbtn');
+    if(!button) return;
+    button.addEventListener('click',function(){
+      var id=card.dataset.id;
+      if(read[id]) delete read[id]; else read[id]=Date.now();
+      save();
+      apply();
+    });
+  });
+  if(toggle) toggle.addEventListener('click',function(){ showRead=!showRead; apply(); });
+  if(box){ box.addEventListener('input',apply); box.addEventListener('search',apply); }
   apply();
 })();
 </script>

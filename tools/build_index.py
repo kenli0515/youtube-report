@@ -7,9 +7,9 @@ Walks the root looking for `report.html` files, reads the `report_assets.json` a
 sitting beside each one, and writes `index.html` at the root: one card per report with its first
 still as a thumbnail, plus a search box. Re-run it after building a report.
 
-The cards are ordered newest video first, by `upload_date` from each `meta.json`. A report whose
-meta carries no date (one written by a browser script that only knew the title and the channel)
-sorts to the bottom, so the field is worth keeping filled in.
+The cards are ordered by the time the report joined the folder, newest first: a report that
+arrives without an `added` stamp gets one the first time the index sees it, and the stamp is kept
+in its `meta.json`, so rebuilding a report never shuffles it back to the top.
 
 The page reuses the report's colour tokens and light/dark switch (see report_html), so the index
 and the reports look like one product.
@@ -27,6 +27,7 @@ from report_html import esc, pretty_date, pretty_duration
 
 INDEX_FILE = "index.html"
 REPORT_FILE = "report.html"
+ADDED_FILE = "_added.json"
 
 # Directories that never contain a report, or that would only add noise when descending.
 SKIP_DIRS = {"assets", "node_modules", ".git", ".obsidian", ".trash"}
@@ -85,28 +86,83 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 .how{margin-top:14px;color:var(--muted);font-size:.86rem;line-height:1.7}
 .how a{color:var(--accent)}
 
+.rc-foot{flex-wrap:wrap}
+.rc-foot .rc-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px}
+.rc-foot .added{white-space:nowrap}
+.readbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  font:inherit;font-size:.76rem;font-weight:600;padding:3px 11px;border-radius:999px;
+  cursor:pointer;transition:color .15s ease,border-color .15s ease,background .15s ease}
+.readbtn:hover{color:var(--accent);border-color:var(--accent)}
+.rcard.is-read{opacity:.45}
+.rcard.is-read:hover{opacity:1}
+.rcard.is-read .readbtn{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+/* .rcard is display:flex, so the hidden attribute needs a rule of its own. */
+.rcard[hidden]{display:none}
+
 @media (max-width:560px){.grid{grid-template-columns:1fr}.wrap{padding:0 16px 80px}}
 """
 
 INDEX_JS = """
 (function(){
+  var KEY='yt-report-read';
   var box=document.getElementById('q');
-  if(!box) return;
   var cards=[].slice.call(document.querySelectorAll('.rcard'));
   var count=document.getElementById('count');
   var empty=document.getElementById('empty');
+  var toggle=document.getElementById('read-toggle');
+  if(!cards.length) return;
+
+  /* Read marks live in this browser and nowhere else: no account, no server, nothing to sync. */
+  var read={};
+  try{ read=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ read={}; }
+  var showRead=false;
+
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(read)); }catch(e){} }
+  function isRead(card){ return !!read[card.dataset.id]; }
+  function readTotal(){
+    var n=0;
+    cards.forEach(function(card){ if(isRead(card)) n++; });
+    return n;
+  }
+
   function apply(){
-    var needle=box.value.trim().toLowerCase(), shown=0;
+    var needle=box?box.value.trim().toLowerCase():'', shown=0, hidden=0;
     cards.forEach(function(card){
       var hit=!needle||(card.dataset.q||'').indexOf(needle)>=0;
-      card.style.display=hit?'':'none';
-      if(hit) shown++;
+      var mark=isRead(card);
+      card.classList.toggle('is-read',mark);
+      var button=card.querySelector('.readbtn');
+      if(button) button.textContent=mark?'标记未读':'已读';
+      var show=hit&&(showRead||!mark);
+      card.hidden=!show;
+      if(show) shown++;
+      else if(hit) hidden++;
     });
-    if(count) count.textContent='共 '+shown+' 份报告';
-    if(empty) empty.hidden=shown>0;
+    if(count) count.textContent='共 '+shown+' 份报告'+(hidden?'，其中已读 '+hidden+' 份':'');
+    if(toggle){
+      var total=readTotal();
+      toggle.hidden=!total;
+      toggle.textContent=(showRead?'隐藏已读':'显示已读')+(total?' ('+total+')':'');
+    }
+    if(empty){
+      empty.hidden=shown>0;
+      empty.textContent=needle?'没有匹配的报告。'
+        :(hidden?'都读完了 —— 点右上角「显示已读」可以翻回来。':'这里还没有报告。');
+    }
   }
-  box.addEventListener('input',apply);
-  box.addEventListener('search',apply);
+
+  cards.forEach(function(card){
+    var button=card.querySelector('.readbtn');
+    if(!button) return;
+    button.addEventListener('click',function(){
+      var id=card.dataset.id;
+      if(read[id]) delete read[id]; else read[id]=Date.now();
+      save();
+      apply();
+    });
+  });
+  if(toggle) toggle.addEventListener('click',function(){ showRead=!showRead; apply(); });
+  if(box){ box.addEventListener('input',apply); box.addEventListener('search',apply); }
   apply();
 })();
 """
@@ -159,11 +215,67 @@ def load_report(path: Path, root: Path):
         "channel": meta.get("channel") or "",
         "duration": meta.get("duration"),
         "date": meta.get("upload_date") or meta.get("publish_date") or "",
+        "added": meta.get("added") or "",
         "points": len(points),
         "url": assets.get("url") or meta.get("webpage_url") or "",
         "still": f"{folder.relative_to(root).as_posix()}/{thumb}" if thumb else None,
         "cover": meta.get("thumbnail") or "",
     }
+
+
+def added_label(stamp: str) -> str:
+    """`2026-09-16T02:24:49+08:00` -> `09-16 02:24` (or the full date when it is not this year).
+
+    The index is ordered by this stamp, so the card shows it too; the year and the seconds are
+    dropped because they rarely help, and the full value stays in the span's title attribute.
+    """
+    if len(stamp) < 16:
+        return stamp
+    text = stamp[:16].replace("T", " ")
+    return text if text[:4] != str(datetime.now().year) else text[5:]
+
+
+def stamp_added(root: Path, reports, now: str) -> dict:
+    """Work out when each report first turned up, and give the stamps back on the reports.
+
+    The index is the only thing that knows this, so it keeps its own file next to the reports
+    rather than trusting what is inside them: rebuilding a report copies its `meta.json` over,
+    and a report must not climb back to the top of the list when that happens. First sight wins,
+    and the stamp is written into the report's `meta.json` too, so a folder read on its own still
+    says when it joined.
+
+    A report that turns up without a stamp - the first run over an existing folder - is dated by
+    the mtime of its `report.html`, the best guess left at that point; `now` is the last resort.
+    """
+    path = root / ADDED_FILE
+    known = read_json(path)
+    if not isinstance(known, dict):
+        known = {}
+    ids = {report["id"] for report in reports}
+
+    for report in reports:
+        stamp = report["added"] or known.get(report["id"]) or ""
+        if not stamp:
+            try:
+                mtime = (report["dir"] / REPORT_FILE).stat().st_mtime
+                stamp = datetime.fromtimestamp(mtime).isoformat(timespec="seconds")
+            except OSError:
+                stamp = now
+            meta_path = report["dir"] / "meta.json"
+            meta = read_json(meta_path)
+            if isinstance(meta, dict):
+                meta["added"] = stamp
+                meta_path.write_text(
+                    json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            print(f"  stamped {report['id']} added={stamp}")
+        known[report["id"]] = stamp
+        report["added"] = stamp
+
+    for gone in [vid for vid in known if vid not in ids]:  # reports that were removed
+        del known[gone]
+    path.write_text(json.dumps(dict(sorted(known.items())), ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8")
+    return known
 
 
 def render(root: Path, reports, generated: str):
@@ -175,7 +287,7 @@ def render(root: Path, reports, generated: str):
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
         "<title>视频要点报告</title>",
         f"<style>{report_html.TOKENS_CSS}{INDEX_CSS}</style>",
-        '<noscript><style>.toolbtn{display:none}</style></noscript>',
+        '<noscript><style>.toolbtn,.readbtn{display:none}</style></noscript>',
         "</head>",
         "<body>",
         '<div class="wrap">',
@@ -183,6 +295,7 @@ def render(root: Path, reports, generated: str):
         '<div class="hero-top">',
         '<span class="eyebrow">报告库</span>',
         '<div class="tools">',
+        '<button id="read-toggle" class="toolbtn" type="button" hidden>显示已读</button>',
         '<button id="theme" class="toolbtn" type="button" '
         'title="切换浅色 / 深色 / 跟随系统">跟随系统</button>',
         "</div>",
@@ -224,9 +337,11 @@ def render(root: Path, reports, generated: str):
             cover = '<div class="ph">这一份还没有截图</div>'
         href = f'{report["rel"]}/{REPORT_FILE}'
         search_text = f'{report["title"]} {report["channel"]} {report["id"]}'.lower()
+        added = added_label(report["added"])
 
         out += [
-            f'<article class="rcard" data-q="{esc(search_text)}">',
+            f'<article class="rcard" data-id="{esc(report["id"])}" '
+            f'data-q="{esc(search_text)}">',
             f'<a class="cover" href="{esc(href)}">{cover}'
             f'<span class="badge">{report["points"]} 个要点</span></a>',
             '<div class="rc-body">',
@@ -234,16 +349,24 @@ def render(root: Path, reports, generated: str):
             f'<div class="tags">{"".join(tags)}</div>',
             '<div class="rc-foot">',
             f'<span class="id">{esc(report["id"])}</span>',
+            '<span class="rc-actions">',
         ]
+        if added:
+            out.append(f'<span class="added" title="加入于 {esc(report["added"])}">'
+                       f'加入 {esc(added)}</span>')
         if report["url"]:
             out.append(f'<a href="{esc(report["url"])}">原视频 ↗</a>')
-        out += ["</div>", "</div>", "</article>"]
+        out += [
+            '<button class="readbtn" type="button">已读</button>',
+            "</span>", "</div>", "</div>", "</article>",
+        ]
 
     out += [
         "</main>",
         '<p class="empty" id="empty" hidden>没有匹配的报告。</p>',
         "<footer>",
-        f"共 {len(reports)} 份报告，位于 <code>{esc(root.name)}/</code>。<br>",
+        f"共 {len(reports)} 份报告，位于 <code>{esc(root.name)}/</code>，按加入时间从新到旧排列。<br>",
+        "「已读」只记在这台浏览器里（localStorage），换设备或清缓存就没了。<br>",
         f"索引生成于 {esc(generated)}；新增报告后重新运行 "
         "<code>build_index.py --root</code> 即可刷新。<br>",
         "每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。",
@@ -268,10 +391,12 @@ def main():
         raise SystemExit(f"error: {root} is not a directory")
 
     reports = [load_report(path, root) for path in find_reports(root)]
-    # Newest video first; the title only breaks ties between videos posted the same day. Two
-    # passes, because the first key runs backwards and the second one forwards.
+    stamp_added(root, reports, datetime.now().isoformat(timespec="seconds"))
+    # Newly added first. Three stable passes, so the tie-breaks are: video date descending, then
+    # title ascending - both only ever matter for reports that arrived in the same second.
     reports.sort(key=lambda r: r["title"])
-    reports.sort(key=lambda r: r["date"], reverse=True)
+    reports.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
+    reports.sort(key=lambda r: r["added"], reverse=True)
 
     out = Path(args.out).expanduser() if args.out else root / INDEX_FILE
     out.write_text(
