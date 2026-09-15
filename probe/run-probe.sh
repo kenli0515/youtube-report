@@ -27,8 +27,12 @@ mkdir -p "$LOGS" "$MEDIA"
 VIDEOS=(
   "S7CrlFLAmEA|https://www.youtube.com/watch?v=S7CrlFLAmEA|en.*"
   "96UZNMMDKXw|https://www.youtube.com/watch?v=96UZNMMDKXw|zh-Hans.*"
+  "_JbDZ2Rj2SA|https://www.youtube.com/watch?v=_JbDZ2Rj2SA|en.*"
 )
 CLIENTS=(default web_safari tv mweb android_vr ios)
+# Every client yt-dlp can be asked for, because the pipeline's first job is getting a caption
+# track out of a datacenter IP and the clients differ in what they are handed.
+SUBS_CLIENTS=(default web web_safari web_embedded web_creator mweb tv tv_embedded tv_simply ios android android_vr)
 
 # The selector the report builder uses, capped at 360p here so the probe stays quick.
 FORMAT='bv*[height<=360][vcodec^=avc1]+ba[acodec^=mp4a]/bv*[height<=360][vcodec^=avc1]/bv*[height<=360]/b[height<=360]'
@@ -112,6 +116,26 @@ for entry in "${VIDEOS[@]}"; do
   check "$name · auto subtitles" "$name-subs" \
     $YTDLP --no-warnings --skip-download --ignore-no-formats-error --write-auto-subs \
       --sub-langs "$subs" --sub-format vtt -o "$MEDIA/%(id)s.%(ext)s" "$url"
+
+  # Subtitles per player client: this is the check that decides whether the pages flow can build
+  # a report for a video at all. LOGIN_REQUIRED here is a block, an empty list is a missing track.
+  for client in "${SUBS_CLIENTS[@]}"; do
+    if [ "$client" = default ]; then
+      client_args=()
+    else
+      client_args=(--extractor-args "youtube:player_client=$client")
+    fi
+    check "$name · 字幕 client=$client" "$name-sub-$client" \
+      $YTDLP --no-warnings --skip-download --ignore-no-formats-error "${client_args[@]}" \
+        --list-subs "$url"
+    if grep -qiE "LOGIN_REQUIRED|not a bot" "$LOGS/$name-sub-$client.log"; then
+      note "$name · 字幕 client=$client 判定" "登录验证拦截"
+    elif grep -qE "Available (automatic captions|subtitles)" "$LOGS/$name-sub-$client.log"; then
+      note "$name · 字幕 client=$client 判定" "有字幕 ✅"
+    else
+      note "$name · 字幕 client=$client 判定" "没有字幕"
+    fi
+  done
 
   # The whole pipeline hangs on this one: without a JS runtime yt-dlp lists formats but cannot
   # produce a downloadable URL ("No video formats found!"), which looks like a block and is not.
