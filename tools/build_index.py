@@ -7,6 +7,11 @@ Walks the root looking for `report.html` files, reads the `report_assets.json` a
 sitting beside each one, and writes `index.html` at the root: one card per report with its first
 still as a thumbnail, plus a search box. Re-run it after building a report.
 
+With `--generator` the page also carries the "paste a link, get a report" panel. That panel only
+works where the site is served over http(s) and a sibling `assets/generate.js` exists (the
+GitHub Pages setup in the youtube-report repository); the script is not inlined here because it
+talks to the GitHub API for whatever repository the page is served from.
+
 The page reuses the report's colour tokens and light/dark switch (see report_html), so the index
 and the reports look like one product.
 """
@@ -105,6 +110,102 @@ INDEX_JS = """
 """
 
 
+GENERATOR_CSS = """
+.gen{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden}
+.gen>summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:15px 20px;
+  cursor:pointer;font-weight:700;list-style:none}
+.gen>summary::-webkit-details-marker{display:none}
+.gen>summary::after{content:"\\25be";margin-left:auto;color:var(--muted);font-size:.85rem;
+  transition:transform .2s ease}
+.gen[open]>summary::after{transform:rotate(180deg)}
+.gen>summary:hover{color:var(--accent)}
+.gen-hint{font-weight:450;font-size:.83rem;color:var(--muted)}
+.gen-body{padding:0 20px 18px;border-top:1px solid var(--line)}
+.gen-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  margin-top:16px}
+.gen-field{display:flex;flex-direction:column;gap:6px}
+.gen-field.gen-wide{grid-column:1/-1}
+.gen-field span{font-size:.78rem;font-weight:650;letter-spacing:.02em;color:var(--muted)}
+.gen-field input,.gen textarea{padding:10px 13px;border-radius:11px;border:1px solid var(--line-strong);
+  background:var(--bg);color:var(--ink);font:inherit;font-size:.9rem;transition:border-color .15s ease}
+.gen-field input:focus,.gen textarea:focus{outline:none;border-color:var(--accent)}
+.gen textarea{width:100%;margin-top:12px;resize:vertical;font-size:.85rem;line-height:1.7;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.gen-remember{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:.83rem;
+  color:var(--muted);cursor:pointer}
+.gen-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:16px}
+.gen-btn{border:0;border-radius:11px;padding:10px 20px;font:inherit;font-size:.9rem;font-weight:650;
+  color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  box-shadow:0 10px 22px -14px var(--accent);transition:filter .15s ease,opacity .15s ease}
+.gen-btn:hover{filter:brightness(1.06)}
+.gen-btn:disabled{opacity:.5;cursor:progress}
+.gen-state{font-size:.83rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.gen-log{display:flex;flex-direction:column;gap:6px;margin:16px 0 0;padding:0;list-style:none;
+  max-height:280px;overflow:auto;font-size:.85rem;font-variant-numeric:tabular-nums}
+.gen-log:empty{display:none}
+.gen-log li{padding:8px 12px;border-radius:9px;background:var(--accent-soft);color:var(--ink-soft);
+  overflow-wrap:anywhere}
+.gen-log li.gen-ok{background:rgba(34,197,94,.13);color:#1a9f52}
+.gen-log li.gen-error{background:rgba(229,72,77,.14);color:#e5484d}
+.gen-more{margin-top:18px;border:1px dashed var(--line-strong);border-radius:var(--radius-sm);
+  padding:12px 15px}
+.gen-more>summary{cursor:pointer;font-size:.85rem;color:var(--muted)}
+.gen-more>summary:hover{color:var(--accent)}
+.gen-more p{margin:12px 0 0;font-size:.83rem;color:var(--muted);line-height:1.8}
+.gen-note{margin:18px 0 0;font-size:.82rem;line-height:1.9;color:var(--muted)}
+.gen-note code,.gen-more code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.92em;
+  background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:1px 6px}
+
+@media (max-width:560px){.gen-body{padding:0 15px 16px}.gen>summary{padding:14px 15px}}
+"""
+
+# The panel outside the reports grid. Every id here is read by assets/generate.js.
+GENERATOR_PANEL = """
+<details class="gen" id="gen" open>
+<summary><span>生成新报告</span><span class="gen-hint">贴一条 YouTube 链接，剩下的交给 GitHub Actions
+和 DeepSeek</span></summary>
+<div class="gen-body">
+<div class="gen-grid">
+<label class="gen-field gen-wide"><span>YouTube 链接</span>
+<input id="gen-url" type="url" autocomplete="off" spellcheck="false"
+ placeholder="https://www.youtube.com/watch?v=..."></label>
+<label class="gen-field"><span>GitHub token（fine-grained，本仓库 Contents: Read and write）</span>
+<input id="gen-token" type="password" autocomplete="off" spellcheck="false"
+ placeholder="github_pat_..."></label>
+<label class="gen-field"><span>DeepSeek API key</span>
+<input id="gen-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-..."></label>
+</div>
+<label class="gen-remember"><input id="gen-remember" type="checkbox">
+记住这两个 key（只写进这台浏览器的 localStorage）</label>
+<div class="gen-actions">
+<button id="gen-run" class="gen-btn" type="button">生成报告</button>
+<span class="gen-state" id="gen-state"></span>
+</div>
+<ol class="gen-log" id="gen-log"></ol>
+<details class="gen-more" id="gen-more">
+<summary>抓不到字幕？自己贴一份</summary>
+<p>runner 的 IP 偶尔会被 YouTube 拦下来（数据中心 IP 要过人机验证）。打开视频页的「显示字幕记录」，
+全选复制贴进下面，时间戳会自动解析；字幕文件（<code>.srt</code> / <code>.vtt</code>）也可以直接贴。</p>
+<textarea id="gen-paste" rows="7" spellcheck="false"
+ placeholder="0:01&#10;大家好，欢迎回来&#10;0:05&#10;今天聊聊..."></textarea>
+<div class="gen-actions">
+<button id="gen-paste-run" class="gen-btn" type="button">用这份字幕生成</button>
+<span class="gen-state" id="gen-paste-state"></span>
+</div>
+</details>
+<p class="gen-note">两个 key 都只活在这个页面里：GitHub token 用来往 <code>requests/</code> 和
+<code>work/</code> 写文件，DeepSeek key 由浏览器直接调用 DeepSeek
+（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
+② 浏览器调 DeepSeek 挑要点 → ③ Action 生成报告页并刷新这个索引，通常 1-2 分钟。</p>
+</div>
+</details>
+"""
+
+GENERATOR_SCRIPT = '<script src="assets/generate.js" defer></script>'
+
+
 def read_json(path):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -145,7 +246,7 @@ def load_report(path: Path, root: Path):
     }
 
 
-def render(root: Path, reports, generated: str):
+def render(root: Path, reports, generated: str, generator: bool = False):
     out = [
         "<!doctype html>",
         '<html lang="zh-Hans">',
@@ -153,8 +254,9 @@ def render(root: Path, reports, generated: str):
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
         "<title>视频要点报告</title>",
-        f"<style>{report_html.TOKENS_CSS}{INDEX_CSS}</style>",
-        '<noscript><style>.toolbtn{display:none}</style></noscript>',
+        f"<style>{report_html.TOKENS_CSS}{INDEX_CSS}"
+        f"{GENERATOR_CSS if generator else ''}</style>",
+        '<noscript><style>.toolbtn,.gen{display:none}</style></noscript>',
         "</head>",
         "<body>",
         '<div class="wrap">',
@@ -173,6 +275,7 @@ def render(root: Path, reports, generated: str):
         "</div>",
         '<input id="q" class="search" type="search" autocomplete="off" '
         'placeholder="搜索标题或频道…">',
+        GENERATOR_PANEL.strip() if generator else "",
         "</header>",
         '<main class="grid">',
     ]
@@ -227,6 +330,7 @@ def render(root: Path, reports, generated: str):
         "每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。",
         "</footer>",
         "</div>",
+        GENERATOR_SCRIPT if generator else "",
         f"<script>{report_html.THEME_JS}\n{INDEX_JS}</script>",
         "</body>",
         "</html>",
@@ -239,6 +343,11 @@ def main():
     ap = argparse.ArgumentParser(description="build an index page for a folder of reports")
     ap.add_argument("--root", default=".", help="folder holding the report directories")
     ap.add_argument("--out", help="index file to write (default: <root>/index.html)")
+    ap.add_argument(
+        "--generator",
+        action="store_true",
+        help="also render the link -> report panel (needs assets/generate.js beside the index)",
+    )
     args = ap.parse_args()
 
     root = Path(args.root).expanduser().resolve()
@@ -249,8 +358,9 @@ def main():
     reports.sort(key=lambda r: (r["date"], r["title"]), reverse=True)
 
     out = Path(args.out).expanduser() if args.out else root / INDEX_FILE
-    out.write_text(render(root, reports, datetime.now().strftime("%Y-%m-%d %H:%M")),
-                   encoding="utf-8")
+    out.write_text(
+        render(root, reports, datetime.now().strftime("%Y-%m-%d %H:%M"), generator=args.generator),
+        encoding="utf-8")
     print(f"{len(reports)} 份报告 -> {out}")
 
 
