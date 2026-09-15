@@ -132,6 +132,38 @@
     }
   }
 
+  async function deleteFile(path, message) {
+    var existing = await fetch(API + '/contents/' + path + '?ref=' + BRANCH, { headers: headers() });
+    if (!existing.ok) return;
+    var sha = (await existing.json()).sha;
+    if (!sha) return;
+    await fetch(API + '/contents/' + path, {
+      method: 'DELETE',
+      headers: headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ message: message, sha: sha, branch: BRANCH })
+    });
+  }
+
+  /* Waits for the transcript, but stops as soon as the Action writes a failure - a blocked
+     runner should not cost the reader six minutes of polling before they hear about it. */
+  async function pollTranscript(id) {
+    for (var i = 0; i < 45; i++) {
+      var text = await getFile('work/' + id + '/transcript_timestamped.txt');
+      if (text !== null) return text;
+      var failure = await getFile('work/' + id + '/error.txt');
+      if (failure !== null) {
+        log('① 字幕抓取失败：', 'error');
+        failure.split('\n').slice(0, 5).forEach(function (line) { log('  ' + line, 'error'); });
+        offerPaste();
+        throw new Error('runner 的 IP 被 YouTube 拦下来了：展开下面的「自己贴一份」，或者用本机的 skill');
+      }
+      if (!i) log('等待字幕（Actions 正在跑，约 1-2 分钟）…');
+      state('等待字幕…');
+      await sleep(POLL_MS);
+    }
+    throw new Error('等字幕超时了，可以到 https://github.com/' + REPO + '/actions 看 run 日志');
+  }
+
   async function pollFor(path, describe, tries) {
     for (var i = 0; i < (tries || 45); i++) {
       var text = await getFile(path);
@@ -408,23 +440,16 @@
       if (stamp === null) {
         var failure = await getFile('work/' + creds.id + '/error.txt');
         if (failure !== null) {
-          log('上一次没抓到字幕（换一个 runner 会换一个出口 IP，再排一次）：', 'error');
+          log('上一次没抓到字幕，换一个 runner 再排一次（出口 IP 会变）：', 'error');
           failure.split('\n').slice(0, 3).forEach(function (line) { log('  ' + line, 'error'); });
           offerPaste();
-        } else {
-          log('① 排队：让 Actions 去抓字幕…');
+          await deleteFile('work/' + creds.id + '/error.txt', 'retry: ' + creds.id);
         }
+        log('① 排队：让 Actions 去抓字幕…');
         await putFile('requests/' + creds.id + '.json',
           JSON.stringify({ url: creds.url, requestedAt: new Date().toISOString() }, null, 2) + '\n',
           'request: ' + creds.id);
-        stamp = await pollFor('work/' + creds.id + '/transcript_timestamped.txt', '字幕');
-        var lateFailure = await getFile('work/' + creds.id + '/error.txt');
-        if (lateFailure !== null) {
-          log('① 字幕抓取失败：', 'error');
-          lateFailure.split('\n').slice(0, 5).forEach(function (line) { log('  ' + line, 'error'); });
-          offerPaste();
-          throw new Error('runner 的 IP 被 YouTube 拦下来了，可以在下面自己贴字幕');
-        }
+        stamp = await pollTranscript(creds.id);
       }
       log('① 字幕就绪（' + stamp.split('\n').filter(Boolean).length + ' 行）', 'ok');
 
