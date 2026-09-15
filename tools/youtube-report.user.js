@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         YouTube 要点报告
 // @namespace    https://github.com/kenli0515/youtube-report
-// @version      1.0.0
+// @version      1.0.1
 // @description  在 YouTube 视频页直接读字幕，用你自己的 DeepSeek key 生成简体中文要点报告
 // @author       kenli0515
 // @match        https://www.youtube.com/watch*
+// @updateURL    https://raw.githubusercontent.com/kenli0515/youtube-report/main/tools/youtube-report.user.js
+// @downloadURL  https://raw.githubusercontent.com/kenli0515/youtube-report/main/tools/youtube-report.user.js
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @run-at       document-idle
