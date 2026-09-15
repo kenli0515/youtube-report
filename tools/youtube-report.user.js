@@ -494,8 +494,9 @@
     '#ytrep .go:disabled{opacity:.5;cursor:progress}',
     '#ytrep .x{border:0;background:transparent;color:#8d94a2;cursor:pointer;font-size:16px;line-height:1}',
     '#ytrep .log{list-style:none;margin:12px 0 0;padding:0;max-height:190px;overflow:auto;font-size:12px}',
+    '#ytrep .log:empty{display:none}',
     '#ytrep .log li{padding:6px 9px;border-radius:7px;background:#1a1f33;margin-bottom:5px;',
-    'overflow-wrap:anywhere}',
+    'overflow-wrap:anywhere;white-space:pre-wrap}',
     '#ytrep .log li.ok{background:rgba(34,197,94,.13);color:#3ec46d}',
     '#ytrep .log li.err{background:rgba(229,72,77,.14);color:#e5484d}',
     '#ytrep .hint{font-size:11px;color:#8d94a2;margin:10px 0 0;line-height:1.6}',
@@ -503,46 +504,80 @@
     '#ytrep a:hover{text-decoration:underline}'
   ].join('');
 
+  function make(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  /* Built node by node rather than with innerHTML: youtube.com ships
+     `require-trusted-types-for 'script'`, which refuses an innerHTML assignment. */
   function build() {
     var style = document.createElement('style');
     style.textContent = CSS;
     document.head.appendChild(style);
 
-    var host = document.createElement('div');
+    var host = make('div');
     host.id = 'ytrep';
-    host.innerHTML = [
-      '<button class="fab" type="button">生成要点报告</button>',
-      '<div class="card" hidden>',
-      '<h4><span>要点报告</span><button class="x" type="button" title="收起">×</button></h4>',
-      '<div class="id"></div>',
-      '<label>GitHub token（fine-grained）</label>',
-      '<input class="token" type="password" placeholder="github_pat_..." autocomplete="off">',
-      '<label>DeepSeek API key</label>',
-      '<input class="key" type="password" placeholder="sk-..." autocomplete="off">',
-      '<div class="row"><button class="go" type="button">生成</button>',
-      '<span class="state"></span></div>',
-      '<ul class="log"></ul>',
-      '<p class="hint">字幕从当前页面读（等于你在网页上点开「显示字幕记录」拿到的那份），',
-      '不经过 GitHub runner，所以不会被 YouTube 的数据中心 IP 限制拖累。',
-      '若读不到，先在视频简介里点开「显示字幕记录」，再按生成。</p>',
-      '<p class="hint">两个 key 只存在这台浏览器里，用来写 <code>' + REPO + '</code> 的 work/ 目录；',
-      '字幕直接从当前页面读，不经过 GitHub runner，所以不会被 YouTube 拦。</p>',
-      '<p class="hint">报告做好后会出现在 <a href="' + SITE + '" target="_blank">报告库</a>。</p>',
-      '</div>'
-    ].join('');
+
+    var fab = make('button', 'fab', '生成要点报告');
+    fab.type = 'button';
+
+    var card = make('div', 'card');
+    card.hidden = true;
+    var head = make('h4');
+    head.appendChild(make('span', null, '要点报告'));
+    var close = make('button', 'x', '\u00d7');
+    close.type = 'button';
+    close.title = '收起';
+    head.appendChild(close);
+
+    var idLine = make('div', 'id');
+
+    var tokenLabel = make('label', null, 'GitHub token（fine-grained）');
+    var token = make('input', 'token');
+    token.type = 'password';
+    token.placeholder = 'github_pat_...';
+    token.autocomplete = 'off';
+
+    var keyLabel = make('label', null, 'DeepSeek API key');
+    var key = make('input', 'key');
+    key.type = 'password';
+    key.placeholder = 'sk-...';
+    key.autocomplete = 'off';
+
+    var row = make('div', 'row');
+    var go = make('button', 'go', '生成');
+    go.type = 'button';
+    var state = make('span', 'state');
+    row.appendChild(go);
+    row.appendChild(state);
+
+    var logList = make('ul', 'log');
+
+    var hint1 = make('p', 'hint',
+      '字幕直接从当前页面读，不经过 GitHub runner，所以不受数据中心 IP 的限制。' +
+      '如果读不到，先在视频简介里点开「显示字幕记录」，再按一次生成。');
+    var hint2 = make('p', 'hint',
+      '两个 key 只存在这台浏览器里（油猴的存储），只用来写 ' + REPO + ' 的 work/ 目录。');
+    var hint3 = make('p', 'hint');
+    var link = make('a', null, '报告库');
+    link.href = SITE;
+    link.target = '_blank';
+    hint3.appendChild(document.createTextNode('报告做好后会出现在 '));
+    hint3.appendChild(link);
+    hint3.appendChild(document.createTextNode('。'));
+
+    [head, idLine, tokenLabel, token, keyLabel, key, row, logList, hint1, hint2, hint3]
+      .forEach(function (node) { card.appendChild(node); });
+    host.appendChild(fab);
+    host.appendChild(card);
     document.body.appendChild(host);
 
     var ui = {
-      host: host,
-      fab: host.querySelector('.fab'),
-      card: host.querySelector('.card'),
-      close: host.querySelector('.x'),
-      id: host.querySelector('.id'),
-      token: host.querySelector('.token'),
-      key: host.querySelector('.key'),
-      go: host.querySelector('.go'),
-      state: host.querySelector('.state'),
-      log: host.querySelector('.log')
+      host: host, fab: fab, card: card, close: close, id: idLine, token: token, key: key,
+      go: go, state: state, log: logList
     };
     ui.token.value = read(KEY_TOKEN);
     ui.key.value = read(KEY_DEEPSEEK);
@@ -550,6 +585,11 @@
   }
 
   var ui = build();
+
+  /* innerHTML is off limits on youtube.com (Trusted Types), so emptying is done by hand. */
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+  }
 
   function log(ui, message, kind) {
     var line = document.createElement('li');
@@ -567,7 +607,7 @@
 
   async function run(ui) {
     var id = videoId();
-    ui.log.innerHTML = '';
+    clear(ui.log);
     ui.go.disabled = true;
     ui.state.textContent = '';
     try {
