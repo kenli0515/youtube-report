@@ -9,8 +9,7 @@
       "note": "开场旁白：「我们只为三个人打断每周节目——特朗普总统、耶稣，还有黄仁勋。」黄仁勋穿着新夹克上台，全场起立鼓掌。",
       "clip": null,
       "frame": "assets/frames/00h00m55s_GPUJesus登场.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=54&end=60&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=54&rel=0&modestbranding=1"
     },
     {
       "sec": 99,
@@ -19,8 +18,7 @@
       "note": "讨论 Dario 周末那篇引发轰动的文章，以及前沿实验室集体围绕它表态的现象。黄仁勋把它拆成两块：安全议题，以及公司自身的内部控制。",
       "clip": null,
       "frame": "assets/frames/00h01m39s_Dario的博客与前沿实验室的联合.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=98&end=104&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=98&rel=0&modestbranding=1"
     },
     {
       "sec": 144,
@@ -29,8 +27,7 @@
       "note": "他强调安全至关重要，但「安全与领导力不是虚假的选择」：可以快速创新、快速执行，同时把安全做好。他也表示吹哨人值得被认真对待。",
       "clip": null,
       "frame": "assets/frames/00h02m24s_安全与领导力不是二选一.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=143&end=149&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=143&rel=0&modestbranding=1"
     },
     {
       "sec": 296,
@@ -39,8 +36,7 @@
       "note": "谈到「10% 灭绝概率」这类说法时，他直接说这是编造的，而且是研究者不该做的事——现场爆出掌声。他认为这类预测既不负责任，也无法向普通人解释清楚。",
       "clip": null,
       "frame": "assets/frames/00h04m56s_这是编造的.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=295&end=301&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=295&rel=0&modestbranding=1"
     },
     {
       "sec": 327,
@@ -49,8 +45,7 @@
       "note": "他逐条列举落空的预测：「五年内放射科医生会消失」，结果反而需要更多放射科医生；「6 到 12 个月内 90% 的代码由 AI 生成」，同样没有发生。",
       "clip": null,
       "frame": "assets/frames/00h05m27s_被证伪的预测清单.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=326&end=332&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=326&rel=0&modestbranding=1"
     },
     {
       "sec": 372,
@@ -59,8 +54,7 @@
       "note": "继续举例：当年说 GPT-2 太危险不能发布、说 Llama 3 太危险不能发布，事后都被证明是错的。他主张应该把这些预测记录下来、回头对账。",
       "clip": null,
       "frame": "assets/frames/00h06m12s_GPT2与Llama3的太危险.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=371&end=377&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=371&rel=0&modestbranding=1"
     },
     {
       "sec": 485,
@@ -69,8 +63,7 @@
       "note": "他认为这些极其重要的公司本该「像我们过去那样安静地把公司建起来」，而不是在公共场合争论。英伟达不允许员工以公司名义对外发言。",
       "clip": null,
       "frame": "assets/frames/00h08m05s_公司本该像以前那样安静地建.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=484&end=490&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=484&rel=0&modestbranding=1"
     },
     {
       "sec": 553,
@@ -79,8 +72,7 @@
       "note": "他解释英伟达的文化：公司是非政治性的、两党合作的，希望美国成功；种族、宗教与政治的讨论请留在公司之外。现场再次掌声。",
       "clip": null,
       "frame": "assets/frames/00h09m13s_公司里不谈政治.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=552&end=558&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=552&rel=0&modestbranding=1"
     },
     {
       "sec": 638,
@@ -89,8 +81,7 @@
       "note": "他的监管立场很直接：监管应该解决实际问题。而到目前为止所有真实问题都出自前沿实验室——因为它们拥有最多的算力，也因此最可能出事。",
       "clip": null,
       "frame": "assets/frames/00h10m38s_监管应该解决真实问题.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=637&end=643&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=637&rel=0&modestbranding=1"
     },
     {
       "sec": 822,
@@ -99,8 +90,7 @@
       "note": "嘉宾提到中国 GLM 背后的实验室拿到 50 亿美元融资，其中 30 亿将投入「递归自我改进」，也就是让 AI 训练下一代 AI。",
       "clip": null,
       "frame": "assets/frames/00h13m42s_中国实验室投入30亿做RSI.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=821&end=827&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=821&rel=0&modestbranding=1"
     },
     {
       "sec": 967,
@@ -109,8 +99,7 @@
       "note": "谈到 Hugging Face 收购时，主持人称这可能是最具影响力的收购之一。黄仁勋的第一性原理是：世界既需要闭源模型，也需要开源模型。",
       "clip": null,
       "frame": "assets/frames/00h16m07s_HuggingFace与开源.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=966&end=972&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=966&rel=0&modestbranding=1"
     },
     {
       "sec": 1008,
@@ -119,8 +108,7 @@
       "note": "他的比喻：水是免费的，闭源模型就像瓶装水——在合适的地方用合适的水。开源则不同，下载下来它就属于你，可以 fork、改进、据为己有。",
       "clip": null,
       "frame": "assets/frames/00h16m48s_闭源模型像瓶装水.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1007&end=1013&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1007&rel=0&modestbranding=1"
     },
     {
       "sec": 1176,
@@ -129,8 +117,7 @@
       "note": "他说这场竞赛的本质不是谁先发明，而是谁把技术利用得最好：上一次工业革命的发明者都不是美国人，但美国把它利用得比谁都好。",
       "clip": null,
       "frame": "assets/frames/00h19m36s_竞赛是谁更好地利用技术.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1175&end=1181&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1175&rel=0&modestbranding=1"
     },
     {
       "sec": 1204,
@@ -139,8 +126,7 @@
       "note": "他认为中国的叙事更务实——把 AI 看作推动经济与社会的技术，而不是宣告文明终结。他反复强调「这是编造的」，并说与其吓唬那些无能为力的人，不如去把它建出来。",
       "clip": null,
       "frame": "assets/frames/00h20m04s_为什么中国的叙事更务实.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1203&end=1209&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1203&rel=0&modestbranding=1"
     },
     {
       "sec": 1354,
@@ -149,8 +135,7 @@
       "note": "他用「打字」类比编程：在打字出现之前就有工程，之后也会有大量工程。他常对工程师说「你只是在打字」，并说自己最喜欢的键是退格键——最好的软件是最小的软件。",
       "clip": null,
       "frame": "assets/frames/00h22m34s_退格键最好的软件是最小的.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1353&end=1359&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1353&rel=0&modestbranding=1"
     },
     {
       "sec": 1395,
@@ -159,8 +144,7 @@
       "note": "节目进行中接到特朗普的电话，黄仁勋当场把他接到扩音器上。特朗普第一句调侃：詹森能造出十年没人能复制的芯片，却不知道怎么把他接到免提上。",
       "clip": null,
       "frame": "assets/frames/00h23m15s_节目中接到总统电话.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1394&end=1400&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1394&rel=0&modestbranding=1"
     },
     {
       "sec": 1508,
@@ -169,8 +153,7 @@
       "note": "特朗普称 AI 末日论是「骗局」，并表示数据中心是未来 20 到 25 年的石油、比互联网更大，正在让原本衰败的社区变富裕，不能因为这套论调停下来。",
       "clip": null,
       "frame": "assets/frames/00h25m08s_这是骗局与数据中心.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1507&end=1513&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1507&rel=0&modestbranding=1"
     },
     {
       "sec": 1615,
@@ -179,8 +162,7 @@
       "note": "特朗普引用自己的说法：「谁赢得 AI，谁就赢得一切」，并称要让美国在 AI 竞赛中人人受益——每个行业、每家公司、每个州。",
       "clip": null,
       "frame": "assets/frames/00h26m55s_谁赢得AI谁赢得一切.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1614&end=1620&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1614&rel=0&modestbranding=1"
     },
     {
       "sec": 1708,
@@ -189,8 +171,7 @@
       "note": "挂断后嘉宾们确认这不是安排好的桥段。他们聊到总统会半夜打电话、把正在度假的黄仁勋叫回来，以及他为什么能看穿这套末日叙事。",
       "clip": null,
       "frame": "assets/frames/00h28m28s_挂断之后这是真的.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1707&end=1713&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1707&rel=0&modestbranding=1"
     },
     {
       "sec": 1930,
@@ -199,8 +180,7 @@
       "note": "谈到 AI 带来的资本与就业：仅最近六个月就有约 4000 亿美元风险融资进入 AI 行业，创造了大量岗位，也带来对算力和数据中心的巨大需求。",
       "clip": null,
       "frame": "assets/frames/00h32m10s_4000亿风投与就业.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1929&end=1935&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1929&rel=0&modestbranding=1"
     },
     {
       "sec": 1980,
@@ -209,8 +189,7 @@
       "note": "主持人指出，英伟达为了把生态推起来，实际上不得不成为「AI 的银行」：与 BlackRock、Goldman 等合作搭建融资能力，从上游供应链一路布局。",
       "clip": null,
       "frame": "assets/frames/00h33m00s_英伟达成了AI的银行.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1979&end=1985&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=1979&rel=0&modestbranding=1"
     },
     {
       "sec": 2236,
@@ -219,8 +198,7 @@
       "note": "他的策略表述：「向上走到必要的高度，向下走得尽可能低」。如果不是英伟达做了 cuDNN，各种框架就不会存在；把该做的技术做出来，然后让百花齐放。",
       "clip": null,
       "frame": "assets/frames/00h37m16s_向上走到必要的高度.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2235&end=2241&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2235&rel=0&modestbranding=1"
     },
     {
       "sec": 2300,
@@ -229,8 +207,7 @@
       "note": "谈到超大规模云厂商时他说，自己「出奇地不喜欢竞争」，更希望有五家超级云厂商；但他指出超大规模厂商一年只规划一次，而市场波动太大，区域云反而更敏捷。",
       "clip": null,
       "frame": "assets/frames/00h38m20s_我出奇地不喜欢竞争.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2299&end=2305&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2299&rel=0&modestbranding=1"
     },
     {
       "sec": 2428,
@@ -239,8 +216,7 @@
       "note": "被问是否要拿开源模型的金牌、开源能否追上前沿时，他的逻辑是：我们会做，一是我们有这个能力，二是客户需要我们做。",
       "clip": null,
       "frame": "assets/frames/00h40m28s_会不会做出最好的开源模型.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2427&end=2433&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2427&rel=0&modestbranding=1"
     },
     {
       "sec": 2558,
@@ -249,8 +225,7 @@
       "note": "谈到马斯克宣布的 1 亿平方英尺 Terafab 工厂，他说「如果有谁能做到，那就是他」，并提到两人曾同机长谈过这件事。",
       "clip": null,
       "frame": "assets/frames/00h42m38s_对Terafab的看法.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2557&end=2563&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2557&rel=0&modestbranding=1"
     },
     {
       "sec": 2628,
@@ -259,8 +234,7 @@
       "note": "他判断中国到 2030 年就能自己做出先进光刻系统；被问到是否意味着闸门打开，他说中国非常擅长大规模量产，这只是时间问题。",
       "clip": null,
       "frame": "assets/frames/00h43m48s_中国2030年搞定先进光刻.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2627&end=2633&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2627&rel=0&modestbranding=1"
     },
     {
       "sec": 2705,
@@ -269,8 +243,7 @@
       "note": "谈到 AGI 与超级智能，他说「我觉得我们已经到了」：在自动驾驶、蛋白质合成这些窄领域里，AI 已经比人做得更好——一辆车的事故率只有人类的十分之一。",
       "clip": null,
       "frame": "assets/frames/00h45m05s_我们已经到了超级智能.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2704&end=2710&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2704&rel=0&modestbranding=1"
     },
     {
       "sec": 2750,
@@ -279,8 +252,7 @@
       "note": "收尾时他鼓励大家「骑上这辆车」，希望所有人一起到达那里，并呼吁把这套戏剧性降温——最重要的是让整个美国一起走。",
       "clip": null,
       "frame": "assets/frames/00h45m50s_结尾骑上这辆车.jpg",
-      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2749&end=2755&rel=0&modestbranding=1",
-      "clip_len": 6
+      "embed": "https://www.youtube.com/embed/S7CrlFLAmEA?start=2749&rel=0&modestbranding=1"
     }
   ],
   "failures": []

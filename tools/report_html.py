@@ -251,7 +251,7 @@ CORE_JS = """
     card.classList.toggle('collapsed',collapsed);
     var btn=card.querySelector('[data-toggle]');
     if(btn){
-      btn.textContent=collapsed?('展开视频 · '+btn.dataset.secs+' 秒'):'收起视频';
+      btn.textContent=collapsed?(btn.dataset.secs?'展开视频 · '+btn.dataset.secs+' 秒':'展开视频'):'收起视频';
       btn.setAttribute('aria-expanded',collapsed?'false':'true');
     }
     if(collapsed){
@@ -435,10 +435,13 @@ def render(title, url, meta, sep, points, has_media, source_note=""):
             f'<h3>{esc(point["title"])}</h3>',
         ]
         if has_player:
+            # The embedded shape has no fixed length - the player runs on - so it says nothing
+            # about seconds rather than claiming an empty one.
+            secs = point.get("clip_len")
             out.append(
                 '<button class="toggle" type="button" data-toggle '
-                f'data-secs="{esc(point.get("clip_len") or "")}" aria-expanded="false">'
-                f'展开视频 · {esc(point.get("clip_len") or "")} 秒</button>'
+                f'data-secs="{esc(secs or "")}" aria-expanded="false">'
+                f'{f"展开视频 · {esc(secs)} 秒" if secs else "展开视频"}</button>'
             )
         out.append("</div>")
         if point.get("embed"):

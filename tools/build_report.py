@@ -13,8 +13,9 @@ The standalone HTML report is the primary output: it plays video inline in any b
 so it does not depend on what a particular markdown viewer supports. Markdown is still
 available with --md when a plain-text source is wanted.
 
-With --embed youtube the report embeds the YouTube player at the point's own second and keeps
-only the still frame, which is the shape that fits a website: nothing to host, nothing to serve.
+With --embed youtube the report embeds the YouTube player at the point's own second and lets it
+play on from there, keeping only the still frame: the shape that fits a website, where there is
+nothing to host and nothing to serve.
 
 Clips are fetched with yt-dlp's --download-sections, so only the seconds around each
 point are downloaded - never the whole video.
@@ -128,11 +129,15 @@ def video_id(url):
     return os.path.basename(url.rstrip("/"))
 
 
-def embed_url(url, sec, lead, tail):
-    start = max(0, sec - lead)
+def embed_url(url, sec, lead):
+    """The player starts a second before the point and then keeps playing.
+
+    No `end=`: in the shared-link shape the reader is watching the real video, and cutting them
+    off a few seconds in is worse than letting them watch on. The bounded version of a moment is
+    what `--embed file` is for.
+    """
     params = urllib.parse.urlencode({
-        "start": start,
-        "end": sec + tail,
+        "start": max(0, sec - lead),
         "rel": "0",
         "modestbranding": "1",
     })
@@ -314,8 +319,7 @@ def main():
                 point["frame"] = os.path.relpath(frame_path, args.out)
             elif args.still == "thumbnail":
                 point["frame"] = thumbnail_url(args.url, meta)
-            point["embed"] = embed_url(args.url, sec, args.lead, args.tail)
-            point["clip_len"] = args.lead + args.tail
+            point["embed"] = embed_url(args.url, sec, args.lead)
             built.append(point)
             print(f"[{index}/{len(points)}] ok {hms(sec)} {point['title']}", flush=True)
             continue
