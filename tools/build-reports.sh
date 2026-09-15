@@ -29,6 +29,6 @@ for points in work/*/points.json; do
 done
 
 if [ "$built" -gt 0 ]; then
-  python3 tools/build_index.py --root . --generator
+  python3 tools/build_index.py --root .
 fi
 echo "built $built report(s)"

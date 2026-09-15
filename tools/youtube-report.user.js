@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube 要点报告
 // @namespace    https://github.com/kenli0515/youtube-report
-// @version      1.0.2
+// @version      1.0.3
 // @description  在 YouTube 视频页直接读字幕，用你自己的 DeepSeek key 生成简体中文要点报告
 // @author       kenli0515
 // @match        https://www.youtube.com/watch*
@@ -393,10 +393,16 @@
     var details = pr.videoDetails || {};
     var micro = pr.microformat && pr.microformat.playerMicroformatRenderer;
     var thumbs = (details.thumbnail && details.thumbnail.thumbnails) || [];
+    /* upload_date is what build_index.py sorts on, and a report without it sinks to the bottom of
+       the list. yt-dlp reports it as YYYYMMDD, so the dashes come off the player's ISO date. */
+    var upload = String((micro && (micro.uploadDate || micro.publishDate)) || '');
     return {
+      id: details.videoId || '',
       title: details.title || '',
       channel: details.author || '',
       duration: Number(details.lengthSeconds) || null,
+      upload_date: upload.replace(/-/g, '') || null,
+      view_count: Number(details.viewCount) || null,
       webpage_url: url,
       thumbnail: (thumbs[thumbs.length - 1] || {}).url || ''
     };

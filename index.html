@@ -135,61 +135,12 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);
 footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;
   background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:1px 6px}
 
+.how{margin-top:14px;color:var(--muted);font-size:.86rem;line-height:1.7}
+.how a{color:var(--accent)}
+
 @media (max-width:560px){.grid{grid-template-columns:1fr}.wrap{padding:0 16px 80px}}
-
-.gen{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:var(--shadow);overflow:hidden}
-.gen>summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:15px 20px;
-  cursor:pointer;font-weight:700;list-style:none}
-.gen>summary::-webkit-details-marker{display:none}
-.gen>summary::after{content:"\25be";margin-left:auto;color:var(--muted);font-size:.85rem;
-  transition:transform .2s ease}
-.gen[open]>summary::after{transform:rotate(180deg)}
-.gen>summary:hover{color:var(--accent)}
-.gen-hint{font-weight:450;font-size:.83rem;color:var(--muted)}
-.gen-body{padding:0 20px 18px;border-top:1px solid var(--line)}
-.gen-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  margin-top:16px}
-.gen-field{display:flex;flex-direction:column;gap:6px}
-.gen-field.gen-wide{grid-column:1/-1}
-.gen-field span{font-size:.78rem;font-weight:650;letter-spacing:.02em;color:var(--muted)}
-.gen-field input,.gen textarea{padding:10px 13px;border-radius:11px;border:1px solid var(--line-strong);
-  background:var(--bg);color:var(--ink);font:inherit;font-size:.9rem;transition:border-color .15s ease}
-.gen-field input:focus,.gen textarea:focus{outline:none;border-color:var(--accent)}
-.gen textarea{width:100%;margin-top:12px;resize:vertical;font-size:.85rem;line-height:1.7;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.gen-remember{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:.83rem;
-  color:var(--muted);cursor:pointer}
-.gen-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:16px}
-.gen-btn{border:0;border-radius:11px;padding:10px 20px;font:inherit;font-size:.9rem;font-weight:650;
-  color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  box-shadow:0 10px 22px -14px var(--accent);transition:filter .15s ease,opacity .15s ease}
-/* In the dark palette the accent is a light colour, so white on it would wash out. */
-:root[data-theme="dark"] .gen-btn{color:#0b0c10}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gen-btn{color:#0b0c10}}
-.gen-btn:hover{filter:brightness(1.06)}
-.gen-btn:disabled{opacity:.5;cursor:progress}
-.gen-state{font-size:.83rem;color:var(--accent);font-variant-numeric:tabular-nums}
-.gen-log{display:flex;flex-direction:column;gap:6px;margin:16px 0 0;padding:0;list-style:none;
-  max-height:280px;overflow:auto;font-size:.85rem;font-variant-numeric:tabular-nums}
-.gen-log:empty{display:none}
-.gen-log li{padding:8px 12px;border-radius:9px;background:var(--accent-soft);color:var(--ink-soft);
-  overflow-wrap:anywhere}
-.gen-log li.gen-ok{background:rgba(34,197,94,.13);color:#1a9f52}
-.gen-log li.gen-error{background:rgba(229,72,77,.14);color:#e5484d}
-.gen-more{margin-top:18px;border:1px dashed var(--line-strong);border-radius:var(--radius-sm);
-  padding:12px 15px}
-.gen-more>summary{cursor:pointer;font-size:.85rem;color:var(--muted)}
-.gen-more>summary:hover{color:var(--accent)}
-.gen-more p{margin:12px 0 0;font-size:.83rem;color:var(--muted);line-height:1.8}
-.gen-note{margin:18px 0 0;font-size:.82rem;line-height:1.9;color:var(--muted)}
-.gen-note code,.gen-more code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  font-size:.92em;
-  background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:1px 6px}
-
-@media (max-width:560px){.gen-body{padding:0 15px 16px}.gen>summary{padding:14px 15px}}
 </style>
-<noscript><style>.toolbtn,.gen{display:none}</style></noscript>
+<noscript><style>.toolbtn{display:none}</style></noscript>
 </head>
 <body>
 <div class="wrap">
@@ -206,61 +157,11 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 <span class="pill ghost">youtube-report/</span>
 </div>
 <input id="q" class="search" type="search" autocomplete="off" placeholder="搜索标题或频道…">
-<details class="gen" id="gen" open>
-<summary><span>生成新报告</span><span class="gen-hint">贴一条 YouTube 链接，剩下的交给 GitHub Actions
-和 DeepSeek</span></summary>
-<div class="gen-body">
-<div class="gen-grid">
-<label class="gen-field gen-wide"><span>YouTube 链接</span>
-<input id="gen-url" type="url" autocomplete="off" spellcheck="false"
- placeholder="https://www.youtube.com/watch?v=..."></label>
-<label class="gen-field"><span>GitHub token（fine-grained）</span>
-<input id="gen-token" type="password" autocomplete="off" spellcheck="false"
- placeholder="github_pat_..."></label>
-<label class="gen-field"><span>DeepSeek API key</span>
-<input id="gen-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-..."></label>
-</div>
-<label class="gen-remember"><input id="gen-remember" type="checkbox">
-记住这两个 key（只写进这台浏览器的 localStorage）</label>
-<div class="gen-actions">
-<button id="gen-run" class="gen-btn" type="button">生成报告</button>
-<span class="gen-state" id="gen-state"></span>
-</div>
-<ol class="gen-log" id="gen-log"></ol>
-<details class="gen-more" id="gen-more">
-<summary>抓不到字幕？自己贴一份</summary>
-<p>runner 的 IP 偶尔会被 YouTube 拦下来（数据中心 IP 要过人机验证）。打开视频页的「显示字幕记录」，
-全选复制贴进下面，时间戳会自动解析；字幕文件（<code>.srt</code> / <code>.vtt</code>）也可以直接贴。</p>
-<textarea id="gen-paste" rows="7" spellcheck="false"
- placeholder="0:01&#10;大家好，欢迎回来&#10;0:05&#10;今天聊聊..."></textarea>
-<div class="gen-actions">
-<button id="gen-paste-run" class="gen-btn" type="button">用这份字幕生成</button>
-<span class="gen-state" id="gen-paste-state"></span>
-</div>
-</details>
-<p class="gen-note">runner 拿不到这条视频的字幕时（YouTube 会拦数据中心 IP），两条退路：展开下面的
-「自己贴一份」，或者装
-<a id="gen-userscript" href="tools/youtube-report.user.js">油猴脚本</a>
-直接在 YouTube 页面上生成 —— 脚本用你自己的浏览器读字幕，不经过 runner。</p>
-<p class="gen-note">两个 key 都只活在这个页面里：GitHub token 是 fine-grained、只勾本仓库的
-<code>Contents: Read and write</code>，用来往 <code>requests/</code> 和 <code>work/</code>
-写文件；DeepSeek key 由浏览器直接调用 DeepSeek（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
-② 浏览器调 DeepSeek 挑要点 → ③ Action 生成报告页并刷新这个索引，通常 1-2 分钟。</p>
-</div>
-</details>
+<p class="how">装一次
+<a href="tools/youtube-report.user.js">油猴脚本</a>，以后在 YouTube 视频页右下角点「生成要点报告」
+就行 —— 字幕由你自己的浏览器读取，不经过任何服务器。</p>
 </header>
 <main class="grid">
-<article class="rcard" data-q="爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论 ak‘s tech studio krolqfvchl4">
-<a class="cover" href="reports/kROlQfvcHl4/report.html"><img src="https://i.ytimg.com/vi/kROlQfvcHl4/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/kROlQfvcHl4/report.html">爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论</a></h3>
-<div class="tags"><span class="tag">AK‘s Tech Studio</span><span class="tag ghost">1:02:48</span><span class="tag ghost">2026-09-15</span><span class="tag ghost">30 个要点</span></div>
-<div class="rc-foot">
-<span class="id">kROlQfvcHl4</span>
-<a href="https://www.youtube.com/watch?v=kROlQfvcHl4">原视频 ↗</a>
-</div>
-</div>
-</article>
 <article class="rcard" data-q="anthropic ceo 警告 ai 智能体集群可能威胁人类 cnn _jbdz2rj2sa">
 <a class="cover" href="reports/_JbDZ2Rj2SA/report.html"><img src="https://i.ytimg.com/vi_webp/_JbDZ2Rj2SA/maxresdefault.webp" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
 <div class="rc-body">
@@ -272,14 +173,25 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 </div>
 </div>
 </article>
-<article class="rcard" data-q="黄仁勋谈 ai 末日论、开源与中国｜all-in podcast 访谈要点 all-in podcast s7crlflamea">
-<a class="cover" href="reports/S7CrlFLAmEA/report.html"><img src="https://i.ytimg.com/vi/S7CrlFLAmEA/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/S7CrlFLAmEA/assets/frames/00h00m55s_GPUJesus登场.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">28 个要点</span></a>
+<article class="rcard" data-q="爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论 ak‘s tech studio krolqfvchl4">
+<a class="cover" href="reports/kROlQfvcHl4/report.html"><img src="https://i.ytimg.com/vi/kROlQfvcHl4/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
 <div class="rc-body">
-<h3><a href="reports/S7CrlFLAmEA/report.html">黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</a></h3>
-<div class="tags"><span class="tag">All-In Podcast</span><span class="tag ghost">46:46</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">28 个要点</span></div>
+<h3><a href="reports/kROlQfvcHl4/report.html">爱情是交易吗？生理吸引、灵魂伴侣与长久关系的辩论</a></h3>
+<div class="tags"><span class="tag">AK‘s Tech Studio</span><span class="tag ghost">1:02:48</span><span class="tag ghost">2026-09-15</span><span class="tag ghost">30 个要点</span></div>
 <div class="rc-foot">
-<span class="id">S7CrlFLAmEA</span>
-<a href="https://www.youtube.com/watch?v=S7CrlFLAmEA">原视频 ↗</a>
+<span class="id">kROlQfvcHl4</span>
+<a href="https://www.youtube.com/watch?v=kROlQfvcHl4">原视频 ↗</a>
+</div>
+</div>
+</article>
+<article class="rcard" data-q="ai 末日是否更近？前大厂工程师的深度解析 asian dad energy gor5-pr6w5k">
+<a class="cover" href="reports/GOR5-pr6W5k/report.html"><img src="https://i.ytimg.com/vi/GOR5-pr6W5k/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/GOR5-pr6W5k/report.html">AI 末日是否更近？前大厂工程师的深度解析</a></h3>
+<div class="tags"><span class="tag">Asian Dad Energy</span><span class="tag ghost">17:43</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">25 个要点</span></div>
+<div class="rc-foot">
+<span class="id">GOR5-pr6W5k</span>
+<a href="https://www.youtube.com/watch?v=GOR5-pr6W5k">原视频 ↗</a>
 </div>
 </div>
 </article>
@@ -294,6 +206,39 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 </div>
 </div>
 </article>
+<article class="rcard" data-q="黄仁勋谈 ai 末日论、开源与中国｜all-in podcast 访谈要点 all-in podcast s7crlflamea">
+<a class="cover" href="reports/S7CrlFLAmEA/report.html"><img src="https://i.ytimg.com/vi/S7CrlFLAmEA/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/S7CrlFLAmEA/assets/frames/00h00m55s_GPUJesus登场.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">28 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/S7CrlFLAmEA/report.html">黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</a></h3>
+<div class="tags"><span class="tag">All-In Podcast</span><span class="tag ghost">46:46</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">28 个要点</span></div>
+<div class="rc-foot">
+<span class="id">S7CrlFLAmEA</span>
+<a href="https://www.youtube.com/watch?v=S7CrlFLAmEA">原视频 ↗</a>
+</div>
+</div>
+</article>
+<article class="rcard" data-q="ai十年內毀滅人類？美國警告與中國加速的危機 風雲谷 whirling clouds valley 5f4mrwj20ua">
+<a class="cover" href="reports/5f4MRwJ20UA/report.html"><img src="https://i.ytimg.com/vi/5f4MRwJ20UA/hqdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/5f4MRwJ20UA/report.html">AI十年內毀滅人類？美國警告與中國加速的危機</a></h3>
+<div class="tags"><span class="tag">風雲谷 Whirling Clouds Valley</span><span class="tag ghost">37:01</span><span class="tag ghost">2026-09-12</span><span class="tag ghost">30 个要点</span></div>
+<div class="rc-foot">
+<span class="id">5f4MRwJ20UA</span>
+<a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s">原视频 ↗</a>
+</div>
+</div>
+</article>
+<article class="rcard" data-q="anthropic ceo 与离职员工激辩 ai 灭绝风险 cnn hi6skj4wf5i">
+<a class="cover" href="reports/HI6skJ4Wf5I/report.html"><img src="https://i.ytimg.com/vi/HI6skJ4Wf5I/hqdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/HI6skJ4Wf5I/report.html">Anthropic CEO 与离职员工激辩 AI 灭绝风险</a></h3>
+<div class="tags"><span class="tag">CNN</span><span class="tag ghost">2026-09-12</span><span class="tag ghost">30 个要点</span></div>
+<div class="rc-foot">
+<span class="id">HI6skJ4Wf5I</span>
+<a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I">原视频 ↗</a>
+</div>
+</div>
+</article>
 <article class="rcard" data-q="一个离谱到像科幻的真实故事：hugging face 事故复盘｜要点报告 進擊的筆記 96uznmmdkxw">
 <a class="cover" href="reports/96UZNMMDKXw/report.html"><img src="https://i.ytimg.com/vi/96UZNMMDKXw/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/96UZNMMDKXw/assets/frames/00h00m01s_一份官方声明的复盘.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">23 个要点</span></a>
 <div class="rc-body">
@@ -305,48 +250,14 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 </div>
 </div>
 </article>
-<article class="rcard" data-q="anthropic ceo 与离职员工激辩 ai 灭绝风险 cnn hi6skj4wf5i">
-<a class="cover" href="reports/HI6skJ4Wf5I/report.html"><img src="https://i.ytimg.com/vi/HI6skJ4Wf5I/hqdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/HI6skJ4Wf5I/report.html">Anthropic CEO 与离职员工激辩 AI 灭绝风险</a></h3>
-<div class="tags"><span class="tag">CNN</span><span class="tag ghost">30 个要点</span></div>
-<div class="rc-foot">
-<span class="id">HI6skJ4Wf5I</span>
-<a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="ai十年內毀滅人類？美國警告與中國加速的危機 風雲谷 whirling clouds valley 5f4mrwj20ua">
-<a class="cover" href="reports/5f4MRwJ20UA/report.html"><img src="https://i.ytimg.com/vi/5f4MRwJ20UA/hqdefault.jpg" alt="" loading="lazy"><span class="badge">30 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/5f4MRwJ20UA/report.html">AI十年內毀滅人類？美國警告與中國加速的危機</a></h3>
-<div class="tags"><span class="tag">風雲谷 Whirling Clouds Valley</span><span class="tag ghost">30 个要点</span></div>
-<div class="rc-foot">
-<span class="id">5f4MRwJ20UA</span>
-<a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s">原视频 ↗</a>
-</div>
-</div>
-</article>
-<article class="rcard" data-q="ai 末日是否更近？前大厂工程师的深度解析 asian dad energy gor5-pr6w5k">
-<a class="cover" href="reports/GOR5-pr6W5k/report.html"><img src="https://i.ytimg.com/vi/GOR5-pr6W5k/maxresdefault.jpg" alt="" loading="lazy"><span class="badge">25 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/GOR5-pr6W5k/report.html">AI 末日是否更近？前大厂工程师的深度解析</a></h3>
-<div class="tags"><span class="tag">Asian Dad Energy</span><span class="tag ghost">17:43</span><span class="tag ghost">25 个要点</span></div>
-<div class="rc-foot">
-<span class="id">GOR5-pr6W5k</span>
-<a href="https://www.youtube.com/watch?v=GOR5-pr6W5k">原视频 ↗</a>
-</div>
-</div>
-</article>
 </main>
 <p class="empty" id="empty" hidden>没有匹配的报告。</p>
 <footer>
 共 8 份报告，位于 <code>youtube-report/</code>。<br>
-索引生成于 2026-09-15 18:24；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
+索引生成于 2026-09-16 02:25；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
 每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
 </footer>
 </div>
-<script src="assets/generate.js" defer></script>
 <script>(function(){
   var root=document.documentElement;
   var key='yt-report-theme', saved=null;
