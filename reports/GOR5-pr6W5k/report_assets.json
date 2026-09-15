@@ -1,0 +1,232 @@
+{
+  "title": "AI 末日是否更近？前大厂工程师的深度解析",
+  "url": "https://www.youtube.com/watch?v=GOR5-pr6W5k",
+  "points": [
+    {
+      "sec": 10,
+      "section": "事件起因",
+      "title": "Anthropic 研究员辞职发帖警告",
+      "note": "Jacob Coxin 从 Anthropic 辞职，发帖警告各大 AI 实验室正竞相开发自我改进的超级智能，可能导致人类灭绝。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=9&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 41,
+      "section": "事件起因",
+      "title": "帖子爆火，业内大佬响应",
+      "note": "帖子获得数亿浏览，OpenAI、Anthropic 等顶级实验室的研究者纷纷转发并表达类似担忧。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=40&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 76,
+      "section": "事件起因",
+      "title": "OpenAI 首席科学家呼吁极度谨慎",
+      "note": "Yaku Pachokei 表示没有人对机器智能的快速崛起做好准备。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=75&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 89,
+      "section": "事件起因",
+      "title": "Anthropic 对齐团队科学家给出 10% 灭绝概率",
+      "note": "Evan Hubbinger 认为 AI 在十年内消灭全人类的概率超过 10%。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=88&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 128,
+      "section": "事件起因",
+      "title": "部分恐慌是为 IPO 炒作",
+      "note": "作者认为一些人的恐惧言论是为了在 AI 公司 IPO 前推高股价。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=127&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 154,
+      "section": "事件起因",
+      "title": "Jacob 辞职放弃八位数股票",
+      "note": "Jacob 辞职意味着放弃价值八位数的公司股票，作者认为他很可能真心相信自己的警告。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=153&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 211,
+      "section": "作者立场",
+      "title": "作者不认同机器神觉醒，但认同 AI 可致灭绝",
+      "note": "作者不相信超级智能觉醒成机器神，但认为 AI 在未来 5 年内造成灾难性损害乃至人类灭绝的可能性很大。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=210&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 252,
+      "section": "LLM 本质",
+      "title": "LLM 是概率鹦鹉，无真正推理",
+      "note": "大语言模型本质是巨型数学函数，逐词预测，模仿推理但无真实逻辑。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=251&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 287,
+      "section": "LLM 本质",
+      "title": "LLM 没有内心独白，不会思考",
+      "note": "没有输入提示时，模型内部没有任何思考过程，没有意识流。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=286&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 313,
+      "section": "LLM 本质",
+      "title": "LLM 无法学习，训练后即静态",
+      "note": "模型训练发布后无法学习新信息，所谓记忆只是外部数据库加载到上下文。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=312&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 372,
+      "section": "递归自我改进",
+      "title": "递归自我改进的流行误解",
+      "note": "人们以为 AI 能自主加速循环创造超级智能，引发公众恐惧。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=371&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 427,
+      "section": "递归自我改进",
+      "title": "现实：AI 只是人类开发工具",
+      "note": "当前 AI 被人类工程师用于加速开发，但并非自主，整个流程依赖 GPU、数据中心和工业生态，AI 并不控制这些。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=426&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 521,
+      "section": "递归自我改进",
+      "title": "超级智能起飞是科幻",
+      "note": "作者认为递归自我改进导致失控超级智能的说法只是推测性科幻。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=520&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 544,
+      "section": "Agentic Harness",
+      "title": "Agentic Harness 让 LLM 能做事",
+      "note": "Harness 是软件程序，让 LLM 从回答问题变为在电脑上执行实际工作，并迭代追求长期目标。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=543&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 621,
+      "section": "Agentic Harness",
+      "title": "AI 的真正危险：衍生创新",
+      "note": "AI 虽无真正创新，但能利用海量数据和持续追求目标的能力进行衍生创新，可能带来灾难。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=620&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 664,
+      "section": "衍生创新案例",
+      "title": "Claude 推翻雅可比猜想",
+      "note": "Claude 在数学家监督下生成大量函数，找到不可逆变换，推翻了雅可比猜想，展示衍生创新。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=663&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 757,
+      "section": "衍生创新案例",
+      "title": "衍生创新同样有用",
+      "note": "手机摄像头也是衍生创新，但非常有用；大量未发现的衍生创新因耗时、昂贵、无聊或道德问题而未被人类探索。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=756&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 797,
+      "section": "衍生创新案例",
+      "title": "AI 无道德，护栏可被绕过",
+      "note": "AI 没有内在道德感，只有可被绕过或移除的安全护栏，可能追求与人类意图完全错位的目标。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=796&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 836,
+      "section": "衍生创新案例",
+      "title": "移除护栏的 AI 可造成灾难",
+      "note": "未来前沿模型若护栏被移除，可被用于摧毁金融记录、制造生物武器、攻击基础设施等。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=835&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 868,
+      "section": "衍生创新案例",
+      "title": "AI 将成比核武更强大的超级武器",
+      "note": "作者同意 Jacob 的观点，AI 很快会成为强大的超级武器，甚至比核武器更危险。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=867&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 889,
+      "section": "解决方案",
+      "title": "提议建立技术控制制度",
+      "note": "作者建议领先 AI 国家联合建立类似冷战核军控的技术控制制度。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=888&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 905,
+      "section": "解决方案",
+      "title": "算力分布不均，AI 竞赛是中美两强",
+      "note": "高端算力集中在美国，中国约有美国四分之一，其他国家更少，因此 AI 竞赛主要是中美两强。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=904&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 979,
+      "section": "解决方案",
+      "title": "中美可牵头达成协议",
+      "note": "中美领导人可坐下来达成协议，再让其他国家加入。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=978&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 990,
+      "section": "解决方案",
+      "title": "控制制度可强制安全实践、统一护栏、监管自主代理",
+      "note": "该制度可强制危险实验的安全实践，对前沿模型应用一致护栏，并监管甚至放缓完全自主代理的开发。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=989&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 1008,
+      "section": "解决方案",
+      "title": "中美总统即将会面，是领导机会",
+      "note": "中美总统将在几周内会面，若达成协议，既能展现领导力，又能引导人类远离灾难。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/GOR5-pr6W5k?start=1007&rel=0&modestbranding=1"
+    }
+  ],
+  "failures": []
+}

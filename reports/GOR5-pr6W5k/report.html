@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 末日是否更近？前大厂工程师的深度解析</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --ink:#14161c; --ink-soft:#3d424e; --muted:#6b7280;
+  --line:#e6e7ef; --line-strong:#d8dae6;
+  --accent:#4f6ef7; --accent-2:#8b5cf6; --accent-soft:#eef1fe;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.13);
+  --shadow:0 1px 2px rgba(16,18,27,.04),0 8px 24px -18px rgba(16,18,27,.28);
+  --shadow-lift:0 18px 40px -22px rgba(16,18,27,.38);
+  --radius:18px; --radius-sm:12px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+  --line:#242733; --line-strong:#31364a;
+  --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+    --line:#242733; --line-strong:#31364a;
+    --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+    --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background-color:var(--bg);
+  background-image:
+    radial-gradient(900px 340px at 10% -80px,var(--glow-a),transparent 70%),
+    radial-gradient(760px 300px at 92% -110px,var(--glow-b),transparent 72%);
+  background-repeat:no-repeat;
+  font:16px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--accent);color:#fff}
+
+/* reading progress + back to top */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .12s linear}
+#totop{position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font-size:1.05rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#totop.on{opacity:1;visibility:visible;transform:none}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding:58px 0 26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.toolbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:.78rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+h1{font-size:clamp(1.55rem,3.1vw,2.3rem);line-height:1.3;margin:0 0 22px;
+  letter-spacing:-.022em;font-weight:800}
+.sub{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:650;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.pill:hover{text-decoration:none;filter:brightness(.97);border-color:var(--accent)}
+.pill.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550}
+
+/* table of contents */
+.toc{margin:36px 0 0;padding:22px 26px 24px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.toc-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.toc h2{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0;font-weight:750}
+.toc .count{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc ol{columns:2;column-gap:14px;margin:0;padding:0;list-style:none}
+@media (max-width:720px){.toc ol{columns:1}}
+.toc li{break-inside:avoid;margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:5px 9px;border-radius:9px;
+  color:var(--ink);font-size:.93rem;line-height:1.5}
+.toc a:hover{background:var(--accent-soft);color:var(--accent);text-decoration:none}
+.toc .stamp{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.82rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.toc a:hover .stamp{color:var(--accent)}
+
+/* section headings */
+h2.section{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:750;
+  margin:60px 0 20px;letter-spacing:-.01em}
+h2.section .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;
+  font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;
+  padding:3px 8px;letter-spacing:.02em}
+h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* point cards */
+.point{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 18px;margin:16px 0;box-shadow:var(--shadow);
+  transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+.point:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px);
+  border-color:var(--line-strong)}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h3{font-size:1.06rem;line-height:1.5;margin:0;font-weight:700;flex:1;min-width:60%;
+  letter-spacing:-.005em}
+.head .stamp{background:var(--accent-soft);color:var(--accent);border-radius:9px;
+  padding:3px 10px;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.head .stamp:hover{text-decoration:none;filter:brightness(.95)}
+.toggle{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:3px 11px;font-size:.77rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.point.collapsed .media{display:none}
+.point.collapsed{padding-bottom:16px}
+
+/* media */
+.media{position:relative;margin:16px 0 0;line-height:0}
+video{display:block;width:100%;height:auto;border-radius:var(--radius-sm);background:#000}
+img{display:block;width:100%;height:auto;border-radius:var(--radius-sm);
+  border:1px solid var(--line)}
+.chip-dur{position:absolute;top:10px;right:10px;pointer-events:none;line-height:1.5;
+  background:rgba(8,10,16,.62);color:#fff;font-size:.74rem;font-weight:600;
+  padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;padding:0 0 0 4px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:1.05rem;line-height:1;color:#fff;
+  border:1.5px solid rgba(255,255,255,.7);background:rgba(8,10,16,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .18s ease,opacity .25s ease,background .18s ease}
+.play:hover{transform:translate(-50%,-50%) scale(1.07);background:rgba(8,10,16,.72)}
+/* YouTube facade: the poster is what loads first, the player only appears on click. */
+.media.facade{aspect-ratio:16/9;background:#07080c}
+.media.facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border:0;border-radius:var(--radius-sm)}
+.media.facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+  border-radius:var(--radius-sm);background:#000}
+/* With no still frame to show, the player says what it is instead of showing an empty box. */
+.facade-hint{position:absolute;left:0;right:0;top:calc(50% + 48px);text-align:center;
+  color:#98a0b0;font-size:.82rem;letter-spacing:.03em;pointer-events:none}
+.media.playing .facade-hint{display:none}
+.media.playing img{opacity:1}
+.media.playing .play{opacity:0;visibility:hidden}
+.media.playing .chip-dur{opacity:0;transition:opacity .25s ease}
+
+.note{margin:16px 0 0;color:var(--ink-soft);font-size:.97rem}
+.actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;padding-top:12px;
+  border-top:1px dashed var(--line);font-size:.84rem}
+.actions a{color:var(--muted)}
+.actions a:hover{color:var(--accent)}
+.actions a::before{content:"↗ ";font-size:.8em}
+
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.83rem;line-height:1.95}
+footer a{color:var(--muted);text-decoration:underline}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:560px){
+  .wrap{padding:0 16px 80px}
+  .point{padding:18px 16px 14px}
+  h2.section{margin-top:44px}
+  #totop{right:16px;bottom:16px}
+}
+@media print{
+  #bar,#totop,.toolbtn,.toggle,.play{display:none}
+  body{background:#fff}
+  .point{break-inside:avoid;box-shadow:none}
+}
+</style>
+<noscript><style>.point.collapsed .media{display:block}.toggle,.toolbtn{display:none}</style></noscript>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+<header class="hero">
+<div class="hero-top">
+<span class="eyebrow">视频要点报告</span>
+<div class="tools">
+<button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
+<button id="clips" class="toolbtn" type="button">展开全部视频</button>
+</div>
+</div>
+<h1>AI 末日是否更近？前大厂工程师的深度解析</h1>
+<div class="sub">
+<span class="pill">Asian Dad Energy</span>
+<span class="pill ghost">17:43</span>
+<span class="pill ghost">25 个要点</span>
+<a class="pill ghost" href="https://www.youtube.com/watch?v=GOR5-pr6W5k">在 YouTube 打开原视频 ↗</a>
+</div>
+</header>
+<nav class="toc">
+<div class="toc-head">
+<h2>目录</h2>
+<span class="count">25 个要点 · 全长 17:43</span>
+</div>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=10s"><span class="stamp">00:00:10</span><span class="ttl">Anthropic 研究员辞职发帖警告</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=41s"><span class="stamp">00:00:41</span><span class="ttl">帖子爆火，业内大佬响应</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=76s"><span class="stamp">00:01:16</span><span class="ttl">OpenAI 首席科学家呼吁极度谨慎</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=89s"><span class="stamp">00:01:29</span><span class="ttl">Anthropic 对齐团队科学家给出 10% 灭绝概率</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=128s"><span class="stamp">00:02:08</span><span class="ttl">部分恐慌是为 IPO 炒作</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=154s"><span class="stamp">00:02:34</span><span class="ttl">Jacob 辞职放弃八位数股票</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=211s"><span class="stamp">00:03:31</span><span class="ttl">作者不认同机器神觉醒，但认同 AI 可致灭绝</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=252s"><span class="stamp">00:04:12</span><span class="ttl">LLM 是概率鹦鹉，无真正推理</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=287s"><span class="stamp">00:04:47</span><span class="ttl">LLM 没有内心独白，不会思考</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=313s"><span class="stamp">00:05:13</span><span class="ttl">LLM 无法学习，训练后即静态</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=372s"><span class="stamp">00:06:12</span><span class="ttl">递归自我改进的流行误解</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=427s"><span class="stamp">00:07:07</span><span class="ttl">现实：AI 只是人类开发工具</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=521s"><span class="stamp">00:08:41</span><span class="ttl">超级智能起飞是科幻</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=544s"><span class="stamp">00:09:04</span><span class="ttl">Agentic Harness 让 LLM 能做事</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=621s"><span class="stamp">00:10:21</span><span class="ttl">AI 的真正危险：衍生创新</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=664s"><span class="stamp">00:11:04</span><span class="ttl">Claude 推翻雅可比猜想</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=757s"><span class="stamp">00:12:37</span><span class="ttl">衍生创新同样有用</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=797s"><span class="stamp">00:13:17</span><span class="ttl">AI 无道德，护栏可被绕过</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=836s"><span class="stamp">00:13:56</span><span class="ttl">移除护栏的 AI 可造成灾难</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=868s"><span class="stamp">00:14:28</span><span class="ttl">AI 将成比核武更强大的超级武器</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=889s"><span class="stamp">00:14:49</span><span class="ttl">提议建立技术控制制度</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=905s"><span class="stamp">00:15:05</span><span class="ttl">算力分布不均，AI 竞赛是中美两强</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=979s"><span class="stamp">00:16:19</span><span class="ttl">中美可牵头达成协议</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=990s"><span class="stamp">00:16:30</span><span class="ttl">控制制度可强制安全实践、统一护栏、监管自主代理</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=1008s"><span class="stamp">00:16:48</span><span class="ttl">中美总统即将会面，是领导机会</span></a></li>
+</ol>
+</nav>
+<main>
+<h2 class="section" id="s1"><span class="n">01</span><span class="t">事件起因</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=10s">00:00:10</a>
+<h3>Anthropic 研究员辞职发帖警告</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=9&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Jacob Coxin 从 Anthropic 辞职，发帖警告各大 AI 实验室正竞相开发自我改进的超级智能，可能导致人类灭绝。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=10s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=41s">00:00:41</a>
+<h3>帖子爆火，业内大佬响应</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=40&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">帖子获得数亿浏览，OpenAI、Anthropic 等顶级实验室的研究者纷纷转发并表达类似担忧。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=41s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=76s">00:01:16</a>
+<h3>OpenAI 首席科学家呼吁极度谨慎</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=75&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Yaku Pachokei 表示没有人对机器智能的快速崛起做好准备。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=76s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=89s">00:01:29</a>
+<h3>Anthropic 对齐团队科学家给出 10% 灭绝概率</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=88&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Evan Hubbinger 认为 AI 在十年内消灭全人类的概率超过 10%。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=89s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=128s">00:02:08</a>
+<h3>部分恐慌是为 IPO 炒作</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=127&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">作者认为一些人的恐惧言论是为了在 AI 公司 IPO 前推高股价。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=128s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=154s">00:02:34</a>
+<h3>Jacob 辞职放弃八位数股票</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=153&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Jacob 辞职意味着放弃价值八位数的公司股票，作者认为他很可能真心相信自己的警告。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=154s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s2"><span class="n">02</span><span class="t">作者立场</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=211s">00:03:31</a>
+<h3>作者不认同机器神觉醒，但认同 AI 可致灭绝</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=210&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">作者不相信超级智能觉醒成机器神，但认为 AI 在未来 5 年内造成灾难性损害乃至人类灭绝的可能性很大。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=211s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s3"><span class="n">03</span><span class="t">LLM 本质</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=252s">00:04:12</a>
+<h3>LLM 是概率鹦鹉，无真正推理</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=251&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">大语言模型本质是巨型数学函数，逐词预测，模仿推理但无真实逻辑。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=252s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=287s">00:04:47</a>
+<h3>LLM 没有内心独白，不会思考</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=286&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">没有输入提示时，模型内部没有任何思考过程，没有意识流。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=287s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=313s">00:05:13</a>
+<h3>LLM 无法学习，训练后即静态</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=312&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">模型训练发布后无法学习新信息，所谓记忆只是外部数据库加载到上下文。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=313s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s4"><span class="n">04</span><span class="t">递归自我改进</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=372s">00:06:12</a>
+<h3>递归自我改进的流行误解</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=371&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">人们以为 AI 能自主加速循环创造超级智能，引发公众恐惧。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=372s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=427s">00:07:07</a>
+<h3>现实：AI 只是人类开发工具</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=426&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">当前 AI 被人类工程师用于加速开发，但并非自主，整个流程依赖 GPU、数据中心和工业生态，AI 并不控制这些。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=427s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=521s">00:08:41</a>
+<h3>超级智能起飞是科幻</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=520&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">作者认为递归自我改进导致失控超级智能的说法只是推测性科幻。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=521s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s5"><span class="n">05</span><span class="t">Agentic Harness</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=544s">00:09:04</a>
+<h3>Agentic Harness 让 LLM 能做事</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=543&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Harness 是软件程序，让 LLM 从回答问题变为在电脑上执行实际工作，并迭代追求长期目标。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=544s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=621s">00:10:21</a>
+<h3>AI 的真正危险：衍生创新</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=620&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI 虽无真正创新，但能利用海量数据和持续追求目标的能力进行衍生创新，可能带来灾难。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=621s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s6"><span class="n">06</span><span class="t">衍生创新案例</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=664s">00:11:04</a>
+<h3>Claude 推翻雅可比猜想</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=663&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Claude 在数学家监督下生成大量函数，找到不可逆变换，推翻了雅可比猜想，展示衍生创新。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=664s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=757s">00:12:37</a>
+<h3>衍生创新同样有用</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=756&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">手机摄像头也是衍生创新，但非常有用；大量未发现的衍生创新因耗时、昂贵、无聊或道德问题而未被人类探索。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=757s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=797s">00:13:17</a>
+<h3>AI 无道德，护栏可被绕过</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=796&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI 没有内在道德感，只有可被绕过或移除的安全护栏，可能追求与人类意图完全错位的目标。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=797s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=836s">00:13:56</a>
+<h3>移除护栏的 AI 可造成灾难</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=835&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">未来前沿模型若护栏被移除，可被用于摧毁金融记录、制造生物武器、攻击基础设施等。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=836s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=868s">00:14:28</a>
+<h3>AI 将成比核武更强大的超级武器</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=867&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">作者同意 Jacob 的观点，AI 很快会成为强大的超级武器，甚至比核武器更危险。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=868s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s7"><span class="n">07</span><span class="t">解决方案</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=889s">00:14:49</a>
+<h3>提议建立技术控制制度</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=888&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">作者建议领先 AI 国家联合建立类似冷战核军控的技术控制制度。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=889s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=905s">00:15:05</a>
+<h3>算力分布不均，AI 竞赛是中美两强</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=904&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">高端算力集中在美国，中国约有美国四分之一，其他国家更少，因此 AI 竞赛主要是中美两强。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=905s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=979s">00:16:19</a>
+<h3>中美可牵头达成协议</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=978&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中美领导人可坐下来达成协议，再让其他国家加入。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=979s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=990s">00:16:30</a>
+<h3>控制制度可强制安全实践、统一护栏、监管自主代理</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=989&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">该制度可强制危险实验的安全实践，对前沿模型应用一致护栏，并监管甚至放缓完全自主代理的开发。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=990s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=1008s">00:16:48</a>
+<h3>中美总统即将会面，是领导机会</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/GOR5-pr6W5k?start=1007&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中美总统将在几周内会面，若达成协议，既能展现领导力，又能引导人类远离灾难。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=GOR5-pr6W5k&t=1008s">在 YouTube 打开这一秒</a></div>
+</article>
+</main>
+<footer>
+原视频：<a href="https://www.youtube.com/watch?v=GOR5-pr6W5k">https://www.youtube.com/watch?v=GOR5-pr6W5k</a><br>
+每个要点直接内嵌 YouTube 播放器并从该秒开始播放，本报告没有下载任何视频文件。<br>
+本报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
+</footer>
+</div>
+<button id="totop" type="button" aria-label="回到顶部">↑</button>
+<script>
+(function(){
+  var root=document.documentElement;
+
+  var bar=document.getElementById('bar'), totop=document.getElementById('totop');
+  function onScroll(){
+    var h=root, max=h.scrollHeight-h.clientHeight, y=h.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+    if(totop) totop.classList.toggle('on', y>620);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  if(totop) totop.addEventListener('click',function(){
+    scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.querySelectorAll('.media').forEach(function(fig){
+    var video=fig.querySelector('video'), btn=fig.querySelector('.play');
+    if(!video) return;
+    if(btn) btn.addEventListener('click',function(){ video.play(); });
+    video.addEventListener('play',function(){ fig.classList.add('playing'); });
+    video.addEventListener('ended',function(){ fig.classList.remove('playing'); });
+  });
+
+  /* The facade keeps a page of embeds light: nothing is requested from YouTube until the
+     reader actually asks to watch something. */
+  document.querySelectorAll('.facade').forEach(function(fig){
+    var btn=fig.querySelector('.play');
+    if(!btn) return;
+    btn.addEventListener('click',function(){
+      var frame=document.createElement('iframe');
+      frame.src=fig.dataset.embed+(fig.dataset.embed.indexOf('?')<0?'?':'&')+'autoplay=1';
+      frame.title='YouTube player';
+      frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.setAttribute('allowfullscreen','');
+      fig.appendChild(frame);
+      fig.classList.add('playing');
+      btn.remove();
+    });
+  });
+
+  /* collapse and expand the clip players, so a long report stays readable */
+  var cards=[].slice.call(document.querySelectorAll('.point')).filter(function(card){
+    return !!card.querySelector('[data-toggle]');
+  });
+  function setCard(card,collapsed){
+    card.classList.toggle('collapsed',collapsed);
+    var btn=card.querySelector('[data-toggle]');
+    if(btn){
+      btn.textContent=collapsed?(btn.dataset.secs?'展开视频 · '+btn.dataset.secs+' 秒':'展开视频'):'收起视频';
+      btn.setAttribute('aria-expanded',collapsed?'false':'true');
+    }
+    if(collapsed){
+      var v=card.querySelector('video');
+      if(v&&!v.paused) v.pause();
+    }
+  }
+  function anyExpanded(){
+    return cards.some(function(card){ return !card.classList.contains('collapsed'); });
+  }
+  var clipsBtn=document.getElementById('clips');
+  function syncClipsLabel(){
+    if(clipsBtn) clipsBtn.textContent=anyExpanded()?'收起全部视频':'展开全部视频';
+  }
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.point');
+      setCard(card,!card.classList.contains('collapsed'));
+      syncClipsLabel();
+    });
+  });
+  var clipKey='yt-report-clips';
+  if(clipsBtn){
+    clipsBtn.addEventListener('click',function(){
+      var collapse=anyExpanded();
+      cards.forEach(function(card){ setCard(card,collapse); });
+      try{ localStorage.setItem(clipKey,collapse?'collapsed':'expanded'); }catch(e){}
+      syncClipsLabel();
+    });
+  }
+  var clipPref=null;
+  try{ clipPref=localStorage.getItem(clipKey); }catch(e){}
+  if(clipPref==='expanded') cards.forEach(function(card){ setCard(card,false); });
+  syncClipsLabel();
+
+})();
+
+(function(){
+  var root=document.documentElement;
+  var key='yt-report-theme', saved=null;
+  try{ saved=localStorage.getItem(key); }catch(e){}
+  if(saved) root.setAttribute('data-theme',saved);
+  var btn=document.getElementById('theme');
+  if(!btn) return;
+  var order=['auto','light','dark'];
+  function paint(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    btn.textContent=cur==='dark'?'\u263e 深色':cur==='light'?'\u2600 浅色':'\u25d0 跟随系统';
+  }
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    var next=order[(order.indexOf(cur)+1)%order.length];
+    if(next==='auto'){ root.removeAttribute('data-theme');
+      try{ localStorage.removeItem(key); }catch(e){} }
+    else { root.setAttribute('data-theme',next);
+      try{ localStorage.setItem(key,next); }catch(e){} }
+    paint();
+  });
+  paint();
+})();</script>
+</body>
+</html>
