@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Builds a report for every work/<id>/points.json and refreshes the index.
+# Builds a report for every work/<id>/points.json that changed, then refreshes the index.
 #
 # The reports use --embed youtube --still none: the player comes from YouTube and no video is
-# downloaded, so this runs happily on a runner whose IP YouTube will not serve video to.
+# downloaded, so this runs happily on a runner whose IP YouTube will not serve video to. A video
+# whose points.json already matches the published one is left alone, otherwise every run would
+# rewrite the index timestamp and commit for nothing.
 set -u
 
 shopt -s nullglob
@@ -11,6 +13,10 @@ for points in work/*/points.json; do
   id=$(basename "$(dirname "$points")")
   url=$(cat "work/$id/source.txt" 2>/dev/null || true)
   url=${url:-https://www.youtube.com/watch?v=$id}
+  if [ -f "reports/$id/report.html" ] && cmp -s "$points" "reports/$id/points.json"; then
+    echo "=== $id unchanged, skip ==="
+    continue
+  fi
   echo "=== $id <- $url ==="
   mkdir -p "reports/$id"
   if [ -f "work/$id/meta.json" ]; then

@@ -327,7 +327,7 @@ def render(root: Path, reports, generated: str, generator: bool = False):
         "</main>",
         '<p class="empty" id="empty" hidden>没有匹配的报告。</p>',
         "<footer>",
-        f"共 {len(reports)} 份报告，位于 <code>{esc(str(root))}</code>。<br>",
+        f"共 {len(reports)} 份报告，位于 <code>{esc(root.name)}/</code>。<br>",
         f"索引生成于 {esc(generated)}；新增报告后重新运行 "
         "<code>build_index.py --root</code> 即可刷新。<br>",
         "每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。",
