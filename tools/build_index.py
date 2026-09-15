@@ -138,6 +138,9 @@ GENERATOR_CSS = """
 .gen-btn{border:0;border-radius:11px;padding:10px 20px;font:inherit;font-size:.9rem;font-weight:650;
   color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent-2));
   box-shadow:0 10px 22px -14px var(--accent);transition:filter .15s ease,opacity .15s ease}
+/* In the dark palette the accent is a light colour, so white on it would wash out. */
+:root[data-theme="dark"] .gen-btn{color:#0b0c10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gen-btn{color:#0b0c10}}
 .gen-btn:hover{filter:brightness(1.06)}
 .gen-btn:disabled{opacity:.5;cursor:progress}
 .gen-state{font-size:.83rem;color:var(--accent);font-variant-numeric:tabular-nums}
@@ -171,7 +174,7 @@ GENERATOR_PANEL = """
 <label class="gen-field gen-wide"><span>YouTube 链接</span>
 <input id="gen-url" type="url" autocomplete="off" spellcheck="false"
  placeholder="https://www.youtube.com/watch?v=..."></label>
-<label class="gen-field"><span>GitHub token（fine-grained，本仓库 Contents: Read and write）</span>
+<label class="gen-field"><span>GitHub token（fine-grained）</span>
 <input id="gen-token" type="password" autocomplete="off" spellcheck="false"
  placeholder="github_pat_..."></label>
 <label class="gen-field"><span>DeepSeek API key</span>
@@ -195,9 +198,9 @@ GENERATOR_PANEL = """
 <span class="gen-state" id="gen-paste-state"></span>
 </div>
 </details>
-<p class="gen-note">两个 key 都只活在这个页面里：GitHub token 用来往 <code>requests/</code> 和
-<code>work/</code> 写文件，DeepSeek key 由浏览器直接调用 DeepSeek
-（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
+<p class="gen-note">两个 key 都只活在这个页面里：GitHub token 是 fine-grained、只勾本仓库的
+<code>Contents: Read and write</code>，用来往 <code>requests/</code> 和 <code>work/</code>
+写文件；DeepSeek key 由浏览器直接调用 DeepSeek（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
 ② 浏览器调 DeepSeek 挑要点 → ③ Action 生成报告页并刷新这个索引，通常 1-2 分钟。</p>
 </div>
 </details>

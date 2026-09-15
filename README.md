@@ -6,22 +6,39 @@
 
 ## 目录结构
 
-- `index.html` — 报告库首页，由 `build_index.py` 生成
+- `index.html` — 报告库首页，由 `tools/build_index.py --generator` 生成
+- `assets/generate.js` — 首页那个「生成新报告」面板的逻辑（只在 Pages 上生效）
 - `reports/<videoId>/report.html` — 单份报告，`assets/frames/` 里是每个要点的截图
+- `requests/<videoId>.json` — 待抓字幕的队列，`work/<videoId>/` 是抓下来的字幕与要点
+- `tools/` — skill（`youtube-timestamped-report`）脚本的副本，本机和 runner 跑同一份代码
 - `probe/` — yt-dlp 在 GitHub runner 上的可用性探测结果
-- `.github/workflows/pages.yml` — 部署站点
-- `.github/workflows/probe.yml` — 运行上面的探测
 
-## 生成方式
+## 在网页上生成一份报告
 
-报告目前在本机生成后推送：
+首页的表单填三样东西：视频链接、一个 GitHub token、一个 DeepSeek API key，然后按「生成报告」。
 
-```bash
-python3 build_report.py <url> --points points.json --out reports/<videoId> --embed youtube
-python3 build_index.py --root .
+```
+① 浏览器把 requests/<id>.json 写进仓库      → Action「Transcript」抓字幕到 work/<id>/
+② 浏览器拿字幕直接调 DeepSeek（BYOK）        → 得到 points.json
+③ 浏览器把 work/<id>/points.json 写进仓库    → Action「Publish report」生成报告并刷新索引
+④ 浏览器轮询到 reports/<id>/report.html 出现 → 打开报告
 ```
 
-`--embed youtube` 让报告内嵌播放器而不是携带 mp4，所以仓库里只有文字和截图。
+两个 key 都只存在浏览器 localStorage（勾了「记住」才会写）：GitHub token 需要 fine-grained、只勾本仓库的
+`Contents: Read and write`，DeepSeek key 由浏览器直接调用 `api.deepseek.com`，不经过任何服务器。
+
+**runner 的 IP 有时会被 YouTube 拦下来**（数据中心 IP 要过人机验证），这时 Action 会把原因写进
+`work/<id>/error.txt`，页面会把它显示出来，并提示可以展开「抓不到字幕？自己贴一份」，把视频页
+「显示字幕记录」里的内容（或 `.srt` / `.vtt`）贴进去 —— 这条路完全不依赖 runner 的网络。
+
+## 在本机生成
+
+```bash
+python3 tools/build_report.py <url> --points points.json --out reports/<videoId> --embed youtube
+python3 tools/build_index.py --root . --generator
+```
+
+`--embed youtube` 让报告内嵌播放器而不是携带 mp4，所以网页版仓库里只有文字和截图。
 
 ## 两种形态
 
@@ -35,4 +52,5 @@ python3 build_index.py --root .
 ## 已知限制
 
 GitHub runner 的数据中心 IP 会被 YouTube 要求做人机验证（`Sign in to confirm you're not a bot`），
-因此**在 CI 上只能拿到字幕和元数据，拿不到视频流**。详见 `probe/standalone/summary.md`。
+因此**在 CI 上只能拿到字幕和元数据，拿不到视频流**——有的视频连字幕都不给（`LOGIN_REQUIRED`）。
+详见 `probe/standalone/summary.md`。字幕抓不到时，用首页的「自己贴一份」或本机 skill。

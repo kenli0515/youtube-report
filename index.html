@@ -164,6 +164,9 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 .gen-btn{border:0;border-radius:11px;padding:10px 20px;font:inherit;font-size:.9rem;font-weight:650;
   color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent-2));
   box-shadow:0 10px 22px -14px var(--accent);transition:filter .15s ease,opacity .15s ease}
+/* In the dark palette the accent is a light colour, so white on it would wash out. */
+:root[data-theme="dark"] .gen-btn{color:#0b0c10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gen-btn{color:#0b0c10}}
 .gen-btn:hover{filter:brightness(1.06)}
 .gen-btn:disabled{opacity:.5;cursor:progress}
 .gen-state{font-size:.83rem;color:var(--accent);font-variant-numeric:tabular-nums}
@@ -199,7 +202,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 </div>
 <h1>视频要点报告</h1>
 <div class="sub">
-<span class="pill ghost" id="count">共 4 份报告</span>
+<span class="pill ghost" id="count">共 3 份报告</span>
 <span class="pill ghost">youtube-report/</span>
 </div>
 <input id="q" class="search" type="search" autocomplete="off" placeholder="搜索标题或频道…">
@@ -211,7 +214,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 <label class="gen-field gen-wide"><span>YouTube 链接</span>
 <input id="gen-url" type="url" autocomplete="off" spellcheck="false"
  placeholder="https://www.youtube.com/watch?v=..."></label>
-<label class="gen-field"><span>GitHub token（fine-grained，本仓库 Contents: Read and write）</span>
+<label class="gen-field"><span>GitHub token（fine-grained）</span>
 <input id="gen-token" type="password" autocomplete="off" spellcheck="false"
  placeholder="github_pat_..."></label>
 <label class="gen-field"><span>DeepSeek API key</span>
@@ -235,9 +238,9 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 <span class="gen-state" id="gen-paste-state"></span>
 </div>
 </details>
-<p class="gen-note">两个 key 都只活在这个页面里：GitHub token 用来往 <code>requests/</code> 和
-<code>work/</code> 写文件，DeepSeek key 由浏览器直接调用 DeepSeek
-（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
+<p class="gen-note">两个 key 都只活在这个页面里：GitHub token 是 fine-grained、只勾本仓库的
+<code>Contents: Read and write</code>，用来往 <code>requests/</code> 和 <code>work/</code>
+写文件；DeepSeek key 由浏览器直接调用 DeepSeek（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
 ② 浏览器调 DeepSeek 挑要点 → ③ Action 生成报告页并刷新这个索引，通常 1-2 分钟。</p>
 </div>
 </details>
@@ -276,22 +279,11 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 </div>
 </div>
 </article>
-<article class="rcard" data-q="rick astley - never gonna give you up 官方4k重制版 rick astley dqw4w9wgxcq">
-<a class="cover" href="reports/dQw4w9WgXcQ/report.html"><img src="https://i.ytimg.com/vi_webp/dQw4w9WgXcQ/maxresdefault.webp" alt="" loading="lazy"><span class="badge">20 个要点</span></a>
-<div class="rc-body">
-<h3><a href="reports/dQw4w9WgXcQ/report.html">Rick Astley - Never Gonna Give You Up 官方4K重制版</a></h3>
-<div class="tags"><span class="tag">Rick Astley</span><span class="tag ghost">3:33</span><span class="tag ghost">2009-10-25</span><span class="tag ghost">20 个要点</span></div>
-<div class="rc-foot">
-<span class="id">dQw4w9WgXcQ</span>
-<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">原视频 ↗</a>
-</div>
-</div>
-</article>
 </main>
 <p class="empty" id="empty" hidden>没有匹配的报告。</p>
 <footer>
-共 4 份报告，位于 <code>/home/runner/work/youtube-report/youtube-report</code>。<br>
-索引生成于 2026-09-15 16:43；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
+共 3 份报告，位于 <code>/Users/ken/youtube-report</code>。<br>
+索引生成于 2026-09-16 00:45；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
 每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
 </footer>
 </div>
