@@ -52,6 +52,12 @@ PY
       echo "runner time: $(date -u '+%Y-%m-%d %H:%M UTC')"
       echo
       tail -40 "$log"
+      echo
+      echo "--- yt-dlp --list-subs ---"
+      yt-dlp --skip-download --ignore-no-formats-error --list-subs "$url" 2>&1 | tail -25
+      echo
+      echo "--- player response (verbose tail) ---"
+      yt-dlp --skip-download --ignore-no-formats-error -J --verbose "$url" 2>&1 | tail -25
     } >"work/$id/error.txt"
     rm -f "$request"
     echo "FAILED $id"
