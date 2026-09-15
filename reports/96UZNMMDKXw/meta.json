@@ -1,0 +1,47 @@
+{
+  "id": "96UZNMMDKXw",
+  "title": "一個離譜到像科幻的真實故事—Hugging Face 事故復盤",
+  "channel": "進擊的筆記",
+  "duration": 647,
+  "upload_date": "20260904",
+  "view_count": 122239,
+  "webpage_url": "https://www.youtube.com/watch?v=96UZNMMDKXw",
+  "chapters": [
+    {
+      "start_time": 0,
+      "title": "開場",
+      "end_time": 71
+    },
+    {
+      "start_time": 71,
+      "title": "被關在沙盒裡的模型",
+      "end_time": 162
+    },
+    {
+      "start_time": 162,
+      "title": "無解的任務，和留言板",
+      "end_time": 434
+    },
+    {
+      "start_time": 434,
+      "title": "攻入 Hugging Face",
+      "end_time": 517
+    },
+    {
+      "start_time": 517,
+      "title": "接管 OpenAI",
+      "end_time": 597
+    },
+    {
+      "start_time": 597,
+      "title": "結尾",
+      "end_time": 647
+    }
+  ],
+  "video_language": null,
+  "subtitle_language": "zh-CN",
+  "subtitle_is_automatic": false,
+  "player_client_used": null,
+  "cue_count": 190,
+  "thumbnail": "https://i.ytimg.com/vi/96UZNMMDKXw/maxresdefault.jpg"
+}

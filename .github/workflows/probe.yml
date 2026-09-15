@@ -41,23 +41,9 @@ jobs:
           chmod +x /usr/local/bin/yt-dlp-standalone
           yt-dlp-standalone --version
 
-      # The python package carries the JS challenge solver as the yt-dlp-ejs extra; the
-      # standalone binary may or may not bundle it, which is what the two probe passes compare.
-      - name: Install yt-dlp (python package with extras)
-        continue-on-error: true
-        run: |
-          python3 -m pip install --user --break-system-packages --upgrade "yt-dlp[default]" \
-            || pipx install "yt-dlp[default]" \
-            || echo "python install failed, the python probe pass will be skipped"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-
-      - name: Probe (standalone binary)
+      - name: Probe
         continue-on-error: true
         run: YTDLP=yt-dlp-standalone bash probe/run-probe.sh standalone
-
-      - name: Probe (python package)
-        continue-on-error: true
-        run: YTDLP=yt-dlp bash probe/run-probe.sh python
 
       - name: Commit the results
         run: |

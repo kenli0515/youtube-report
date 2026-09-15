@@ -5,9 +5,7 @@
 # download with audio - and writes everything into probe/: a markdown summary plus one log per
 # check, so a run can be judged from the repository alone.
 #
-# Two installs are worth comparing, because the JS challenge solver ships as a python extra:
-#   YTDLP=yt-dlp-standalone bash probe/run-probe.sh standalone
-#   YTDLP=yt-dlp            bash probe/run-probe.sh python
+# usage: YTDLP=yt-dlp-standalone bash probe/run-probe.sh standalone
 # Results land in probe/<tag>/.
 
 set -u
@@ -30,7 +28,7 @@ VIDEOS=(
   "S7CrlFLAmEA|https://www.youtube.com/watch?v=S7CrlFLAmEA|en.*"
   "96UZNMMDKXw|https://www.youtube.com/watch?v=96UZNMMDKXw|zh-Hans.*"
 )
-CLIENTS=(default web_safari tv mweb android_vr)
+CLIENTS=(default web_safari tv mweb android_vr ios)
 
 # The selector the report builder uses, capped at 360p here so the probe stays quick.
 FORMAT='bv*[height<=360][vcodec^=avc1]+ba[acodec^=mp4a]/bv*[height<=360][vcodec^=avc1]/bv*[height<=360]/b[height<=360]'
@@ -117,21 +115,24 @@ for entry in "${VIDEOS[@]}"; do
 
   # The whole pipeline hangs on this one: without a JS runtime yt-dlp lists formats but cannot
   # produce a downloadable URL ("No video formats found!"), which looks like a block and is not.
-  clip_check "$name · 片段（默认 JS 运行时）" "$name-clip-default" "$MEDIA/$name-clip-default.mp4" "$url"
-  clip_check "$name · 片段（--js-runtimes node）" "$name-clip-node" "$MEDIA/$name-clip-node.mp4" "$url" \
-    --js-runtimes node
-
   for client in "${CLIENTS[@]}"; do
     if [ "$client" = default ]; then
-      check "$name · client default" "$name-client-default" \
-        $YTDLP --no-warnings --skip-download --ignore-no-formats-error \
-          --print "%(title)s" "$url"
+      clip_check "$name · 片段 client=default" "$name-clip-default" \
+        "$MEDIA/$name-clip-default.mp4" "$url"
     else
-      check "$name · client $client" "$name-client-$client" \
-        $YTDLP --no-warnings --skip-download --ignore-no-formats-error \
-          --extractor-args "youtube:player_client=$client" --print "%(title)s" "$url"
+      clip_check "$name · 片段 client=$client" "$name-clip-$client" \
+        "$MEDIA/$name-clip-$client.mp4" "$url" \
+        --extractor-args "youtube:player_client=$client"
     fi
   done
+
+  # If nothing can be downloaded, the fallback poster has to come from a plain image URL.
+  if curl -sf -o /dev/null --max-time 15 "https://i.ytimg.com/vi/$name/maxresdefault.jpg"; then
+    row "$name · i.ytimg 封面可取" "✅" "—"
+  else
+    row "$name · i.ytimg 封面可取" "❌" "—"
+  fi
+
 done
 
 {

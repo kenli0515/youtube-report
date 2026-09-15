@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>视频要点报告</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --ink:#14161c; --ink-soft:#3d424e; --muted:#6b7280;
+  --line:#e6e7ef; --line-strong:#d8dae6;
+  --accent:#4f6ef7; --accent-2:#8b5cf6; --accent-soft:#eef1fe;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.13);
+  --shadow:0 1px 2px rgba(16,18,27,.04),0 8px 24px -18px rgba(16,18,27,.28);
+  --shadow-lift:0 18px 40px -22px rgba(16,18,27,.38);
+  --radius:18px; --radius-sm:12px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+  --line:#242733; --line-strong:#31364a;
+  --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+    --line:#242733; --line-strong:#31364a;
+    --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+    --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background-color:var(--bg);
+  background-image:
+    radial-gradient(900px 340px at 10% -80px,var(--glow-a),transparent 70%),
+    radial-gradient(760px 300px at 92% -110px,var(--glow-b),transparent 72%);
+  background-repeat:no-repeat;
+  font:16px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--accent);color:#fff}
+
+/* reading progress + back to top */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .12s linear}
+#totop{position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font-size:1.05rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#totop.on{opacity:1;visibility:visible;transform:none}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding:58px 0 26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.toolbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:.78rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+h1{font-size:clamp(1.55rem,3.1vw,2.3rem);line-height:1.3;margin:0 0 22px;
+  letter-spacing:-.022em;font-weight:800}
+.sub{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:650;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.pill:hover{text-decoration:none;filter:brightness(.97);border-color:var(--accent)}
+.pill.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550}
+
+
+.search{width:100%;margin-top:26px;padding:12px 16px;border-radius:13px;
+  border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font:inherit;font-size:.95rem;transition:border-color .15s ease,box-shadow .15s ease}
+.search::placeholder{color:var(--muted)}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+.grid{display:grid;gap:18px;margin-top:26px;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+
+.rcard{display:flex;flex-direction:column;overflow:hidden;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.rcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);
+  border-color:var(--line-strong)}
+.rcard .cover{position:relative;display:block;aspect-ratio:16/9;background:#0d0f16;
+  overflow:hidden}
+.rcard .cover img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .35s ease}
+.rcard:hover .cover img{transform:scale(1.03)}
+.rcard .ph{display:grid;place-items:center;width:100%;height:100%;color:#7c8394;
+  font-size:.82rem;letter-spacing:.04em}
+.rcard .badge{position:absolute;left:10px;top:10px;padding:3px 10px;border-radius:999px;
+  background:rgba(8,10,16,.62);color:#fff;font-size:.74rem;font-weight:600;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-variant-numeric:tabular-nums}
+.rc-body{display:flex;flex-direction:column;gap:11px;flex:1;padding:16px 18px 14px}
+.rc-body h3{font-size:1rem;font-weight:700;line-height:1.5;margin:0;letter-spacing:-.005em}
+.rc-body h3 a{color:var(--ink)}
+.rc-body h3 a:hover{color:var(--accent);text-decoration:none}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);
+  font-size:.75rem;font-weight:600;white-space:nowrap}
+.tag.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550;font-variant-numeric:tabular-nums}
+.rc-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;
+  padding-top:12px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--muted)}
+.rc-foot .id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rc-foot a{color:var(--muted)}
+.rc-foot a:hover{color:var(--accent)}
+.empty{margin-top:30px;padding:34px;text-align:center;color:var(--muted);
+  border:1px dashed var(--line-strong);border-radius:var(--radius);font-size:.92rem}
+.empty[hidden]{display:none}
+
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.83rem;line-height:1.95}
+footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;
+  background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:1px 6px}
+
+@media (max-width:560px){.grid{grid-template-columns:1fr}.wrap{padding:0 16px 80px}}
+</style>
+<noscript><style>.toolbtn{display:none}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<div class="hero-top">
+<span class="eyebrow">报告库</span>
+<div class="tools">
+<button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
+</div>
+</div>
+<h1>视频要点报告</h1>
+<div class="sub">
+<span class="pill ghost" id="count">共 2 份报告</span>
+<span class="pill ghost">youtube-report/</span>
+</div>
+<input id="q" class="search" type="search" autocomplete="off" placeholder="搜索标题或频道…">
+</header>
+<main class="grid">
+<article class="rcard" data-q="黄仁勋谈 ai 末日论、开源与中国｜all-in podcast 访谈要点 all-in podcast s7crlflamea">
+<a class="cover" href="reports/S7CrlFLAmEA/report.html"><img src="https://i.ytimg.com/vi/S7CrlFLAmEA/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/S7CrlFLAmEA/assets/frames/00h00m55s_GPUJesus登场.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">28 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/S7CrlFLAmEA/report.html">黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</a></h3>
+<div class="tags"><span class="tag">All-In Podcast</span><span class="tag ghost">46:46</span><span class="tag ghost">2026-09-14</span><span class="tag ghost">28 个要点</span></div>
+<div class="rc-foot">
+<span class="id">S7CrlFLAmEA</span>
+<a href="https://www.youtube.com/watch?v=S7CrlFLAmEA">原视频 ↗</a>
+</div>
+</div>
+</article>
+<article class="rcard" data-q="一个离谱到像科幻的真实故事：hugging face 事故复盘｜要点报告 進擊的筆記 96uznmmdkxw">
+<a class="cover" href="reports/96UZNMMDKXw/report.html"><img src="https://i.ytimg.com/vi/96UZNMMDKXw/maxresdefault.jpg" alt="" loading="lazy" data-still="reports/96UZNMMDKXw/assets/frames/00h00m01s_一份官方声明的复盘.jpg" onerror="this.onerror=null;this.src=this.dataset.still"><span class="badge">23 个要点</span></a>
+<div class="rc-body">
+<h3><a href="reports/96UZNMMDKXw/report.html">一个离谱到像科幻的真实故事：Hugging Face 事故复盘｜要点报告</a></h3>
+<div class="tags"><span class="tag">進擊的筆記</span><span class="tag ghost">10:47</span><span class="tag ghost">2026-09-04</span><span class="tag ghost">23 个要点</span></div>
+<div class="rc-foot">
+<span class="id">96UZNMMDKXw</span>
+<a href="https://www.youtube.com/watch?v=96UZNMMDKXw">原视频 ↗</a>
+</div>
+</div>
+</article>
+</main>
+<p class="empty" id="empty" hidden>没有匹配的报告。</p>
+<footer>
+共 2 份报告，位于 <code>/Users/ken/youtube-report</code>。<br>
+索引生成于 2026-09-16 00:14；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
+每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
+</footer>
+</div>
+<script>(function(){
+  var root=document.documentElement;
+  var key='yt-report-theme', saved=null;
+  try{ saved=localStorage.getItem(key); }catch(e){}
+  if(saved) root.setAttribute('data-theme',saved);
+  var btn=document.getElementById('theme');
+  if(!btn) return;
+  var order=['auto','light','dark'];
+  function paint(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    btn.textContent=cur==='dark'?'\u263e 深色':cur==='light'?'\u2600 浅色':'\u25d0 跟随系统';
+  }
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    var next=order[(order.indexOf(cur)+1)%order.length];
+    if(next==='auto'){ root.removeAttribute('data-theme');
+      try{ localStorage.removeItem(key); }catch(e){} }
+    else { root.setAttribute('data-theme',next);
+      try{ localStorage.setItem(key,next); }catch(e){} }
+    paint();
+  });
+  paint();
+})();
+
+(function(){
+  var box=document.getElementById('q');
+  if(!box) return;
+  var cards=[].slice.call(document.querySelectorAll('.rcard'));
+  var count=document.getElementById('count');
+  var empty=document.getElementById('empty');
+  function apply(){
+    var needle=box.value.trim().toLowerCase(), shown=0;
+    cards.forEach(function(card){
+      var hit=!needle||(card.dataset.q||'').indexOf(needle)>=0;
+      card.style.display=hit?'':'none';
+      if(hit) shown++;
+    });
+    if(count) count.textContent='共 '+shown+' 份报告';
+    if(empty) empty.hidden=shown>0;
+  }
+  box.addEventListener('input',apply);
+  box.addEventListener('search',apply);
+  apply();
+})();
+</script>
+</body>
+</html>

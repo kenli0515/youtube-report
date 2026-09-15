@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --ink:#14161c; --ink-soft:#3d424e; --muted:#6b7280;
+  --line:#e6e7ef; --line-strong:#d8dae6;
+  --accent:#4f6ef7; --accent-2:#8b5cf6; --accent-soft:#eef1fe;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.13);
+  --shadow:0 1px 2px rgba(16,18,27,.04),0 8px 24px -18px rgba(16,18,27,.28);
+  --shadow-lift:0 18px 40px -22px rgba(16,18,27,.38);
+  --radius:18px; --radius-sm:12px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+  --line:#242733; --line-strong:#31364a;
+  --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+    --line:#242733; --line-strong:#31364a;
+    --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+    --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background-color:var(--bg);
+  background-image:
+    radial-gradient(900px 340px at 10% -80px,var(--glow-a),transparent 70%),
+    radial-gradient(760px 300px at 92% -110px,var(--glow-b),transparent 72%);
+  background-repeat:no-repeat;
+  font:16px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--accent);color:#fff}
+
+/* reading progress + back to top */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .12s linear}
+#totop{position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font-size:1.05rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#totop.on{opacity:1;visibility:visible;transform:none}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding:58px 0 26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.toolbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:.78rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+h1{font-size:clamp(1.55rem,3.1vw,2.3rem);line-height:1.3;margin:0 0 22px;
+  letter-spacing:-.022em;font-weight:800}
+.sub{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:650;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.pill:hover{text-decoration:none;filter:brightness(.97);border-color:var(--accent)}
+.pill.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550}
+
+/* table of contents */
+.toc{margin:36px 0 0;padding:22px 26px 24px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.toc-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.toc h2{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0;font-weight:750}
+.toc .count{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc ol{columns:2;column-gap:14px;margin:0;padding:0;list-style:none}
+@media (max-width:720px){.toc ol{columns:1}}
+.toc li{break-inside:avoid;margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:5px 9px;border-radius:9px;
+  color:var(--ink);font-size:.93rem;line-height:1.5}
+.toc a:hover{background:var(--accent-soft);color:var(--accent);text-decoration:none}
+.toc .stamp{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.82rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.toc a:hover .stamp{color:var(--accent)}
+
+/* section headings */
+h2.section{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:750;
+  margin:60px 0 20px;letter-spacing:-.01em}
+h2.section .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;
+  font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;
+  padding:3px 8px;letter-spacing:.02em}
+h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* point cards */
+.point{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 18px;margin:16px 0;box-shadow:var(--shadow);
+  transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+.point:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px);
+  border-color:var(--line-strong)}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h3{font-size:1.06rem;line-height:1.5;margin:0;font-weight:700;flex:1;min-width:60%;
+  letter-spacing:-.005em}
+.head .stamp{background:var(--accent-soft);color:var(--accent);border-radius:9px;
+  padding:3px 10px;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.head .stamp:hover{text-decoration:none;filter:brightness(.95)}
+.toggle{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:3px 11px;font-size:.77rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.point.collapsed .media{display:none}
+.point.collapsed{padding-bottom:16px}
+
+/* media */
+.media{position:relative;margin:16px 0 0;line-height:0}
+video{display:block;width:100%;height:auto;border-radius:var(--radius-sm);background:#000}
+img{display:block;width:100%;height:auto;border-radius:var(--radius-sm);
+  border:1px solid var(--line)}
+.chip-dur{position:absolute;top:10px;right:10px;pointer-events:none;line-height:1.5;
+  background:rgba(8,10,16,.62);color:#fff;font-size:.74rem;font-weight:600;
+  padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;padding:0 0 0 4px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:1.05rem;line-height:1;color:#fff;
+  border:1.5px solid rgba(255,255,255,.7);background:rgba(8,10,16,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .18s ease,opacity .25s ease,background .18s ease}
+.play:hover{transform:translate(-50%,-50%) scale(1.07);background:rgba(8,10,16,.72)}
+/* YouTube facade: the poster is what loads first, the player only appears on click. */
+.media.facade{aspect-ratio:16/9;background:#07080c}
+.media.facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border:0;border-radius:var(--radius-sm)}
+.media.facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+  border-radius:var(--radius-sm);background:#000}
+.media.playing img{opacity:1}
+.media.playing .play{opacity:0;visibility:hidden}
+.media.playing .chip-dur{opacity:0;transition:opacity .25s ease}
+
+.note{margin:16px 0 0;color:var(--ink-soft);font-size:.97rem}
+.actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;padding-top:12px;
+  border-top:1px dashed var(--line);font-size:.84rem}
+.actions a{color:var(--muted)}
+.actions a:hover{color:var(--accent)}
+.actions a::before{content:"↗ ";font-size:.8em}
+
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.83rem;line-height:1.95}
+footer a{color:var(--muted);text-decoration:underline}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:560px){
+  .wrap{padding:0 16px 80px}
+  .point{padding:18px 16px 14px}
+  h2.section{margin-top:44px}
+  #totop{right:16px;bottom:16px}
+}
+@media print{
+  #bar,#totop,.toolbtn,.toggle,.play{display:none}
+  body{background:#fff}
+  .point{break-inside:avoid;box-shadow:none}
+}
+</style>
+<noscript><style>.point.collapsed .media{display:block}.toggle,.toolbtn{display:none}</style></noscript>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+<header class="hero">
+<div class="hero-top">
+<span class="eyebrow">视频要点报告</span>
+<div class="tools">
+<button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
+<button id="clips" class="toolbtn" type="button">展开全部视频</button>
+</div>
+</div>
+<h1>黄仁勋谈 AI 末日论、开源与中国｜All-In Podcast 访谈要点</h1>
+<div class="sub">
+<span class="pill">All-In Podcast</span>
+<span class="pill ghost">46:46</span>
+<span class="pill ghost">2026-09-14</span>
+<span class="pill ghost">41.7 万次观看</span>
+<span class="pill ghost">28 个要点</span>
+<a class="pill ghost" href="https://www.youtube.com/watch?v=S7CrlFLAmEA">在 YouTube 打开原视频 ↗</a>
+</div>
+</header>
+<nav class="toc">
+<div class="toc-head">
+<h2>目录</h2>
+<span class="count">28 个要点 · 全长 46:46</span>
+</div>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=55s"><span class="stamp">00:00:55</span><span class="ttl">「GPU Jesus」登场</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=99s"><span class="stamp">00:01:39</span><span class="ttl">Dario 的博客与前沿实验室的联合</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=144s"><span class="stamp">00:02:24</span><span class="ttl">安全与领导力不是二选一</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=296s"><span class="stamp">00:04:56</span><span class="ttl">「这是编造的」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=327s"><span class="stamp">00:05:27</span><span class="ttl">被证伪的预测清单</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=372s"><span class="stamp">00:06:12</span><span class="ttl">GPT-2 与 Llama 3 的「太危险」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=485s"><span class="stamp">00:08:05</span><span class="ttl">公司本该像以前那样安静地建</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=553s"><span class="stamp">00:09:13</span><span class="ttl">公司里不谈政治</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=638s"><span class="stamp">00:10:38</span><span class="ttl">监管应该解决真实问题</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=822s"><span class="stamp">00:13:42</span><span class="ttl">中国实验室投入 30 亿做 RSI</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=967s"><span class="stamp">00:16:07</span><span class="ttl">Hugging Face 与开源</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1008s"><span class="stamp">00:16:48</span><span class="ttl">闭源模型像瓶装水</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1176s"><span class="stamp">00:19:36</span><span class="ttl">竞赛是谁更好地利用技术</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1204s"><span class="stamp">00:20:04</span><span class="ttl">为什么中国的叙事更「务实」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1354s"><span class="stamp">00:22:34</span><span class="ttl">退格键：最好的软件是最小的</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1395s"><span class="stamp">00:23:15</span><span class="ttl">节目中接到总统电话</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1508s"><span class="stamp">00:25:08</span><span class="ttl">「这是骗局」与数据中心</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1615s"><span class="stamp">00:26:55</span><span class="ttl">谁赢得 AI 谁赢得一切</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1708s"><span class="stamp">00:28:28</span><span class="ttl">挂断之后：这是真的</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1930s"><span class="stamp">00:32:10</span><span class="ttl">4000 亿风投与就业</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1980s"><span class="stamp">00:33:00</span><span class="ttl">英伟达成了「AI 的银行」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2236s"><span class="stamp">00:37:16</span><span class="ttl">向上走到必要的高度</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2300s"><span class="stamp">00:38:20</span><span class="ttl">「我出奇地不喜欢竞争」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2428s"><span class="stamp">00:40:28</span><span class="ttl">会不会做出最好的开源模型</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2558s"><span class="stamp">00:42:38</span><span class="ttl">对 Terafab 的看法</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2628s"><span class="stamp">00:43:48</span><span class="ttl">中国 2030 年搞定先进光刻</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2705s"><span class="stamp">00:45:05</span><span class="ttl">「我们已经到了超级智能」</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2750s"><span class="stamp">00:45:50</span><span class="ttl">结尾：骑上这辆车</span></a></li>
+</ol>
+</nav>
+<main>
+<h2 class="section" id="s1"><span class="n">01</span><span class="t">开场：黄仁勋登台</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=55s">00:00:55</a>
+<h3>「GPU Jesus」登场</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=54&amp;end=60&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h00m55s_GPUJesus登场.jpg" alt="「GPU Jesus」登场"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">开场旁白：「我们只为三个人打断每周节目——特朗普总统、耶稣，还有黄仁勋。」黄仁勋穿着新夹克上台，全场起立鼓掌。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=55s">在 YouTube 打开这一秒</a><a href="assets/frames/00h00m55s_GPUJesus登场.jpg">查看截图原图</a></div>
+</article>
+<h2 class="section" id="s2"><span class="n">02</span><span class="t">末日论之争</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=99s">00:01:39</a>
+<h3>Dario 的博客与前沿实验室的联合</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=98&amp;end=104&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h01m39s_Dario的博客与前沿实验室的联合.jpg" alt="Dario 的博客与前沿实验室的联合"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">讨论 Dario 周末那篇引发轰动的文章，以及前沿实验室集体围绕它表态的现象。黄仁勋把它拆成两块：安全议题，以及公司自身的内部控制。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=99s">在 YouTube 打开这一秒</a><a href="assets/frames/00h01m39s_Dario的博客与前沿实验室的联合.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=144s">00:02:24</a>
+<h3>安全与领导力不是二选一</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=143&amp;end=149&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h02m24s_安全与领导力不是二选一.jpg" alt="安全与领导力不是二选一"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他强调安全至关重要，但「安全与领导力不是虚假的选择」：可以快速创新、快速执行，同时把安全做好。他也表示吹哨人值得被认真对待。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=144s">在 YouTube 打开这一秒</a><a href="assets/frames/00h02m24s_安全与领导力不是二选一.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=296s">00:04:56</a>
+<h3>「这是编造的」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=295&amp;end=301&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h04m56s_这是编造的.jpg" alt="「这是编造的」"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">谈到「10% 灭绝概率」这类说法时，他直接说这是编造的，而且是研究者不该做的事——现场爆出掌声。他认为这类预测既不负责任，也无法向普通人解释清楚。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=296s">在 YouTube 打开这一秒</a><a href="assets/frames/00h04m56s_这是编造的.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=327s">00:05:27</a>
+<h3>被证伪的预测清单</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=326&amp;end=332&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h05m27s_被证伪的预测清单.jpg" alt="被证伪的预测清单"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他逐条列举落空的预测：「五年内放射科医生会消失」，结果反而需要更多放射科医生；「6 到 12 个月内 90% 的代码由 AI 生成」，同样没有发生。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=327s">在 YouTube 打开这一秒</a><a href="assets/frames/00h05m27s_被证伪的预测清单.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=372s">00:06:12</a>
+<h3>GPT-2 与 Llama 3 的「太危险」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=371&amp;end=377&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h06m12s_GPT2与Llama3的太危险.jpg" alt="GPT-2 与 Llama 3 的「太危险」"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">继续举例：当年说 GPT-2 太危险不能发布、说 Llama 3 太危险不能发布，事后都被证明是错的。他主张应该把这些预测记录下来、回头对账。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=372s">在 YouTube 打开这一秒</a><a href="assets/frames/00h06m12s_GPT2与Llama3的太危险.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=485s">00:08:05</a>
+<h3>公司本该像以前那样安静地建</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=484&amp;end=490&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h08m05s_公司本该像以前那样安静地建.jpg" alt="公司本该像以前那样安静地建"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他认为这些极其重要的公司本该「像我们过去那样安静地把公司建起来」，而不是在公共场合争论。英伟达不允许员工以公司名义对外发言。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=485s">在 YouTube 打开这一秒</a><a href="assets/frames/00h08m05s_公司本该像以前那样安静地建.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=553s">00:09:13</a>
+<h3>公司里不谈政治</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=552&amp;end=558&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h09m13s_公司里不谈政治.jpg" alt="公司里不谈政治"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他解释英伟达的文化：公司是非政治性的、两党合作的，希望美国成功；种族、宗教与政治的讨论请留在公司之外。现场再次掌声。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=553s">在 YouTube 打开这一秒</a><a href="assets/frames/00h09m13s_公司里不谈政治.jpg">查看截图原图</a></div>
+</article>
+<h2 class="section" id="s3"><span class="n">03</span><span class="t">监管、算力与递归自我改进</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=638s">00:10:38</a>
+<h3>监管应该解决真实问题</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=637&amp;end=643&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h10m38s_监管应该解决真实问题.jpg" alt="监管应该解决真实问题"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他的监管立场很直接：监管应该解决实际问题。而到目前为止所有真实问题都出自前沿实验室——因为它们拥有最多的算力，也因此最可能出事。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=638s">在 YouTube 打开这一秒</a><a href="assets/frames/00h10m38s_监管应该解决真实问题.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=822s">00:13:42</a>
+<h3>中国实验室投入 30 亿做 RSI</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=821&amp;end=827&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h13m42s_中国实验室投入30亿做RSI.jpg" alt="中国实验室投入 30 亿做 RSI"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">嘉宾提到中国 GLM 背后的实验室拿到 50 亿美元融资，其中 30 亿将投入「递归自我改进」，也就是让 AI 训练下一代 AI。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=822s">在 YouTube 打开这一秒</a><a href="assets/frames/00h13m42s_中国实验室投入30亿做RSI.jpg">查看截图原图</a></div>
+</article>
+<h2 class="section" id="s4"><span class="n">04</span><span class="t">开源、竞赛与「打字之后」的工程</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=967s">00:16:07</a>
+<h3>Hugging Face 与开源</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=966&amp;end=972&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h16m07s_HuggingFace与开源.jpg" alt="Hugging Face 与开源"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">谈到 Hugging Face 收购时，主持人称这可能是最具影响力的收购之一。黄仁勋的第一性原理是：世界既需要闭源模型，也需要开源模型。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=967s">在 YouTube 打开这一秒</a><a href="assets/frames/00h16m07s_HuggingFace与开源.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1008s">00:16:48</a>
+<h3>闭源模型像瓶装水</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1007&amp;end=1013&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h16m48s_闭源模型像瓶装水.jpg" alt="闭源模型像瓶装水"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他的比喻：水是免费的，闭源模型就像瓶装水——在合适的地方用合适的水。开源则不同，下载下来它就属于你，可以 fork、改进、据为己有。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1008s">在 YouTube 打开这一秒</a><a href="assets/frames/00h16m48s_闭源模型像瓶装水.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1176s">00:19:36</a>
+<h3>竞赛是谁更好地利用技术</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1175&amp;end=1181&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h19m36s_竞赛是谁更好地利用技术.jpg" alt="竞赛是谁更好地利用技术"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他说这场竞赛的本质不是谁先发明，而是谁把技术利用得最好：上一次工业革命的发明者都不是美国人，但美国把它利用得比谁都好。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1176s">在 YouTube 打开这一秒</a><a href="assets/frames/00h19m36s_竞赛是谁更好地利用技术.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1204s">00:20:04</a>
+<h3>为什么中国的叙事更「务实」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1203&amp;end=1209&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h20m04s_为什么中国的叙事更务实.jpg" alt="为什么中国的叙事更「务实」"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他认为中国的叙事更务实——把 AI 看作推动经济与社会的技术，而不是宣告文明终结。他反复强调「这是编造的」，并说与其吓唬那些无能为力的人，不如去把它建出来。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1204s">在 YouTube 打开这一秒</a><a href="assets/frames/00h20m04s_为什么中国的叙事更务实.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1354s">00:22:34</a>
+<h3>退格键：最好的软件是最小的</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1353&amp;end=1359&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h22m34s_退格键最好的软件是最小的.jpg" alt="退格键：最好的软件是最小的"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他用「打字」类比编程：在打字出现之前就有工程，之后也会有大量工程。他常对工程师说「你只是在打字」，并说自己最喜欢的键是退格键——最好的软件是最小的软件。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1354s">在 YouTube 打开这一秒</a><a href="assets/frames/00h22m34s_退格键最好的软件是最小的.jpg">查看截图原图</a></div>
+</article>
+<h2 class="section" id="s5"><span class="n">05</span><span class="t">特朗普来电</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1395s">00:23:15</a>
+<h3>节目中接到总统电话</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1394&amp;end=1400&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h23m15s_节目中接到总统电话.jpg" alt="节目中接到总统电话"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">节目进行中接到特朗普的电话，黄仁勋当场把他接到扩音器上。特朗普第一句调侃：詹森能造出十年没人能复制的芯片，却不知道怎么把他接到免提上。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1395s">在 YouTube 打开这一秒</a><a href="assets/frames/00h23m15s_节目中接到总统电话.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1508s">00:25:08</a>
+<h3>「这是骗局」与数据中心</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1507&amp;end=1513&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h25m08s_这是骗局与数据中心.jpg" alt="「这是骗局」与数据中心"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">特朗普称 AI 末日论是「骗局」，并表示数据中心是未来 20 到 25 年的石油、比互联网更大，正在让原本衰败的社区变富裕，不能因为这套论调停下来。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1508s">在 YouTube 打开这一秒</a><a href="assets/frames/00h25m08s_这是骗局与数据中心.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1615s">00:26:55</a>
+<h3>谁赢得 AI 谁赢得一切</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1614&amp;end=1620&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h26m55s_谁赢得AI谁赢得一切.jpg" alt="谁赢得 AI 谁赢得一切"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">特朗普引用自己的说法：「谁赢得 AI，谁就赢得一切」，并称要让美国在 AI 竞赛中人人受益——每个行业、每家公司、每个州。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1615s">在 YouTube 打开这一秒</a><a href="assets/frames/00h26m55s_谁赢得AI谁赢得一切.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1708s">00:28:28</a>
+<h3>挂断之后：这是真的</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1707&amp;end=1713&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h28m28s_挂断之后这是真的.jpg" alt="挂断之后：这是真的"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">挂断后嘉宾们确认这不是安排好的桥段。他们聊到总统会半夜打电话、把正在度假的黄仁勋叫回来，以及他为什么能看穿这套末日叙事。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1708s">在 YouTube 打开这一秒</a><a href="assets/frames/00h28m28s_挂断之后这是真的.jpg">查看截图原图</a></div>
+</article>
+<h2 class="section" id="s6"><span class="n">06</span><span class="t">AI 繁荣与英伟达的资本配置</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1930s">00:32:10</a>
+<h3>4000 亿风投与就业</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1929&amp;end=1935&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h32m10s_4000亿风投与就业.jpg" alt="4000 亿风投与就业"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">谈到 AI 带来的资本与就业：仅最近六个月就有约 4000 亿美元风险融资进入 AI 行业，创造了大量岗位，也带来对算力和数据中心的巨大需求。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1930s">在 YouTube 打开这一秒</a><a href="assets/frames/00h32m10s_4000亿风投与就业.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1980s">00:33:00</a>
+<h3>英伟达成了「AI 的银行」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=1979&amp;end=1985&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h33m00s_英伟达成了AI的银行.jpg" alt="英伟达成了「AI 的银行」"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">主持人指出，英伟达为了把生态推起来，实际上不得不成为「AI 的银行」：与 BlackRock、Goldman 等合作搭建融资能力，从上游供应链一路布局。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=1980s">在 YouTube 打开这一秒</a><a href="assets/frames/00h33m00s_英伟达成了AI的银行.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2236s">00:37:16</a>
+<h3>向上走到必要的高度</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2235&amp;end=2241&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h37m16s_向上走到必要的高度.jpg" alt="向上走到必要的高度"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他的策略表述：「向上走到必要的高度，向下走得尽可能低」。如果不是英伟达做了 cuDNN，各种框架就不会存在；把该做的技术做出来，然后让百花齐放。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2236s">在 YouTube 打开这一秒</a><a href="assets/frames/00h37m16s_向上走到必要的高度.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2300s">00:38:20</a>
+<h3>「我出奇地不喜欢竞争」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2299&amp;end=2305&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h38m20s_我出奇地不喜欢竞争.jpg" alt="「我出奇地不喜欢竞争」"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">谈到超大规模云厂商时他说，自己「出奇地不喜欢竞争」，更希望有五家超级云厂商；但他指出超大规模厂商一年只规划一次，而市场波动太大，区域云反而更敏捷。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2300s">在 YouTube 打开这一秒</a><a href="assets/frames/00h38m20s_我出奇地不喜欢竞争.jpg">查看截图原图</a></div>
+</article>
+<h2 class="section" id="s7"><span class="n">07</span><span class="t">开源野心、中国与超级智能</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2428s">00:40:28</a>
+<h3>会不会做出最好的开源模型</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2427&amp;end=2433&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h40m28s_会不会做出最好的开源模型.jpg" alt="会不会做出最好的开源模型"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">被问是否要拿开源模型的金牌、开源能否追上前沿时，他的逻辑是：我们会做，一是我们有这个能力，二是客户需要我们做。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2428s">在 YouTube 打开这一秒</a><a href="assets/frames/00h40m28s_会不会做出最好的开源模型.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2558s">00:42:38</a>
+<h3>对 Terafab 的看法</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2557&amp;end=2563&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h42m38s_对Terafab的看法.jpg" alt="对 Terafab 的看法"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">谈到马斯克宣布的 1 亿平方英尺 Terafab 工厂，他说「如果有谁能做到，那就是他」，并提到两人曾同机长谈过这件事。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2558s">在 YouTube 打开这一秒</a><a href="assets/frames/00h42m38s_对Terafab的看法.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2628s">00:43:48</a>
+<h3>中国 2030 年搞定先进光刻</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2627&amp;end=2633&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h43m48s_中国2030年搞定先进光刻.jpg" alt="中国 2030 年搞定先进光刻"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他判断中国到 2030 年就能自己做出先进光刻系统；被问到是否意味着闸门打开，他说中国非常擅长大规模量产，这只是时间问题。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2628s">在 YouTube 打开这一秒</a><a href="assets/frames/00h43m48s_中国2030年搞定先进光刻.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2705s">00:45:05</a>
+<h3>「我们已经到了超级智能」</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2704&amp;end=2710&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h45m05s_我们已经到了超级智能.jpg" alt="「我们已经到了超级智能」"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">谈到 AGI 与超级智能，他说「我觉得我们已经到了」：在自动驾驶、蛋白质合成这些窄领域里，AI 已经比人做得更好——一辆车的事故率只有人类的十分之一。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2705s">在 YouTube 打开这一秒</a><a href="assets/frames/00h45m05s_我们已经到了超级智能.jpg">查看截图原图</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2750s">00:45:50</a>
+<h3>结尾：骑上这辆车</h3>
+<button class="toggle" type="button" data-toggle data-secs="6" aria-expanded="false">展开视频 · 6 秒</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/S7CrlFLAmEA?start=2749&amp;end=2755&amp;rel=0&amp;modestbranding=1"><img src="assets/frames/00h45m50s_结尾骑上这辆车.jpg" alt="结尾：骑上这辆车"><span class="chip-dur">6 秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">收尾时他鼓励大家「骑上这辆车」，希望所有人一起到达那里，并呼吁把这套戏剧性降温——最重要的是让整个美国一起走。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=S7CrlFLAmEA&t=2750s">在 YouTube 打开这一秒</a><a href="assets/frames/00h45m50s_结尾骑上这辆车.jpg">查看截图原图</a></div>
+</article>
+</main>
+<footer>
+原视频：<a href="https://www.youtube.com/watch?v=S7CrlFLAmEA">https://www.youtube.com/watch?v=S7CrlFLAmEA</a><br>
+片段与截图取自原视频，每个要点只用 <code>yt-dlp --download-sections</code> 截取前后数秒，未下载整片。<br>
+本报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
+</footer>
+</div>
+<button id="totop" type="button" aria-label="回到顶部">↑</button>
+<script>
+(function(){
+  var root=document.documentElement;
+
+  var bar=document.getElementById('bar'), totop=document.getElementById('totop');
+  function onScroll(){
+    var h=root, max=h.scrollHeight-h.clientHeight, y=h.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+    if(totop) totop.classList.toggle('on', y>620);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  if(totop) totop.addEventListener('click',function(){
+    scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.querySelectorAll('.media').forEach(function(fig){
+    var video=fig.querySelector('video'), btn=fig.querySelector('.play');
+    if(!video) return;
+    if(btn) btn.addEventListener('click',function(){ video.play(); });
+    video.addEventListener('play',function(){ fig.classList.add('playing'); });
+    video.addEventListener('ended',function(){ fig.classList.remove('playing'); });
+  });
+
+  /* The facade keeps a page of embeds light: nothing is requested from YouTube until the
+     reader actually asks to watch something. */
+  document.querySelectorAll('.facade').forEach(function(fig){
+    var btn=fig.querySelector('.play');
+    if(!btn) return;
+    btn.addEventListener('click',function(){
+      var frame=document.createElement('iframe');
+      frame.src=fig.dataset.embed+(fig.dataset.embed.indexOf('?')<0?'?':'&')+'autoplay=1';
+      frame.title='YouTube player';
+      frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.setAttribute('allowfullscreen','');
+      fig.appendChild(frame);
+      fig.classList.add('playing');
+      btn.remove();
+    });
+  });
+
+  /* collapse and expand the clip players, so a long report stays readable */
+  var cards=[].slice.call(document.querySelectorAll('.point')).filter(function(card){
+    return !!card.querySelector('[data-toggle]');
+  });
+  function setCard(card,collapsed){
+    card.classList.toggle('collapsed',collapsed);
+    var btn=card.querySelector('[data-toggle]');
+    if(btn){
+      btn.textContent=collapsed?('展开视频 · '+btn.dataset.secs+' 秒'):'收起视频';
+      btn.setAttribute('aria-expanded',collapsed?'false':'true');
+    }
+    if(collapsed){
+      var v=card.querySelector('video');
+      if(v&&!v.paused) v.pause();
+    }
+  }
+  function anyExpanded(){
+    return cards.some(function(card){ return !card.classList.contains('collapsed'); });
+  }
+  var clipsBtn=document.getElementById('clips');
+  function syncClipsLabel(){
+    if(clipsBtn) clipsBtn.textContent=anyExpanded()?'收起全部视频':'展开全部视频';
+  }
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.point');
+      setCard(card,!card.classList.contains('collapsed'));
+      syncClipsLabel();
+    });
+  });
+  var clipKey='yt-report-clips';
+  if(clipsBtn){
+    clipsBtn.addEventListener('click',function(){
+      var collapse=anyExpanded();
+      cards.forEach(function(card){ setCard(card,collapse); });
+      try{ localStorage.setItem(clipKey,collapse?'collapsed':'expanded'); }catch(e){}
+      syncClipsLabel();
+    });
+  }
+  var clipPref=null;
+  try{ clipPref=localStorage.getItem(clipKey); }catch(e){}
+  if(clipPref==='expanded') cards.forEach(function(card){ setCard(card,false); });
+  syncClipsLabel();
+
+})();
+
+(function(){
+  var root=document.documentElement;
+  var key='yt-report-theme', saved=null;
+  try{ saved=localStorage.getItem(key); }catch(e){}
+  if(saved) root.setAttribute('data-theme',saved);
+  var btn=document.getElementById('theme');
+  if(!btn) return;
+  var order=['auto','light','dark'];
+  function paint(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    btn.textContent=cur==='dark'?'\u263e 深色':cur==='light'?'\u2600 浅色':'\u25d0 跟随系统';
+  }
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    var next=order[(order.indexOf(cur)+1)%order.length];
+    if(next==='auto'){ root.removeAttribute('data-theme');
+      try{ localStorage.removeItem(key); }catch(e){} }
+    else { root.setAttribute('data-theme',next);
+      try{ localStorage.setItem(key,next); }catch(e){} }
+    paint();
+  });
+  paint();
+})();</script>
+</body>
+</html>
