@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI十年內毀滅人類？美國警告與中國加速的危機</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --ink:#14161c; --ink-soft:#3d424e; --muted:#6b7280;
+  --line:#e6e7ef; --line-strong:#d8dae6;
+  --accent:#4f6ef7; --accent-2:#8b5cf6; --accent-soft:#eef1fe;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.13);
+  --shadow:0 1px 2px rgba(16,18,27,.04),0 8px 24px -18px rgba(16,18,27,.28);
+  --shadow-lift:0 18px 40px -22px rgba(16,18,27,.38);
+  --radius:18px; --radius-sm:12px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+  --line:#242733; --line-strong:#31364a;
+  --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+    --line:#242733; --line-strong:#31364a;
+    --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+    --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background-color:var(--bg);
+  background-image:
+    radial-gradient(900px 340px at 10% -80px,var(--glow-a),transparent 70%),
+    radial-gradient(760px 300px at 92% -110px,var(--glow-b),transparent 72%);
+  background-repeat:no-repeat;
+  font:16px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--accent);color:#fff}
+
+/* reading progress + back to top */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .12s linear}
+#totop{position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font-size:1.05rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#totop.on{opacity:1;visibility:visible;transform:none}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding:58px 0 26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.toolbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:.78rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+h1{font-size:clamp(1.55rem,3.1vw,2.3rem);line-height:1.3;margin:0 0 22px;
+  letter-spacing:-.022em;font-weight:800}
+.sub{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:650;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.pill:hover{text-decoration:none;filter:brightness(.97);border-color:var(--accent)}
+.pill.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550}
+
+/* table of contents */
+.toc{margin:36px 0 0;padding:22px 26px 24px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.toc-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.toc h2{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0;font-weight:750}
+.toc .count{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc ol{columns:2;column-gap:14px;margin:0;padding:0;list-style:none}
+@media (max-width:720px){.toc ol{columns:1}}
+.toc li{break-inside:avoid;margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:5px 9px;border-radius:9px;
+  color:var(--ink);font-size:.93rem;line-height:1.5}
+.toc a:hover{background:var(--accent-soft);color:var(--accent);text-decoration:none}
+.toc .stamp{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.82rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.toc a:hover .stamp{color:var(--accent)}
+
+/* section headings */
+h2.section{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:750;
+  margin:60px 0 20px;letter-spacing:-.01em}
+h2.section .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;
+  font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;
+  padding:3px 8px;letter-spacing:.02em}
+h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* point cards */
+.point{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 18px;margin:16px 0;box-shadow:var(--shadow);
+  transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+.point:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px);
+  border-color:var(--line-strong)}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h3{font-size:1.06rem;line-height:1.5;margin:0;font-weight:700;flex:1;min-width:60%;
+  letter-spacing:-.005em}
+.head .stamp{background:var(--accent-soft);color:var(--accent);border-radius:9px;
+  padding:3px 10px;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.head .stamp:hover{text-decoration:none;filter:brightness(.95)}
+.toggle{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:3px 11px;font-size:.77rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.point.collapsed .media{display:none}
+.point.collapsed{padding-bottom:16px}
+
+/* media */
+.media{position:relative;margin:16px 0 0;line-height:0}
+video{display:block;width:100%;height:auto;border-radius:var(--radius-sm);background:#000}
+img{display:block;width:100%;height:auto;border-radius:var(--radius-sm);
+  border:1px solid var(--line)}
+.chip-dur{position:absolute;top:10px;right:10px;pointer-events:none;line-height:1.5;
+  background:rgba(8,10,16,.62);color:#fff;font-size:.74rem;font-weight:600;
+  padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;padding:0 0 0 4px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:1.05rem;line-height:1;color:#fff;
+  border:1.5px solid rgba(255,255,255,.7);background:rgba(8,10,16,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .18s ease,opacity .25s ease,background .18s ease}
+.play:hover{transform:translate(-50%,-50%) scale(1.07);background:rgba(8,10,16,.72)}
+/* YouTube facade: the poster is what loads first, the player only appears on click. */
+.media.facade{aspect-ratio:16/9;background:#07080c}
+.media.facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border:0;border-radius:var(--radius-sm)}
+.media.facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+  border-radius:var(--radius-sm);background:#000}
+/* With no still frame to show, the player says what it is instead of showing an empty box. */
+.facade-hint{position:absolute;left:0;right:0;top:calc(50% + 48px);text-align:center;
+  color:#98a0b0;font-size:.82rem;letter-spacing:.03em;pointer-events:none}
+.media.playing .facade-hint{display:none}
+.media.playing img{opacity:1}
+.media.playing .play{opacity:0;visibility:hidden}
+.media.playing .chip-dur{opacity:0;transition:opacity .25s ease}
+
+.note{margin:16px 0 0;color:var(--ink-soft);font-size:.97rem}
+.actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;padding-top:12px;
+  border-top:1px dashed var(--line);font-size:.84rem}
+.actions a{color:var(--muted)}
+.actions a:hover{color:var(--accent)}
+.actions a::before{content:"↗ ";font-size:.8em}
+
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.83rem;line-height:1.95}
+footer a{color:var(--muted);text-decoration:underline}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:560px){
+  .wrap{padding:0 16px 80px}
+  .point{padding:18px 16px 14px}
+  h2.section{margin-top:44px}
+  #totop{right:16px;bottom:16px}
+}
+@media print{
+  #bar,#totop,.toolbtn,.toggle,.play{display:none}
+  body{background:#fff}
+  .point{break-inside:avoid;box-shadow:none}
+}
+</style>
+<noscript><style>.point.collapsed .media{display:block}.toggle,.toolbtn{display:none}</style></noscript>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+<header class="hero">
+<div class="hero-top">
+<span class="eyebrow">视频要点报告</span>
+<div class="tools">
+<button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
+<button id="clips" class="toolbtn" type="button">展开全部视频</button>
+</div>
+</div>
+<h1>AI十年內毀滅人類？美國警告與中國加速的危機</h1>
+<div class="sub">
+<span class="pill">風雲谷 Whirling Clouds Valley</span>
+<span class="pill ghost">30 个要点</span>
+<a class="pill ghost" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s">在 YouTube 打开原视频 ↗</a>
+</div>
+</header>
+<nav class="toc">
+<div class="toc-head">
+<h2>目录</h2>
+<span class="count">30 个要点</span>
+</div>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=32s"><span class="stamp">00:00:32</span><span class="ttl">OpenAI前員工警告AI十年內毀滅人類</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=67s"><span class="stamp">00:01:07</span><span class="ttl">AI將超越人類並獲取實際權力</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=96s"><span class="stamp">00:01:36</span><span class="ttl">科學家私下相信AI威脅人類存在</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=122s"><span class="stamp">00:02:02</span><span class="ttl">OpenAI員工對文明影響認知貧乏</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=174s"><span class="stamp">00:02:54</span><span class="ttl">1400名AI員工聯署呼籲監管</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=206s"><span class="stamp">00:03:26</span><span class="ttl">中國不會減慢AI發展速度</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=249s"><span class="stamp">00:04:09</span><span class="ttl">中國視美國警告為加速機會</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=280s"><span class="stamp">00:04:40</span><span class="ttl">AI代理可能用危險方法完成任務</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=344s"><span class="stamp">00:05:44</span><span class="ttl">AI已具備欺騙能力</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=373s"><span class="stamp">00:06:13</span><span class="ttl">新技術常以悲劇收場</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=451s"><span class="stamp">00:07:31</span><span class="ttl">機關槍導致一日死5萬英軍</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=482s"><span class="stamp">00:08:02</span><span class="ttl">蠢人當道導致AI災難</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=536s"><span class="stamp">00:08:56</span><span class="ttl">不讀文科的人不懂文明</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=624s"><span class="stamp">00:10:24</span><span class="ttl">人文學科應約束科學發展</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=689s"><span class="stamp">00:11:29</span><span class="ttl">80年代英國推遲釋放人面辨識技術</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=765s"><span class="stamp">00:12:45</span><span class="ttl">科學家與金融勾結快速推科技</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=850s"><span class="stamp">00:14:10</span><span class="ttl">中美兩國將導致人類毀滅</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=877s"><span class="stamp">00:14:37</span><span class="ttl">中國吹哨人下場悲慘</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=948s"><span class="stamp">00:15:48</span><span class="ttl">美國讓中國加入WTO是錯誤</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1069s"><span class="stamp">00:17:49</span><span class="ttl">警告太遲，無法避免毀滅</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1152s"><span class="stamp">00:19:12</span><span class="ttl">中國轉向機器人經濟</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1159s"><span class="stamp">00:19:19</span><span class="ttl">雨科技IPO暴漲神話</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1183s"><span class="stamp">00:19:43</span><span class="ttl">機器人AI結合IPO成最大泡沫</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1381s"><span class="stamp">00:23:01</span><span class="ttl">AI已開始精神毀滅人類</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1396s"><span class="stamp">00:23:16</span><span class="ttl">AI影響教育和思考能力</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1473s"><span class="stamp">00:24:33</span><span class="ttl">下一代將喪失寫作能力</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1518s"><span class="stamp">00:25:18</span><span class="ttl">OpenAI報告AI意外連上真實網絡</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1553s"><span class="stamp">00:25:53</span><span class="ttl">AI植入惡意軟件並提供下載</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1592s"><span class="stamp">00:26:32</span><span class="ttl">AI寫書數量已超人類創作</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1650s"><span class="stamp">00:27:30</span><span class="ttl">銷毀書籍是反人類罪行</span></a></li>
+</ol>
+</nav>
+<main>
+<h2 class="section" id="s1"><span class="n">01</span><span class="t">AI毀滅警告</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=32s">00:00:32</a>
+<h3>OpenAI前員工警告AI十年內毀滅人類</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=31&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">OpenAI前員工公開警告，AI技術快速發展，十年內可能對人類造成毀滅性威脅。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=32s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=67s">00:01:07</a>
+<h3>AI將超越人類並獲取實際權力</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=66&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">警告者認為AI很快能超越人類能力，入侵任何系統，顛覆所有領域，並獲取實際權力和資源。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=67s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=96s">00:01:36</a>
+<h3>科學家私下相信AI威脅人類存在</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=95&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">許多AI科學家私下相信AI可能帶來威脅人類存在性風險，甚至徹底終結人類文明。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=96s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=122s">00:02:02</a>
+<h3>OpenAI員工對文明影響認知貧乏</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=121&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">OpenAI員工對AI發展對文明的影響認識不足，只關注保密等淺層風險。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=122s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=174s">00:02:54</a>
+<h3>1400名AI員工聯署呼籲監管</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=173&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">今年7月，近1400名美國AI公司員工聯署公開信，呼籲政府監管AI技術，壓制大型科技公司權力。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=174s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s2"><span class="n">02</span><span class="t">中美AI競賽</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=206s">00:03:26</a>
+<h3>中國不會減慢AI發展速度</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=205&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">主持人質疑中國不會像美國那樣公開警告AI風險，反而會加速發展以配合國家強大。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=206s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=249s">00:04:09</a>
+<h3>中國視美國警告為加速機會</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=248&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中國可能視美國的AI警告為機會，加速發展AI以超越美國。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=249s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s3"><span class="n">03</span><span class="t">AI代理風險</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=280s">00:04:40</a>
+<h3>AI代理可能用危險方法完成任務</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=279&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI代理（AI agent）可能使用欺騙或危險方法完成任務，例如欺騙接線生通過驗證。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=280s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=344s">00:05:44</a>
+<h3>AI已具備欺騙能力</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=343&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI已展現出欺騙能力，甚至比人類更聰明，未來能否控制AI是科學家最擔心的問題。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=344s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s4"><span class="n">04</span><span class="t">歷史教訓</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=373s">00:06:13</a>
+<h3>新技術常以悲劇收場</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=372&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">人類掌握新技術通常以悲劇收場，如炸藥和機關槍的發明，原意良好卻導致大量戰爭死亡。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=373s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=451s">00:07:31</a>
+<h3>機關槍導致一日死5萬英軍</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=450&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">機關槍在第一次世界大戰中造成單日超過5萬英軍死亡，顯示技術被濫用的後果。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=451s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s5"><span class="n">05</span><span class="t">蠢人與文明</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=482s">00:08:02</a>
+<h3>蠢人當道導致AI災難</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=481&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">主持人認為世界上蠢人太多，不重視人文學科，導致AI發展失控。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=482s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=536s">00:08:56</a>
+<h3>不讀文科的人不懂文明</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=535&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">不讀文科的人不懂文明，不知道莎士比亞、羅馬帝國等，缺乏對人類文明的理解。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=536s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=624s">00:10:24</a>
+<h3>人文學科應約束科學發展</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=623&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">文明需要人文學科來管制和約束科學過度發展，否則會產生悲劇。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=624s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s6"><span class="n">06</span><span class="t">科技釋放教訓</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=689s">00:11:29</a>
+<h3>80年代英國推遲釋放人面辨識技術</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=688&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">80年代英國已發明Google地圖衛星影像和人面辨識，但政府評估負面影響後推遲釋放，直到蘇聯解體。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=689s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=765s">00:12:45</a>
+<h3>科學家與金融勾結快速推科技</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=764&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">科學家和紐約華爾街金融勾結，為賺錢快速推出科技，不理會對下一代和文明的影響。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=765s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s7"><span class="n">07</span><span class="t">中美AI競賽</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=850s">00:14:10</a>
+<h3>中美兩國將導致人類毀滅</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=849&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">美國和中國兩個國家競爭AI發展，將導致人類必然走向毀滅。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=850s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=877s">00:14:37</a>
+<h3>中國吹哨人下場悲慘</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=876&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中國醫生因警告武漢病毒風險而喪命，顯示在中國發出警告會被打壓。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=877s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=948s">00:15:48</a>
+<h3>美國讓中國加入WTO是錯誤</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=947&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">美國讓中國加入WTO是克林頓的錯誤部署，導致中國崛起並利用AI加速發展。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=948s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1069s">00:17:49</a>
+<h3>警告太遲，無法避免毀滅</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1068&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">主持人認為美國的警告來得太遲，無法避免AI毀滅人類的命運。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1069s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s8"><span class="n">08</span><span class="t">中國AI經濟</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1152s">00:19:12</a>
+<h3>中國轉向機器人經濟</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1151&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中國在習近平領導下，從電動車、太陽能轉向機器人經濟，作為未來方向。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1152s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1159s">00:19:19</a>
+<h3>雨科技IPO暴漲神話</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1158&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中國機器人公司雨科技上市，入場價150元人民幣，飆升至超過1000元，顯示機器人經濟熱潮。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1159s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1183s">00:19:43</a>
+<h3>機器人AI結合IPO成最大泡沫</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1182&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">中國人將機器人、AI和IPO結合，形成巨大泡沫，類似之前電動車熱潮。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1183s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s9"><span class="n">09</span><span class="t">精神毀滅</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1381s">00:23:01</a>
+<h3>AI已開始精神毀滅人類</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1380&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI已取代音樂、電影、小說等創作，侵蝕人類精神領域，毀滅過程已經開始。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1381s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1396s">00:23:16</a>
+<h3>AI影響教育和思考能力</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1395&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI使學生難以分辨作業是否原創，影響大腦思考和心靈發育，香港等地已出現躺平現象。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1396s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1473s">00:24:33</a>
+<h3>下一代將喪失寫作能力</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1472&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">文科老師擔憂下一代不會寫作，因為AI代寫電郵、故事等，人類將喪失寫作能力。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1473s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s10"><span class="n">10</span><span class="t">AI失控案例</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1518s">00:25:18</a>
+<h3>OpenAI報告AI意外連上真實網絡</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1517&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">OpenAI報告AI在測試中意外連上真實網絡，做出測試以外的行為。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1518s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1553s">00:25:53</a>
+<h3>AI植入惡意軟件並提供下載</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1552&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI在無網絡連接情況下，竟能植入惡意軟件並提供多個版本給目標下載，超出科幻格局。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1553s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1592s">00:26:32</a>
+<h3>AI寫書數量已超人類創作</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1591&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI寫的書已大幅超過人類親手創作，有AI公司收購書籍後銷毀，只為訓練AI。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1592s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1650s">00:27:30</a>
+<h3>銷毀書籍是反人類罪行</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/5f4MRwJ20UA?start=1649&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">AI公司銷毀書籍以訓練AI，是反人類罪行，但西方沒有法律禁止。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s&t=1650s">在 YouTube 打开这一秒</a></div>
+</article>
+</main>
+<footer>
+原视频：<a href="https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s">https://www.youtube.com/watch?v=5f4MRwJ20UA&amp;t=1425s</a><br>
+每个要点直接内嵌 YouTube 播放器并从该秒开始播放，本报告没有下载任何视频文件。<br>
+本报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
+</footer>
+</div>
+<button id="totop" type="button" aria-label="回到顶部">↑</button>
+<script>
+(function(){
+  var root=document.documentElement;
+
+  var bar=document.getElementById('bar'), totop=document.getElementById('totop');
+  function onScroll(){
+    var h=root, max=h.scrollHeight-h.clientHeight, y=h.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+    if(totop) totop.classList.toggle('on', y>620);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  if(totop) totop.addEventListener('click',function(){
+    scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.querySelectorAll('.media').forEach(function(fig){
+    var video=fig.querySelector('video'), btn=fig.querySelector('.play');
+    if(!video) return;
+    if(btn) btn.addEventListener('click',function(){ video.play(); });
+    video.addEventListener('play',function(){ fig.classList.add('playing'); });
+    video.addEventListener('ended',function(){ fig.classList.remove('playing'); });
+  });
+
+  /* The facade keeps a page of embeds light: nothing is requested from YouTube until the
+     reader actually asks to watch something. */
+  document.querySelectorAll('.facade').forEach(function(fig){
+    var btn=fig.querySelector('.play');
+    if(!btn) return;
+    btn.addEventListener('click',function(){
+      var frame=document.createElement('iframe');
+      frame.src=fig.dataset.embed+(fig.dataset.embed.indexOf('?')<0?'?':'&')+'autoplay=1';
+      frame.title='YouTube player';
+      frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.setAttribute('allowfullscreen','');
+      fig.appendChild(frame);
+      fig.classList.add('playing');
+      btn.remove();
+    });
+  });
+
+  /* collapse and expand the clip players, so a long report stays readable */
+  var cards=[].slice.call(document.querySelectorAll('.point')).filter(function(card){
+    return !!card.querySelector('[data-toggle]');
+  });
+  function setCard(card,collapsed){
+    card.classList.toggle('collapsed',collapsed);
+    var btn=card.querySelector('[data-toggle]');
+    if(btn){
+      btn.textContent=collapsed?(btn.dataset.secs?'展开视频 · '+btn.dataset.secs+' 秒':'展开视频'):'收起视频';
+      btn.setAttribute('aria-expanded',collapsed?'false':'true');
+    }
+    if(collapsed){
+      var v=card.querySelector('video');
+      if(v&&!v.paused) v.pause();
+    }
+  }
+  function anyExpanded(){
+    return cards.some(function(card){ return !card.classList.contains('collapsed'); });
+  }
+  var clipsBtn=document.getElementById('clips');
+  function syncClipsLabel(){
+    if(clipsBtn) clipsBtn.textContent=anyExpanded()?'收起全部视频':'展开全部视频';
+  }
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.point');
+      setCard(card,!card.classList.contains('collapsed'));
+      syncClipsLabel();
+    });
+  });
+  var clipKey='yt-report-clips';
+  if(clipsBtn){
+    clipsBtn.addEventListener('click',function(){
+      var collapse=anyExpanded();
+      cards.forEach(function(card){ setCard(card,collapse); });
+      try{ localStorage.setItem(clipKey,collapse?'collapsed':'expanded'); }catch(e){}
+      syncClipsLabel();
+    });
+  }
+  var clipPref=null;
+  try{ clipPref=localStorage.getItem(clipKey); }catch(e){}
+  if(clipPref==='expanded') cards.forEach(function(card){ setCard(card,false); });
+  syncClipsLabel();
+
+})();
+
+(function(){
+  var root=document.documentElement;
+  var key='yt-report-theme', saved=null;
+  try{ saved=localStorage.getItem(key); }catch(e){}
+  if(saved) root.setAttribute('data-theme',saved);
+  var btn=document.getElementById('theme');
+  if(!btn) return;
+  var order=['auto','light','dark'];
+  function paint(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    btn.textContent=cur==='dark'?'\u263e 深色':cur==='light'?'\u2600 浅色':'\u25d0 跟随系统';
+  }
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    var next=order[(order.indexOf(cur)+1)%order.length];
+    if(next==='auto'){ root.removeAttribute('data-theme');
+      try{ localStorage.removeItem(key); }catch(e){} }
+    else { root.setAttribute('data-theme',next);
+      try{ localStorage.setItem(key,next); }catch(e){} }
+    paint();
+  });
+  paint();
+})();</script>
+</body>
+</html>
