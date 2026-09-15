@@ -23,6 +23,15 @@ python3 build_index.py --root .
 
 `--embed youtube` 让报告内嵌播放器而不是携带 mp4，所以仓库里只有文字和截图。
 
+## 两种形态
+
+| 形态 | 命令 | 目录里有什么 |
+| --- | --- | --- |
+| 本机 / Obsidian | `--embed file`（默认） | 切好的 mp4 片段 + 每个要点的截图 |
+| 网页 / 分享链接 | `--embed youtube` | 没有视频文件，直接内嵌 YouTube 播放器 |
+
+网页版还可以用 `--still none`：连截图都不抓，报告只依赖字幕，**一个字节的视频都不下载**。
+
 ## 已知限制
 
 GitHub runner 的数据中心 IP 会被 YouTube 要求做人机验证（`Sign in to confirm you're not a bot`），
