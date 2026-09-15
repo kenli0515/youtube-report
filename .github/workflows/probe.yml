@@ -34,17 +34,30 @@ jobs:
         with:
           deno-version: v2.x
 
-      # The python package with its default extras, which is what a local install uses. The
-      # JS challenge solver ships as the yt-dlp-ejs extra, so [default] matters here.
-      - name: Install yt-dlp
+      - name: Install yt-dlp (standalone binary)
         run: |
-          pipx install "yt-dlp[default]"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          "$HOME/.local/bin/yt-dlp" --version
+          curl -fsSL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux \
+            -o /usr/local/bin/yt-dlp-standalone
+          chmod +x /usr/local/bin/yt-dlp-standalone
+          yt-dlp-standalone --version
 
-      - name: Probe YouTube from the runner
+      # The python package carries the JS challenge solver as the yt-dlp-ejs extra; the
+      # standalone binary may or may not bundle it, which is what the two probe passes compare.
+      - name: Install yt-dlp (python package with extras)
         continue-on-error: true
-        run: bash probe/run-probe.sh
+        run: |
+          python3 -m pip install --user --break-system-packages --upgrade "yt-dlp[default]" \
+            || pipx install "yt-dlp[default]" \
+            || echo "python install failed, the python probe pass will be skipped"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Probe (standalone binary)
+        continue-on-error: true
+        run: YTDLP=yt-dlp-standalone bash probe/run-probe.sh standalone
+
+      - name: Probe (python package)
+        continue-on-error: true
+        run: YTDLP=yt-dlp bash probe/run-probe.sh python
 
       - name: Commit the results
         run: |

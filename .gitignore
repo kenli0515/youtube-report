@@ -1,2 +1,2 @@
-probe/media/
-probe/logs/
+probe/*/logs/
+probe/*/media/

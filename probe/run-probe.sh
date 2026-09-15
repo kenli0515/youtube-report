@@ -5,11 +5,16 @@
 # download with audio - and writes everything into probe/: a markdown summary plus one log per
 # check, so a run can be judged from the repository alone.
 #
-# usage: bash probe/run-probe.sh
+# Two installs are worth comparing, because the JS challenge solver ships as a python extra:
+#   YTDLP=yt-dlp-standalone bash probe/run-probe.sh standalone
+#   YTDLP=yt-dlp            bash probe/run-probe.sh python
+# Results land in probe/<tag>/.
 
 set -u
 
-OUT=probe
+TAG="${1:-local}"
+YTDLP="${YTDLP:-yt-dlp}"
+OUT="probe/$TAG"
 LOGS="$OUT/logs"
 ROWS="$OUT/rows.md"
 FAILS="$OUT/failures.md"
@@ -66,7 +71,7 @@ note() { row "$1" "$2" "—"; }
 clip_check() {  # clip_check <label> <slug> <outfile> <url> <extra args...>
   local label="$1" slug="$2" outfile="$3" url="$4"; shift 4
   check "$label" "$slug" \
-    yt-dlp --no-warnings --ignore-no-formats-error --merge-output-format mp4 -f "$FORMAT" \
+    $YTDLP --no-warnings --ignore-no-formats-error --merge-output-format mp4 -f "$FORMAT" \
       --download-sections "*00:00:10-00:00:16" -o "${outfile%.mp4}.%(ext)s" "$@" "$url"
   if [ -f "$outfile" ]; then
     local probe="$LOGS/$slug-probe.log"
@@ -89,25 +94,25 @@ for entry in "${VIDEOS[@]}"; do
   # --ignore-no-formats-error is what the pipeline passes: without it, a subtitle-only run dies
   # on format selection and looks like a network block.
   check "$name · metadata" "$name-metadata" \
-    yt-dlp --no-warnings --skip-download --ignore-no-formats-error \
+    $YTDLP --no-warnings --skip-download --ignore-no-formats-error \
       --print "%(title)s|%(duration)s|%(view_count)s" "$url"
 
   # No --ignore-no-formats-error here: an empty format list is exactly what we are hunting for.
   check "$name · format list" "$name-formats" \
-    yt-dlp --no-warnings --skip-download -F "$url"
+    $YTDLP --no-warnings --skip-download -F "$url"
   video_formats=$(grep -cE "^[0-9]+ +mp4 +(1920x1080|1280x720|[0-9]+x[0-9]+)" "$LOGS/$name-formats.log" 2>/dev/null || echo 0)
   avc=$(grep -c "avc1" "$LOGS/$name-formats.log" 2>/dev/null || echo 0)
   note "$name · 可用视频格式" "${video_formats} 条（其中 avc1 ${avc} 条）"
 
   check "$name · verbose run" "$name-verbose" \
-    yt-dlp --skip-download --ignore-no-formats-error -J --verbose "$url"
+    $YTDLP --skip-download --ignore-no-formats-error -J --verbose "$url"
 
   hint=$(grep -iE "js runtime|ejs|nsig|signature|po.?token|player.*error" "$LOGS/$name-verbose.log" \
     | head -2 | cut -c1-90 | tr '\n' ' ')
   note "$name · 警告摘要" "${hint:-未提及 JS 运行时或签名问题}"
 
   check "$name · auto subtitles" "$name-subs" \
-    yt-dlp --no-warnings --skip-download --ignore-no-formats-error --write-auto-subs \
+    $YTDLP --no-warnings --skip-download --ignore-no-formats-error --write-auto-subs \
       --sub-langs "$subs" --sub-format vtt -o "$MEDIA/%(id)s.%(ext)s" "$url"
 
   # The whole pipeline hangs on this one: without a JS runtime yt-dlp lists formats but cannot
@@ -119,11 +124,11 @@ for entry in "${VIDEOS[@]}"; do
   for client in "${CLIENTS[@]}"; do
     if [ "$client" = default ]; then
       check "$name · client default" "$name-client-default" \
-        yt-dlp --no-warnings --skip-download --ignore-no-formats-error \
+        $YTDLP --no-warnings --skip-download --ignore-no-formats-error \
           --print "%(title)s" "$url"
     else
       check "$name · client $client" "$name-client-$client" \
-        yt-dlp --no-warnings --skip-download --ignore-no-formats-error \
+        $YTDLP --no-warnings --skip-download --ignore-no-formats-error \
           --extractor-args "youtube:player_client=$client" --print "%(title)s" "$url"
     fi
   done
@@ -133,7 +138,7 @@ done
   echo "# yt-dlp probe"
   echo
   echo "- 运行时间：$(date -u '+%Y-%m-%d %H:%M UTC')"
-  echo "- yt-dlp：$(yt-dlp --version)"
+  echo "- yt-dlp：$($YTDLP --version)"
   echo "- 出口 IP：$(curl -s --max-time 10 https://ipinfo.io/ip) — $(curl -s --max-time 10 https://ipinfo.io/json | python3 -c "import sys,json;print(json.load(sys.stdin).get('org','?'))" 2>/dev/null)"
   echo "- JS 运行时：node $(node --version 2>/dev/null || echo 无)，deno $(deno --version 2>/dev/null | head -1 || echo 未安装)"
   echo
