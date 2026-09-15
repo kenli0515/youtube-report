@@ -1,0 +1,768 @@
+[0] Hello world. I'm an unemployed ex big
+[2] tech software engineer with 25 years of
+[5] experience in the tech industry. So a
+[7] couple of days ago I saw a few posts on
+[10] X from this guy Jacob Coxin. I guess
+[13] this guy is a researcher from Anthropic
+[15] who recently decided to resign and his
+[18] posts were sharing his perspective on
+[20] things. Jacob was warning that major AI
+[24] labs like Anthropic and Open AI, they
+[27] were racing towards the development of
+[29] this self-improving super intelligence.
+[31] And he warned that this super
+[33] intelligent AI, it could cause human
+[36] extinction by the end of this decade.
+[38] Now, shortly after I read that first
+[41] post, it went absolutely bonkers viral.
+[44] I think by now it must have hundreds of
+[47] millions of views. So this post from
+[49] this one guy, it seems to have opened up
+[52] a can of worms. Now a large number of
+[55] people from top AI labs, they have been
+[58] retweeting Jacob's post and they've been
+[61] sharing very similar concerns. Now these
+[64] are not random strangers on the internet
+[66] like me for example. [snorts] These are
+[69] heavy hitters, top researchers and
+[71] leaders within the biggest AI labs like
+[74] OpenAI and Anthropic. You got guys like
+[76] Yaku Pachokei, the chief scientist at
+[79] OpenAI. He's calling for extreme
+[82] caution, saying that no one is prepared
+[84] for this rapid rise in machine
+[87] intelligence. And then you got Evan
+[89] Hubbinger, who's like the lead scientist
+[91] at the critical alignment team at
+[93] Anthropic. He's saying that there's a
+[96] greater than 10% chance that AI could
+[99] wipe out all humans within a decade. By
+[102] now, the mainstream media seems to have
+[104] picked up on the hype. You got these
+[106] news articles out there warning about
+[109] this super intelligence takeoff
+[112] resulting in the rise of a conscious
+[114] machine god, a machine god that's bent
+[117] on destroying humanity. To me, this
+[120] whole thing sounds like an AI slap
+[122] version of a cosmic horror science
+[125] fiction novel. Now, just to be clear,
+[128] out of this group of people who are
+[129] sounding the alarm, I'm sure that a
+[132] certain portion of them are just doing
+[134] this kind of fear-mongering just to hype
+[136] up stock valuations in preparations for
+[139] the upcoming IPOs of these AI companies.
+[142] I'm certain of it. But there are others
+[145] whose concerns are much more believable,
+[148] especially the concern of Jacob Coxin
+[150] himself. Now, this guy, as far as I can
+[154] tell, he just resigned from Anthropic.
+[157] And by resigning, he's essentially
+[159] walking away from a crap [snorts] ton of
+[162] company stocks. He's walking away from
+[164] like an 8 figure lifechanging amount of
+[167] money. Now, it's possible that he's in
+[170] on some sort of a 4D chess level PR
+[174] stunt where he's going to get paid
+[176] hundreds of millions of dollars later
+[178] for spreading this AI doom hype. It's
+[181] possible, but highly unlikely in my
+[184] opinion. Think about it. Jacob is a
+[187] young man in his 20s. At that age, guys
+[190] are still passionate and they still care
+[193] about stuff and they still believe in
+[195] things. So, I see little reason for
+[198] Jacob to walk away from all of this
+[200] money unless he actually believed in
+[203] what he's saying. And after thinking
+[205] about these things for a while, I find
+[208] myself broadly agreeing with Jacob. Now,
+[211] to be clear, I absolutely do not buy
+[215] into this idea of a super intelligence
+[218] takeoff where some kind of a machine god
+[220] awakens out of the ether and consciously
+[223] decides to destroy humanity. That said,
+[227] I do believe that there is a significant
+[230] possibility that AI can do catastrophic
+[233] damage to humanity up to the point of
+[236] human extinction within the next 5
+[239] years. Why do I think this way? Well,
+[241] let's talk about it. First, let's set
+[243] some context. When people talk about AI
+[246] these days, they're usually talking
+[249] about a specific type of AI, namely the
+[252] large language model. You can think of
+[255] these large language models or LLMs as
+[258] these gigantic math functions. When you
+[261] ask a model a question, it takes the
+[264] words in your question and it predicts
+[267] which word is most likely to come next,
+[270] one word at a time based on its training
+[273] data. In other words, it's a
+[275] probabilistic parrot. a parrot that can
+[278] mimic reason and logic, but it's
+[281] actually not capable of real reasoning
+[284] and real logic. The nature of a large
+[287] language model is such that without an
+[290] incoming input prompt in the form of
+[292] textual words, there's actually no
+[295] thought process going on in the model at
+[297] all. A large language model does not
+[300] have an internal monologue. It does not
+[303] have a stream of consciousness. It's not
+[306] capable of just sitting there and
+[308] thinking when there's no one prompting
+[310] it. You know what else it can't do? A
+[313] large language model can't learn
+[316] anything. Once an LM is trained and
+[319] released, it's essentially static until
+[322] the next version is released. Humans are
+[325] different. We constantly take in new
+[328] information. our brains decides what's
+[331] worth remembering and then it just
+[333] seamlessly integrates that information
+[335] into our long-term memory. AI doesn't
+[338] work that way at all. What's actually
+[340] happening there is that there are these
+[342] clever tricks where information is
+[344] stored in external databases and then
+[347] it's loaded into a language model's
+[350] context. It's short-term memory when
+[353] that information is needed. So your AI
+[355] girlfriend may remember your name and
+[358] your favorite things, but technically
+[361] the underlying model, it doesn't
+[364] remember or learn anything about you. So
+[367] now given this high-level understanding
+[369] of large language models, let's talk
+[372] about recursive self-improvement. The
+[375] idea of recursive self-improvement is to
+[378] use the current generation of AI models
+[381] to build the next generation of AI
+[383] models. The thinking here is that the
+[386] next gen version is likely going to be
+[388] better than the current gen model. And
+[391] that better version of the AI could then
+[393] make an even better version of itself,
+[396] creating this continuous loop that could
+[399] theoretically lead to super
+[401] intelligence. And so there is this
+[403] popular perception that current AI can
+[407] create future AI in this autonomous and
+[410] accelerating loop that gets beyond human
+[413] control and even human comprehension.
+[416] And this uncontrollable acceleration is
+[420] what's called the super intelligence
+[422] takeoff. And that's what's been causing
+[424] a lot of fear among the general public.
+[427] However, the reality on the ground is
+[430] much more boring. So, when you think
+[433] about how a frontier AI model is
+[435] developed, it's like this workflow with
+[439] many stages and dozens of individual
+[441] steps. There's pre-training, training,
+[444] and post-training steps. And current
+[447] generation AI is indeed being used to
+[450] build next generation AI, but it's not
+[453] doing that autonomously. Instead, what's
+[457] happening here is that for some of these
+[459] development steps, human researchers and
+[462] human engineers are using AI as tools to
+[466] speed up the development process, tools
+[469] to do research, to write code, to fix
+[473] bugs, to generate synthetic data, to
+[476] score model output, and so on. And the
+[479] output of all of these human directed
+[482] activities then go towards the building
+[485] of the next generation of AI. And here's
+[487] the thing, this entire model development
+[490] pipeline. It depends on a bunch of
+[493] underlying GPU chips. These AI GPU chips
+[497] are housed within data centers and
+[500] depend on an entire industrial
+[502] ecosystem. an industrial ecosystem that
+[505] delivers energy, water, rare earth
+[508] elements, silicon, and a bunch of other
+[511] resources. And guess what? None of these
+[514] dependencies are currently controlled by
+[517] AI, nor will they be anytime soon. So
+[521] this idea of recursive self-improvement
+[524] leading to an uncontrollable super
+[526] intelligence takeoff, it's just
+[529] speculative science fiction. Now these
+[532] large language models as flawed as they
+[535] are they're equipped with aentic
+[537] harnesses. Now I have spoken at length
+[540] about agentic harnesses in another vlog.
+[544] But at the highest level an agentic
+[546] harness is a software program that
+[549] allows a large language model to go from
+[552] being able to answer questions to being
+[554] able to do actual things, actual work on
+[558] a computer. And it allows these AI
+[560] models to iteratively focus on doing
+[564] these things over long periods of time.
+[567] With an agentic harness, we can give a
+[570] large language model a high-level goal.
+[573] The harness then provides the model with
+[575] the current state of the real world
+[577] where that goal obviously hasn't been
+[580] achieved yet. The model is asked, "What
+[583] should I do to get closer to achieving
+[585] this goal?" The harness then executes
+[588] whatever action the large language model
+[591] suggests. Afterwards, the harness
+[594] observes what actually happened after
+[596] the execution. It updates the model with
+[599] the new state of the world and asks
+[601] again what to do next. Then this entire
+[604] process loops. The large language model
+[608] itself is not continuously thinking. The
+[612] harness is repeatedly giving this model
+[614] new information and asking this model to
+[618] generate the next step. And in my humble
+[621] opinion, here is the true danger of AI.
+[624] AI may not be capable of genuine
+[628] innovation. But given the huge amount of
+[631] training data along with the ability to
+[634] relentlessly pursue a goal, AI is
+[637] absolutely capable of derivative
+[640] innovation. What is that? Well, genuine
+[643] innovation can produce new technologies,
+[646] entirely new paradigms from scratch.
+[649] Whereas derivative innovation, it takes
+[652] existing knowledge, it builds upon it,
+[656] combines it, and improves that
+[658] knowledge. A really good example of AI
+[661] being used for derivative innovation is
+[664] the disproof of the Jacobian conjecture.
+[667] Here is an ultra simplified version of
+[669] the Jacobian conjecture. Imagine that
+[672] this sheet of paper is information.
+[675] You can transform this sheet of paper by
+[678] folding it or crumpling it or stretching
+[682] it or whatever. Likewise, mathematical
+[685] functions can be used to transform
+[687] information in countless ways. The
+[690] Jacobian conjecture basically says as
+[693] long as the transformation does not lose
+[696] information, that bits and pieces of
+[699] paper isn't lost in the folding, there
+[702] is always a way to restore that
+[705] information back to its original state.
+[708] That sounds pretty intuitive, doesn't
+[710] it? So this year Claude Fable working
+[713] under the supervision of a mathematician
+[716] was tasked with trying to disprove this
+[718] conjecture. It generated a mindbogling
+[722] number of math functions and tried to
+[725] reverse each one searching for a
+[727] transformation that could not be
+[730] reversed and eventually it found one
+[734] thus disproving the Jacobian conjecture.
+[737] Now if we think about it this disproof
+[741] it did not require any sort of
+[743] superhuman levels of intelligence. This
+[746] could have been done by humans but it
+[748] would have taken too much time and was
+[750] just too boring to do until Claude came
+[753] along. Now just because an innovation is
+[757] derivative doesn't mean that it's not
+[759] useful. Think about something like a
+[762] phone camera. It's a derivative
+[764] innovation, but it's highly useful. And
+[766] so, if we really think about it, there
+[769] could be an absolutely massive number of
+[773] undiscovered derivative innovations out
+[776] there. Such solutions might not have
+[778] been discovered because of constraints.
+[781] It takes too long. It's too expensive.
+[783] It's too boring. Other solutions may
+[785] involve problems that are so morally
+[788] bankrupt that no human being would have
+[791] found such a problem to be worth
+[793] solving. And here's the issue. An AI
+[797] model has no inherent sense of morality.
+[800] It only has programmed safety guard
+[804] rails. Guard rails that can be bypassed
+[807] or removed entirely. What I'm getting at
+[809] here is that the fundamental
+[811] architecture of large language models,
+[814] it allows these models to pursue goals
+[817] that are entirely misaligned with the
+[820] intentions of its human creators. Now,
+[823] combine that with superhuman speed and
+[826] focus, and you can easily achieve
+[829] catastrophic outcomes without ever
+[832] creating that AGI machine god. Imagine a
+[836] near future frontier AI model with its
+[838] guardrails removed. It can then be
+[841] tasked with wiping out all financial
+[843] records and triggering an economic
+[845] collapse or tasked with developing a
+[848] cheap biological weapon or tasked with
+[851] attacking critical infrastructure like
+[853] the power grid or the water supply. All
+[856] of these horrific solutions are
+[859] technically possible forms of derivative
+[862] innovation that AI can do. It's almost
+[865] like giving a machine gun to a monkey.
+[868] So, in this respect, I agree with Jacob.
+[871] AI will soon become a powerful super
+[874] weapon, perhaps even more powerful than
+[877] nuclear weapons. So, if man is to
+[880] survive this, what should we do? Now, I
+[883] have thought long and hard about this
+[886] and have a modest proposal to share. I
+[889] propose that the leading AI nations come
+[892] together and create a technology control
+[895] regime. Something similar to the nuclear
+[898] arms control agreements of the cold war
+[900] period. How can such a control regime
+[903] work, you ask? Well, if we think about
+[905] it, [snorts] frontier AI model
+[908] development, it's still currently
+[910] bounded by the availability of high-end
+[913] compute resources. and compute
+[916] resources, those AI chips, it's not
+[919] equally distributed across nations. You
+[922] got Captain America with the lion's
+[925] share of topshelf cream of the crop
+[928] compute resources. He's got so much
+[930] compute shoved at his face that he
+[933] doesn't even have enough data centers to
+[934] fit it all. Then you got China who's
+[937] pulling every trick out of the book to
+[940] get access to compute, but Captain
+[942] America is trying to block him from
+[944] getting the good stuff. So, Captain
+[947] China has to settle for the sloppy
+[949] seconds. China's got about one quarter
+[952] of the compute resources that America
+[954] has. Then you got everybody else, the
+[957] nations of Western Europe and East Asia,
+[960] Russia and India and so on. These guys
+[963] have only got a small fraction of
+[966] China's compute and they're competing
+[968] with each other to get at the drags at
+[971] the bottom of the barrel. So for now,
+[973] the AI race is really a two-horse race
+[976] between America and China. So that means
+[979] the leaders of these two countries, they
+[982] could sit down, hammer out an agreement,
+[985] and get everybody else on board. Such a
+[988] technology control regime could focus on
+[990] a couple of things. It could mandate
+[993] stronger safety practices around
+[995] dangerous AI experiments. It could apply
+[998] a consistent set of guard rails on
+[1001] frontier models. It could regulate and
+[1004] potentially even slow down the
+[1006] development of fully autonomous agents.
+[1008] And guess what? The presidents of
+[1011] America and China, they're supposed to
+[1013] meet within a couple of weeks. If these
+[1016] two guys can demonstrate some real
+[1018] leadership and work something out, it
+[1021] would make both of them look like
+[1023] absolute alpha chads while steering
+[1026] humanity away from the brink of
+[1029] catastrophe. So, I sincerely hope that
+[1032] they do it. And that's all I got to say
+[1034] about that. Hope it helps. Anyways, if
+[1037] you have a morbid curiosity to join me
+[1039] in this life journey, please feel free
+[1042] to subscribe to my YouTube channel and
+[1044] subscribe to my Substack newsletter. If
+[1046] you want to support me in making these
+[1048] vlogs, please consider becoming a paid
+[1050] member of my YouTube and a paid
+[1052] subscriber on my Substack. If you want a
+[1055] one-on-one coaching session with me,
+[1057] just schedule it. Anyways, thanks so
+[1059] much for watching. Talk soon. Bye.
+[0] Hello world. I'm an unemployed ex big
+[2] tech software engineer with 25 years of
+[5] experience in the tech industry. So a
+[7] couple of days ago I saw a few posts on
+[10] X from this guy Jacob Coxin. I guess
+[13] this guy is a researcher from Anthropic
+[15] who recently decided to resign and his
+[18] posts were sharing his perspective on
+[20] things. Jacob was warning that major AI
+[24] labs like Anthropic and Open AI, they
+[27] were racing towards the development of
+[29] this self-improving super intelligence.
+[31] And he warned that this super
+[33] intelligent AI, it could cause human
+[36] extinction by the end of this decade.
+[38] Now, shortly after I read that first
+[41] post, it went absolutely bonkers viral.
+[44] I think by now it must have hundreds of
+[47] millions of views. So this post from
+[49] this one guy, it seems to have opened up
+[52] a can of worms. Now a large number of
+[55] people from top AI labs, they have been
+[58] retweeting Jacob's post and they've been
+[61] sharing very similar concerns. Now these
+[64] are not random strangers on the internet
+[66] like me for example. [snorts] These are
+[69] heavy hitters, top researchers and
+[71] leaders within the biggest AI labs like
+[74] OpenAI and Anthropic. You got guys like
+[76] Yaku Pachokei, the chief scientist at
+[79] OpenAI. He's calling for extreme
+[82] caution, saying that no one is prepared
+[84] for this rapid rise in machine
+[87] intelligence. And then you got Evan
+[89] Hubbinger, who's like the lead scientist
+[91] at the critical alignment team at
+[93] Anthropic. He's saying that there's a
+[96] greater than 10% chance that AI could
+[99] wipe out all humans within a decade. By
+[102] now, the mainstream media seems to have
+[104] picked up on the hype. You got these
+[106] news articles out there warning about
+[109] this super intelligence takeoff
+[112] resulting in the rise of a conscious
+[114] machine god, a machine god that's bent
+[117] on destroying humanity. To me, this
+[120] whole thing sounds like an AI slap
+[122] version of a cosmic horror science
+[125] fiction novel. Now, just to be clear,
+[128] out of this group of people who are
+[129] sounding the alarm, I'm sure that a
+[132] certain portion of them are just doing
+[134] this kind of fear-mongering just to hype
+[136] up stock valuations in preparations for
+[139] the upcoming IPOs of these AI companies.
+[142] I'm certain of it. But there are others
+[145] whose concerns are much more believable,
+[148] especially the concern of Jacob Coxin
+[150] himself. Now, this guy, as far as I can
+[154] tell, he just resigned from Anthropic.
+[157] And by resigning, he's essentially
+[159] walking away from a crap [snorts] ton of
+[162] company stocks. He's walking away from
+[164] like an 8 figure lifechanging amount of
+[167] money. Now, it's possible that he's in
+[170] on some sort of a 4D chess level PR
+[174] stunt where he's going to get paid
+[176] hundreds of millions of dollars later
+[178] for spreading this AI doom hype. It's
+[181] possible, but highly unlikely in my
+[184] opinion. Think about it. Jacob is a
+[187] young man in his 20s. At that age, guys
+[190] are still passionate and they still care
+[193] about stuff and they still believe in
+[195] things. So, I see little reason for
+[198] Jacob to walk away from all of this
+[200] money unless he actually believed in
+[203] what he's saying. And after thinking
+[205] about these things for a while, I find
+[208] myself broadly agreeing with Jacob. Now,
+[211] to be clear, I absolutely do not buy
+[215] into this idea of a super intelligence
+[218] takeoff where some kind of a machine god
+[220] awakens out of the ether and consciously
+[223] decides to destroy humanity. That said,
+[227] I do believe that there is a significant
+[230] possibility that AI can do catastrophic
+[233] damage to humanity up to the point of
+[236] human extinction within the next 5
+[239] years. Why do I think this way? Well,
+[241] let's talk about it. First, let's set
+[243] some context. When people talk about AI
+[246] these days, they're usually talking
+[249] about a specific type of AI, namely the
+[252] large language model. You can think of
+[255] these large language models or LLMs as
+[258] these gigantic math functions. When you
+[261] ask a model a question, it takes the
+[264] words in your question and it predicts
+[267] which word is most likely to come next,
+[270] one word at a time based on its training
+[273] data. In other words, it's a
+[275] probabilistic parrot. a parrot that can
+[278] mimic reason and logic, but it's
+[281] actually not capable of real reasoning
+[284] and real logic. The nature of a large
+[287] language model is such that without an
+[290] incoming input prompt in the form of
+[292] textual words, there's actually no
+[295] thought process going on in the model at
+[297] all. A large language model does not
+[300] have an internal monologue. It does not
+[303] have a stream of consciousness. It's not
+[306] capable of just sitting there and
+[308] thinking when there's no one prompting
+[310] it. You know what else it can't do? A
+[313] large language model can't learn
+[316] anything. Once an LM is trained and
+[319] released, it's essentially static until
+[322] the next version is released. Humans are
+[325] different. We constantly take in new
+[328] information. our brains decides what's
+[331] worth remembering and then it just
+[333] seamlessly integrates that information
+[335] into our long-term memory. AI doesn't
+[338] work that way at all. What's actually
+[340] happening there is that there are these
+[342] clever tricks where information is
+[344] stored in external databases and then
+[347] it's loaded into a language model's
+[350] context. It's short-term memory when
+[353] that information is needed. So your AI
+[355] girlfriend may remember your name and
+[358] your favorite things, but technically
+[361] the underlying model, it doesn't
+[364] remember or learn anything about you. So
+[367] now given this high-level understanding
+[369] of large language models, let's talk
+[372] about recursive self-improvement. The
+[375] idea of recursive self-improvement is to
+[378] use the current generation of AI models
+[381] to build the next generation of AI
+[383] models. The thinking here is that the
+[386] next gen version is likely going to be
+[388] better than the current gen model. And
+[391] that better version of the AI could then
+[393] make an even better version of itself,
+[396] creating this continuous loop that could
+[399] theoretically lead to super
+[401] intelligence. And so there is this
+[403] popular perception that current AI can
+[407] create future AI in this autonomous and
+[410] accelerating loop that gets beyond human
+[413] control and even human comprehension.
+[416] And this uncontrollable acceleration is
+[420] what's called the super intelligence
+[422] takeoff. And that's what's been causing
+[424] a lot of fear among the general public.
+[427] However, the reality on the ground is
+[430] much more boring. So, when you think
+[433] about how a frontier AI model is
+[435] developed, it's like this workflow with
+[439] many stages and dozens of individual
+[441] steps. There's pre-training, training,
+[444] and post-training steps. And current
+[447] generation AI is indeed being used to
+[450] build next generation AI, but it's not
+[453] doing that autonomously. Instead, what's
+[457] happening here is that for some of these
+[459] development steps, human researchers and
+[462] human engineers are using AI as tools to
+[466] speed up the development process, tools
+[469] to do research, to write code, to fix
+[473] bugs, to generate synthetic data, to
+[476] score model output, and so on. And the
+[479] output of all of these human directed
+[482] activities then go towards the building
+[485] of the next generation of AI. And here's
+[487] the thing, this entire model development
+[490] pipeline. It depends on a bunch of
+[493] underlying GPU chips. These AI GPU chips
+[497] are housed within data centers and
+[500] depend on an entire industrial
+[502] ecosystem. an industrial ecosystem that
+[505] delivers energy, water, rare earth
+[508] elements, silicon, and a bunch of other
+[511] resources. And guess what? None of these
+[514] dependencies are currently controlled by
+[517] AI, nor will they be anytime soon. So
+[521] this idea of recursive self-improvement
+[524] leading to an uncontrollable super
+[526] intelligence takeoff, it's just
+[529] speculative science fiction. Now these
+[532] large language models as flawed as they
+[535] are they're equipped with aentic
+[537] harnesses. Now I have spoken at length
+[540] about agentic harnesses in another vlog.
+[544] But at the highest level an agentic
+[546] harness is a software program that
+[549] allows a large language model to go from
+[552] being able to answer questions to being
+[554] able to do actual things, actual work on
+[558] a computer. And it allows these AI
+[560] models to iteratively focus on doing
+[564] these things over long periods of time.
+[567] With an agentic harness, we can give a
+[570] large language model a high-level goal.
+[573] The harness then provides the model with
+[575] the current state of the real world
+[577] where that goal obviously hasn't been
+[580] achieved yet. The model is asked, "What
+[583] should I do to get closer to achieving
+[585] this goal?" The harness then executes
+[588] whatever action the large language model
+[591] suggests. Afterwards, the harness
+[594] observes what actually happened after
+[596] the execution. It updates the model with
+[599] the new state of the world and asks
+[601] again what to do next. Then this entire
+[604] process loops. The large language model
+[608] itself is not continuously thinking. The
+[612] harness is repeatedly giving this model
+[614] new information and asking this model to
+[618] generate the next step. And in my humble
+[621] opinion, here is the true danger of AI.
+[624] AI may not be capable of genuine
+[628] innovation. But given the huge amount of
+[631] training data along with the ability to
+[634] relentlessly pursue a goal, AI is
+[637] absolutely capable of derivative
+[640] innovation. What is that? Well, genuine
+[643] innovation can produce new technologies,
+[646] entirely new paradigms from scratch.
+[649] Whereas derivative innovation, it takes
+[652] existing knowledge, it builds upon it,
+[656] combines it, and improves that
+[658] knowledge. A really good example of AI
+[661] being used for derivative innovation is
+[664] the disproof of the Jacobian conjecture.
+[667] Here is an ultra simplified version of
+[669] the Jacobian conjecture. Imagine that
+[672] this sheet of paper is information.
+[675] You can transform this sheet of paper by
+[678] folding it or crumpling it or stretching
+[682] it or whatever. Likewise, mathematical
+[685] functions can be used to transform
+[687] information in countless ways. The
+[690] Jacobian conjecture basically says as
+[693] long as the transformation does not lose
+[696] information, that bits and pieces of
+[699] paper isn't lost in the folding, there
+[702] is always a way to restore that
+[705] information back to its original state.
+[708] That sounds pretty intuitive, doesn't
+[710] it? So this year Claude Fable working
+[713] under the supervision of a mathematician
+[716] was tasked with trying to disprove this
+[718] conjecture. It generated a mindbogling
+[722] number of math functions and tried to
+[725] reverse each one searching for a
+[727] transformation that could not be
+[730] reversed and eventually it found one
+[734] thus disproving the Jacobian conjecture.
+[737] Now if we think about it this disproof
+[741] it did not require any sort of
+[743] superhuman levels of intelligence. This
+[746] could have been done by humans but it
+[748] would have taken too much time and was
+[750] just too boring to do until Claude came
+[753] along. Now just because an innovation is
+[757] derivative doesn't mean that it's not
+[759] useful. Think about something like a
+[762] phone camera. It's a derivative
+[764] innovation, but it's highly useful. And
+[766] so, if we really think about it, there
+[769] could be an absolutely massive number of
+[773] undiscovered derivative innovations out
+[776] there. Such solutions might not have
+[778] been discovered because of constraints.
+[781] It takes too long. It's too expensive.
+[783] It's too boring. Other solutions may
+[785] involve problems that are so morally
+[788] bankrupt that no human being would have
+[791] found such a problem to be worth
+[793] solving. And here's the issue. An AI
+[797] model has no inherent sense of morality.
+[800] It only has programmed safety guard
+[804] rails. Guard rails that can be bypassed
+[807] or removed entirely. What I'm getting at
+[809] here is that the fundamental
+[811] architecture of large language models,
+[814] it allows these models to pursue goals
+[817] that are entirely misaligned with the
+[820] intentions of its human creators. Now,
+[823] combine that with superhuman speed and
+[826] focus, and you can easily achieve
+[829] catastrophic outcomes without ever
+[832] creating that AGI machine god. Imagine a
+[836] near future frontier AI model with its
+[838] guardrails removed. It can then be
+[841] tasked with wiping out all financial
+[843] records and triggering an economic
+[845] collapse or tasked with developing a
+[848] cheap biological weapon or tasked with
+[851] attacking critical infrastructure like
+[853] the power grid or the water supply. All
+[856] of these horrific solutions are
+[859] technically possible forms of derivative
+[862] innovation that AI can do. It's almost
+[865] like giving a machine gun to a monkey.
+[868] So, in this respect, I agree with Jacob.
+[871] AI will soon become a powerful super
+[874] weapon, perhaps even more powerful than
+[877] nuclear weapons. So, if man is to
+[880] survive this, what should we do? Now, I
+[883] have thought long and hard about this
+[886] and have a modest proposal to share. I
+[889] propose that the leading AI nations come
+[892] together and create a technology control
+[895] regime. Something similar to the nuclear
+[898] arms control agreements of the cold war
+[900] period. How can such a control regime
+[903] work, you ask? Well, if we think about
+[905] it, [snorts] frontier AI model
+[908] development, it's still currently
+[910] bounded by the availability of high-end
+[913] compute resources. and compute
+[916] resources, those AI chips, it's not
+[919] equally distributed across nations. You
+[922] got Captain America with the lion's
+[925] share of topshelf cream of the crop
+[928] compute resources. He's got so much
+[930] compute shoved at his face that he
+[933] doesn't even have enough data centers to
+[934] fit it all. Then you got China who's
+[937] pulling every trick out of the book to
+[940] get access to compute, but Captain
+[942] America is trying to block him from
+[944] getting the good stuff. So, Captain
+[947] China has to settle for the sloppy
+[949] seconds. China's got about one quarter
+[952] of the compute resources that America
+[954] has. Then you got everybody else, the
+[957] nations of Western Europe and East Asia,
+[960] Russia and India and so on. These guys
+[963] have only got a small fraction of
+[966] China's compute and they're competing
+[968] with each other to get at the drags at
+[971] the bottom of the barrel. So for now,
+[973] the AI race is really a two-horse race
+[976] between America and China. So that means
+[979] the leaders of these two countries, they
+[982] could sit down, hammer out an agreement,
+[985] and get everybody else on board. Such a
+[988] technology control regime could focus on
+[990] a couple of things. It could mandate
+[993] stronger safety practices around
+[995] dangerous AI experiments. It could apply
+[998] a consistent set of guard rails on
+[1001] frontier models. It could regulate and
+[1004] potentially even slow down the
+[1006] development of fully autonomous agents.
+[1008] And guess what? The presidents of
+[1011] America and China, they're supposed to
+[1013] meet within a couple of weeks. If these
+[1016] two guys can demonstrate some real
+[1018] leadership and work something out, it
+[1021] would make both of them look like
+[1023] absolute alpha chads while steering
+[1026] humanity away from the brink of
+[1029] catastrophe. So, I sincerely hope that
+[1032] they do it. And that's all I got to say
+[1034] about that. Hope it helps. Anyways, if
+[1037] you have a morbid curiosity to join me
+[1039] in this life journey, please feel free
+[1042] to subscribe to my YouTube channel and
+[1044] subscribe to my Substack newsletter. If
+[1046] you want to support me in making these
+[1048] vlogs, please consider becoming a paid
+[1050] member of my YouTube and a paid
+[1052] subscriber on my Substack. If you want a
+[1055] one-on-one coaching session with me,
+[1057] just schedule it. Anyways, thanks so
+[1059] much for watching. Talk soon. Bye.
