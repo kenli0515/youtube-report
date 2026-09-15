@@ -238,6 +238,10 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 <span class="gen-state" id="gen-paste-state"></span>
 </div>
 </details>
+<p class="gen-note">runner 拿不到这条视频的字幕时（YouTube 会拦数据中心 IP），两条退路：展开下面的
+「自己贴一份」，或者装
+<a id="gen-userscript" href="tools/youtube-report.user.js">油猴脚本</a>
+直接在 YouTube 页面上生成 —— 脚本用你自己的浏览器读字幕，不经过 runner。</p>
 <p class="gen-note">两个 key 都只活在这个页面里：GitHub token 是 fine-grained、只勾本仓库的
 <code>Contents: Read and write</code>，用来往 <code>requests/</code> 和 <code>work/</code>
 写文件；DeepSeek key 由浏览器直接调用 DeepSeek（<code>api.deepseek.com</code>），不经过任何服务器。流程：① Action 抓字幕 →
@@ -316,7 +320,7 @@ footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9
 <p class="empty" id="empty" hidden>没有匹配的报告。</p>
 <footer>
 共 6 份报告，位于 <code>youtube-report/</code>。<br>
-索引生成于 2026-09-15 17:29；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
+索引生成于 2026-09-16 01:46；新增报告后重新运行 <code>build_index.py --root</code> 即可刷新。<br>
 每份报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
 </footer>
 </div>

@@ -499,6 +499,13 @@
     }
   }
 
+  /* The userscript lives in this repository, so the link works on a fork too. */
+  var userscript = document.getElementById('gen-userscript');
+  if (userscript) {
+    userscript.href = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH +
+      '/tools/youtube-report.user.js';
+  }
+
   loadSecrets();
   el.run.addEventListener('click', run);
   el.url.addEventListener('keydown', function (event) {

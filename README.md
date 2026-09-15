@@ -31,6 +31,25 @@
 `work/<id>/error.txt`，页面会把它显示出来，并提示可以展开「抓不到字幕？自己贴一份」，把视频页
 「显示字幕记录」里的内容（或 `.srt` / `.vtt`）贴进去 —— 这条路完全不依赖 runner 的网络。
 
+## 油猴脚本（可选：不依赖 runner 的抓字幕）
+
+runner 是数据中心 IP，YouTube 经常要求它做人机验证，「抓字幕」这一步就会失败。
+`tools/youtube-report.user.js` 把这件事搬进你的浏览器：它运行在 youtube.com 页面上，
+字幕直接从页面读出来，DeepSeek 和 GitHub 的调用也在浏览器里完成。
+
+安装（Tampermonkey / Violentmonkey）：
+
+1. 先装 Tampermonkey 扩展；
+2. 打开 <https://raw.githubusercontent.com/kenli0515/youtube-report/main/tools/youtube-report.user.js>；
+3. Tampermonkey 会弹出安装页，确认；
+4. 回到任意 YouTube 视频页，右下角出现「生成要点报告」，填一次 token + key 即可。
+
+两个 key 存在油猴自己的存储里（Tampermonkey 的 `GM_setValue`，退化为 `localStorage`）。
+
+已知限制：YouTube 现在要求 **poToken** 才肯把字幕文件交出来，所以脚本读的是页面自己渲染的
+「显示字幕记录」面板（等于你手动点开它拿到的那份）。脚本会自己试着点开；点不开时它会在日志里
+说明原因，你手动点开面板再按一次生成就行。
+
 ## 在本机生成
 
 ```bash
