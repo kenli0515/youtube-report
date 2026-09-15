@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube 要点报告
 // @namespace    https://github.com/kenli0515/youtube-report
-// @version      1.0.1
+// @version      1.0.2
 // @description  在 YouTube 视频页直接读字幕，用你自己的 DeepSeek key 生成简体中文要点报告
 // @author       kenli0515
 // @match        https://www.youtube.com/watch*
@@ -85,9 +85,25 @@
 
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
+  /* YouTube re-cut this panel in 2025: the rows are <transcript-segment-view-model> now instead
+     of <ytd-transcript-segment-renderer>, the stamp moved into a ...Timestamp div, and the text
+     sits in a <span class="ytAttributedStringHost"> that carries no class of its own. Both shapes
+     are read here, and a row's body comes from its text nodes, so the next rename of a tag or a
+     class does not cost another round of digging. Auto-generated (asr) captions need no special
+     handling at all: the panel renders whichever track it was handed. */
+  var SEGMENT_SELECTOR = 'transcript-segment-view-model, ytd-transcript-segment-renderer';
+  var STAMP_SELECTOR = '[class*="Timestamp"], [class*="timestamp"]';
+
+  function transcriptPanel() {
+    return document.querySelector('[target-id*="transcript"]');
+  }
+
   function panelIsOpen() {
-    var panel = document.querySelector('ytd-engagement-panel-section-list-renderer[target-id*="transcript"]');
-    return !!panel && panel.getAttribute('visibility') === 'ENGAGEMENT_PANEL_VISIBILITY_EXPANDED';
+    var panel = transcriptPanel();
+    if (!panel) return false;
+    if (panel.getAttribute('visibility') === 'ENGAGEMENT_PANEL_VISIBILITY_EXPANDED') return true;
+    /* The view-model panel drops the attribute but still paints its rows. */
+    return !!panel.querySelector(SEGMENT_SELECTOR);
   }
 
   /* The description hides the transcript button inside its expanded/structured section, so a
@@ -133,17 +149,65 @@
   }
 
   function panelSummary() {
-    var panel = document.querySelector(
-      'ytd-engagement-panel-section-list-renderer[target-id*="transcript"]');
+    var panel = transcriptPanel();
+    var rows = segments();
     return {
       panel: panel ? panel.getAttribute('visibility') : 'none',
-      segments: segments().length,
+      rowTag: rows.length ? rows[0].tagName.toLowerCase() : 'none',
+      segments: rows.length,
       button: !!transcriptButton()
     };
   }
 
   function segments() {
-    return [].slice.call(document.querySelectorAll('ytd-transcript-segment-renderer'));
+    var panel = transcriptPanel();
+    return [].slice.call((panel || document).querySelectorAll(SEGMENT_SELECTOR));
+  }
+
+  function segmentStamp(el) {
+    var nodes = el.querySelectorAll(STAMP_SELECTOR);
+    for (var i = 0; i < nodes.length; i++) {
+      var sec = parseStamp(nodes[i].textContent);
+      /* The row also carries a screen-reader label ("1 minute, 5 seconds"); skip it. */
+      if (sec !== null) return { sec: sec, text: String(nodes[i].textContent).trim() };
+    }
+    /* Drift insurance: the stamp is the first text in the row, whatever element holds it. Read
+       it from the text nodes rather than innerText, which needs the row to be laid out. */
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = (node.nodeValue || '').trim();
+      var fallback = parseStamp(text);
+      if (fallback !== null) return { sec: fallback, text: text };
+    }
+    return null;
+  }
+
+  /* Every row carries a screen-reader label next to its stamp - "0 seconds", "1 minute, 5
+     seconds", "2 分 30 秒", depending on the UI language. It reads as digits, separators and unit
+     words and nothing else, which is what these two patterns match. */
+  var A11Y_UNITS = 'seconds?|minutes?|hours?|秒|分|分鐘|分钟|小時|小时|時|时';
+  var A11Y_LABEL = new RegExp('^(?:\\d+[\\s,.]*(?:' + A11Y_UNITS + ')[\\s,.]*)+$', 'i');
+  var A11Y_HEAD = new RegExp('^(?:\\d+[\\s,.]*(?:' + A11Y_UNITS + ')[\\s,.]*)+', 'i');
+
+  function segmentBody(el) {
+    var parts = [];
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = (node.nodeValue || '').replace(/\s+/g, ' ').trim();
+      if (!text || parseStamp(text) !== null || A11Y_LABEL.test(text)) continue;
+      var cls = String((node.parentElement && node.parentElement.className) || '');
+      if (/timestamp/i.test(cls)) continue;
+      parts.push(text);
+    }
+    var body = parts.join(' ').replace(/\s+/g, ' ').trim();
+    if (body) return body;
+    /* Older rows keep the stamp and the text in one node; cut the stamp off. */
+    var raw = (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim();
+    var stamp = segmentStamp(el);
+    if (stamp && raw.indexOf(stamp.text) === 0) raw = raw.slice(stamp.text.length);
+    return raw.replace(A11Y_HEAD, '').replace(/\s+/g, ' ').trim();
   }
 
   async function scrapePanel() {
@@ -153,8 +217,11 @@
       if (segments().length) break;
       await sleep(400);
     }
-    /* The list renders as it is scrolled; keep nudging it until the count stops growing. */
+    /* The old list renders as it is scrolled and the view-model panel paints every row up
+       front; nudging the scroller is harmless in the second case and needed in the first. */
+    var panel = transcriptPanel();
     var scroller = document.querySelector('#segments-container') ||
+      (panel && panel.querySelector('yt-section-list-renderer')) ||
       document.querySelector('ytd-transcript-renderer #contents') || null;
     var seen = 0;
     for (var pass = 0; pass < 25 && scroller; pass++) {
@@ -166,21 +233,12 @@
     }
     var out = [];
     segments().forEach(function (el) {
-      var time = el.querySelector('.segment-timestamp, [class*="timestamp"]');
-      var text = el.querySelector('.segment-text, [class*="segment-text"]');
-      var sec = time ? parseStamp(time.textContent) : null;
-      var body = text ? (text.textContent || '').replace(/\s+/g, ' ').trim() : '';
-      if (sec === null || !body) {
-        /* Class names drift; the rendered text of a segment is always "<stamp> <text>". */
-        var lines = (el.innerText || el.textContent || '').split('\n')
-          .map(function (line) { return line.trim(); }).filter(Boolean);
-        sec = lines.length > 1 ? parseStamp(lines[0]) : null;
-        body = lines.length > 1 ? lines.slice(1).join(' ').replace(/\s+/g, ' ').trim() : '';
-      }
-      if (sec === null || !body) return;
+      var stamp = segmentStamp(el);
+      var body = segmentBody(el);
+      if (!stamp || !body) return;
       var last = out[out.length - 1];
       if (last && last.text === body) return;
-      out.push({ sec: sec, text: body });
+      out.push({ sec: stamp.sec, text: body });
     });
     return { cues: out, how: how };
   }
@@ -252,9 +310,18 @@
 
     var panel = await scrapePanel();
     if (panel.cues.length) {
-      return { cues: panel.cues, lang: 'panel', isAuto: false, source: '字幕面板' };
+      var meta = await playerResponse(id);
+      var panelTrack = meta ? pickTrack(captionTracks(meta)) : null;
+      return {
+        cues: panel.cues,
+        lang: (panelTrack && panelTrack.languageCode) || 'panel',
+        isAuto: !!(panelTrack && panelTrack.kind === 'asr'),
+        source: '字幕面板'
+      };
     }
-    problems.push('字幕面板：' + panel.how + '（依次尝试展开描述、点「显示字幕记录」）');
+    var shape = panelSummary();
+    problems.push('字幕面板：' + panel.how + '，行元素 ' + shape.rowTag + '，读到 ' + shape.segments +
+      ' 条（依次尝试展开描述、点「显示字幕记录」）');
 
     var pr = await playerResponse(id);
     if (pr) {
