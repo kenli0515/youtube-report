@@ -1,0 +1,46 @@
+name: yt-dlp probe
+
+# Answers one question before anything else gets built: can a GitHub-hosted runner talk to
+# YouTube at all, and can it pull a few seconds of video? Datacenter IPs are the usual reason
+# this fails, so it has to be measured on the runner rather than assumed.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "probe/**"
+      - ".github/workflows/probe.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Environment
+        run: |
+          echo "runner ip: $(curl -s https://ipinfo.io/ip)"
+          curl -s https://ipinfo.io/json | python3 -c "import sys,json;d=json.load(sys.stdin);print(d.get('org'),'|',d.get('city'),d.get('country'))" || true
+          python3 --version; node --version; ffmpeg -version | head -1
+          command -v deno || echo "deno: not installed"
+
+      - name: Install yt-dlp
+        run: |
+          curl -fsSL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o /usr/local/bin/yt-dlp
+          chmod +x /usr/local/bin/yt-dlp
+          yt-dlp --version
+
+      - name: Probe YouTube from the runner
+        continue-on-error: true
+        run: bash probe/run-probe.sh
+
+      - name: Commit the results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A probe
+          git diff --cached --quiet || git commit -m "probe: yt-dlp results [skip ci]"
+          git push
