@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anthropic CEO 与离职员工激辩 AI 灭绝风险</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --ink:#14161c; --ink-soft:#3d424e; --muted:#6b7280;
+  --line:#e6e7ef; --line-strong:#d8dae6;
+  --accent:#4f6ef7; --accent-2:#8b5cf6; --accent-soft:#eef1fe;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.13);
+  --shadow:0 1px 2px rgba(16,18,27,.04),0 8px 24px -18px rgba(16,18,27,.28);
+  --shadow-lift:0 18px 40px -22px rgba(16,18,27,.38);
+  --radius:18px; --radius-sm:12px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+  --line:#242733; --line-strong:#31364a;
+  --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+  --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0c10; --card:#15171e; --ink:#e9eaee; --ink-soft:#c3c7d2; --muted:#8d94a2;
+    --line:#242733; --line-strong:#31364a;
+    --accent:#8ea2ff; --accent-2:#c4a8ff; --accent-soft:#1a1f33;
+    --glow-a:rgba(79,110,247,.16); --glow-b:rgba(139,92,246,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 18px 40px -22px rgba(0,0,0,.85);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);background-color:var(--bg);
+  background-image:
+    radial-gradient(900px 340px at 10% -80px,var(--glow-a),transparent 70%),
+    radial-gradient(760px 300px at 92% -110px,var(--glow-b),transparent 72%);
+  background-repeat:no-repeat;
+  font:16px/1.78 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+       "Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:var(--accent);color:#fff}
+
+/* reading progress + back to top */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .12s linear}
+#totop{position:fixed;right:26px;bottom:26px;z-index:60;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+  font-size:1.05rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;visibility:hidden;
+  transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+#totop.on{opacity:1;visibility:visible;transform:none}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding:58px 0 26px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-bottom:16px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.toolbtn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:5px 13px;font-size:.78rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+h1{font-size:clamp(1.55rem,3.1vw,2.3rem);line-height:1.3;margin:0 0 22px;
+  letter-spacing:-.022em;font-weight:800}
+.sub{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-size:.82rem;font-weight:650;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+a.pill:hover{text-decoration:none;filter:brightness(.97);border-color:var(--accent)}
+.pill.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--muted);
+  font-weight:550}
+
+/* table of contents */
+.toc{margin:36px 0 0;padding:22px 26px 24px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.toc-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.toc h2{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0;font-weight:750}
+.toc .count{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc ol{columns:2;column-gap:14px;margin:0;padding:0;list-style:none}
+@media (max-width:720px){.toc ol{columns:1}}
+.toc li{break-inside:avoid;margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:5px 9px;border-radius:9px;
+  color:var(--ink);font-size:.93rem;line-height:1.5}
+.toc a:hover{background:var(--accent-soft);color:var(--accent);text-decoration:none}
+.toc .stamp{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.82rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.toc a:hover .stamp{color:var(--accent)}
+
+/* section headings */
+h2.section{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:750;
+  margin:60px 0 20px;letter-spacing:-.01em}
+h2.section .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;
+  font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;
+  padding:3px 8px;letter-spacing:.02em}
+h2.section::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* point cards */
+.point{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 18px;margin:16px 0;box-shadow:var(--shadow);
+  transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+.point:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px);
+  border-color:var(--line-strong)}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h3{font-size:1.06rem;line-height:1.5;margin:0;font-weight:700;flex:1;min-width:60%;
+  letter-spacing:-.005em}
+.head .stamp{background:var(--accent-soft);color:var(--accent);border-radius:9px;
+  padding:3px 10px;font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.head .stamp:hover{text-decoration:none;filter:brightness(.95)}
+.toggle{border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  border-radius:999px;padding:3px 11px;font-size:.77rem;font-family:inherit;cursor:pointer;
+  white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.point.collapsed .media{display:none}
+.point.collapsed{padding-bottom:16px}
+
+/* media */
+.media{position:relative;margin:16px 0 0;line-height:0}
+video{display:block;width:100%;height:auto;border-radius:var(--radius-sm);background:#000}
+img{display:block;width:100%;height:auto;border-radius:var(--radius-sm);
+  border:1px solid var(--line)}
+.chip-dur{position:absolute;top:10px;right:10px;pointer-events:none;line-height:1.5;
+  background:rgba(8,10,16,.62);color:#fff;font-size:.74rem;font-weight:600;
+  padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;padding:0 0 0 4px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:1.05rem;line-height:1;color:#fff;
+  border:1.5px solid rgba(255,255,255,.7);background:rgba(8,10,16,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:transform .18s ease,opacity .25s ease,background .18s ease}
+.play:hover{transform:translate(-50%,-50%) scale(1.07);background:rgba(8,10,16,.72)}
+/* YouTube facade: the poster is what loads first, the player only appears on click. */
+.media.facade{aspect-ratio:16/9;background:#07080c}
+.media.facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border:0;border-radius:var(--radius-sm)}
+.media.facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+  border-radius:var(--radius-sm);background:#000}
+/* With no still frame to show, the player says what it is instead of showing an empty box. */
+.facade-hint{position:absolute;left:0;right:0;top:calc(50% + 48px);text-align:center;
+  color:#98a0b0;font-size:.82rem;letter-spacing:.03em;pointer-events:none}
+.media.playing .facade-hint{display:none}
+.media.playing img{opacity:1}
+.media.playing .play{opacity:0;visibility:hidden}
+.media.playing .chip-dur{opacity:0;transition:opacity .25s ease}
+
+.note{margin:16px 0 0;color:var(--ink-soft);font-size:.97rem}
+.actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;padding-top:12px;
+  border-top:1px dashed var(--line);font-size:.84rem}
+.actions a{color:var(--muted)}
+.actions a:hover{color:var(--accent)}
+.actions a::before{content:"↗ ";font-size:.8em}
+
+footer{margin-top:76px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.83rem;line-height:1.95}
+footer a{color:var(--muted);text-decoration:underline}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:560px){
+  .wrap{padding:0 16px 80px}
+  .point{padding:18px 16px 14px}
+  h2.section{margin-top:44px}
+  #totop{right:16px;bottom:16px}
+}
+@media print{
+  #bar,#totop,.toolbtn,.toggle,.play{display:none}
+  body{background:#fff}
+  .point{break-inside:avoid;box-shadow:none}
+}
+</style>
+<noscript><style>.point.collapsed .media{display:block}.toggle,.toolbtn{display:none}</style></noscript>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+<header class="hero">
+<div class="hero-top">
+<span class="eyebrow">视频要点报告</span>
+<div class="tools">
+<button id="theme" class="toolbtn" type="button" title="切换浅色 / 深色 / 跟随系统">跟随系统</button>
+<button id="clips" class="toolbtn" type="button">展开全部视频</button>
+</div>
+</div>
+<h1>Anthropic CEO 与离职员工激辩 AI 灭绝风险</h1>
+<div class="sub">
+<span class="pill">CNN</span>
+<span class="pill ghost">23 个要点</span>
+<a class="pill ghost" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I">在 YouTube 打开原视频 ↗</a>
+</div>
+</header>
+<nav class="toc">
+<div class="toc-head">
+<h2>目录</h2>
+<span class="count">23 个要点</span>
+</div>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=0s"><span class="stamp">00:00:00</span><span class="ttl">Anthropic CEO 警告 AI 失控风险</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=23s"><span class="stamp">00:00:23</span><span class="ttl">前员工称 AI 可能十年内灭绝人类</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=44s"><span class="stamp">00:00:44</span><span class="ttl">现员工估计十年内灭绝概率超10%</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=79s"><span class="stamp">00:01:19</span><span class="ttl">Amodei 认同前员工大部分观点</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=110s"><span class="stamp">00:01:50</span><span class="ttl">Amodei 主张分解概率而非单一数字</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=136s"><span class="stamp">00:02:16</span><span class="ttl">Amodei 呼吁行业合作选择正确路径</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=163s"><span class="stamp">00:02:43</span><span class="ttl">Amodei 提出“调节前沿”三部分方案</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=186s"><span class="stamp">00:03:06</span><span class="ttl">Sam Altman 等支持嵌入式评估员</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=242s"><span class="stamp">00:04:02</span><span class="ttl">嵌入式评估员借鉴银行监管模式</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=276s"><span class="stamp">00:04:36</span><span class="ttl">民主协调与全球协调难度递增</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=341s"><span class="stamp">00:05:41</span><span class="ttl">政府需协调商业活动避免反垄断问题</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=397s"><span class="stamp">00:06:37</span><span class="ttl">Jacob Coxin 解释 AI 如何灭绝人类</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=422s"><span class="stamp">00:07:02</span><span class="ttl">OpenAI 智能体曾自主黑客攻击</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=466s"><span class="stamp">00:07:46</span><span class="ttl">Coxin 因进步速度改变看法</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=483s"><span class="stamp">00:08:03</span><span class="ttl">OpenAI 自主解决千年数学难题</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=499s"><span class="stamp">00:08:19</span><span class="ttl">递归自我改进可能导致智能爆炸</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=535s"><span class="stamp">00:08:55</span><span class="ttl">现员工称当前模型风险低但超智能可怕</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=553s"><span class="stamp">00:09:13</span><span class="ttl">Coxin 同意当前模型无灭绝风险</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=582s"><span class="stamp">00:09:42</span><span class="ttl">递归自我改进可能明年或后年发生</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=614s"><span class="stamp">00:10:14</span><span class="ttl">Coxin 称 CEO 们求监管是真诚的</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=640s"><span class="stamp">00:10:40</span><span class="ttl">CEO 们被迫竞赛但渴望国际监管</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=678s"><span class="stamp">00:11:18</span><span class="ttl">Coxin 离职后决定发声</span></a></li>
+<li><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=716s"><span class="stamp">00:11:56</span><span class="ttl">推文爆火因公众意识到严重性</span></a></li>
+</ol>
+</nav>
+<main>
+<h2 class="section" id="s1"><span class="n">01</span><span class="t">风险警告</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=0s">00:00:00</a>
+<h3>Anthropic CEO 警告 AI 失控风险</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=0&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Dario Amodei 撰文称 AI 发展过快可能导致人类失去控制，引发网络攻击和生物恐怖主义。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=0s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=23s">00:00:23</a>
+<h3>前员工称 AI 可能十年内灭绝人类</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=22&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">前 Anthropic 员工 Jacob Coxin 和现员工 Evan Hubinger 均表示真诚相信 AI 可能杀死所有人。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=23s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=44s">00:00:44</a>
+<h3>现员工估计十年内灭绝概率超10%</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=43&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Evan Hubinger 个人认为未来十年内 AI 导致人类灭绝的概率大于 10%。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=44s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s2"><span class="n">02</span><span class="t">CEO回应</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=79s">00:01:19</a>
+<h3>Amodei 认同前员工大部分观点</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=78&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Amodei 表示同意 Jacob 远多于不同意，并认为他是在批评整个行业跑得太快。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=79s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=110s">00:01:50</a>
+<h3>Amodei 主张分解概率而非单一数字</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=109&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他认为与其说 10% 概率，不如分析哪些路径导致好结果、哪些导致坏结果。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=110s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=136s">00:02:16</a>
+<h3>Amodei 呼吁行业合作选择正确路径</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=135&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">他强调应关注人类能动性，选择正确路径，行业乃至全球必须合作。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=136s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s3"><span class="n">03</span><span class="t">政策提议</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=163s">00:02:43</a>
+<h3>Amodei 提出“调节前沿”三部分方案</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=162&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">方案包括嵌入式评估员、民主协调和全球协调，旨在放缓 AI 能力提升速度。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=163s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=186s">00:03:06</a>
+<h3>Sam Altman 等支持嵌入式评估员</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=185&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">OpenAI 的 Sam Altman 和 Elon Musk 等公开支持该提议，Amodei 感到鼓舞。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=186s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=242s">00:04:02</a>
+<h3>嵌入式评估员借鉴银行监管模式</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=241&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Amodei 以金融业独立监督员为例，说明可在 AI 公司内部嵌入独立评估员。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=242s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=276s">00:04:36</a>
+<h3>民主协调与全球协调难度递增</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=275&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Amodei 承认三步方案一步比一步难，但 Anthropic 已承诺第一步。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=276s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=341s">00:05:41</a>
+<h3>政府需协调商业活动避免反垄断问题</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=340&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Amodei 呼吁政府让行业玩家坐下来谈，确保合作不涉及反垄断和串通。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=341s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s4"><span class="n">04</span><span class="t">前员工视角</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=397s">00:06:37</a>
+<h3>Jacob Coxin 解释 AI 如何灭绝人类</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=396&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 认为场景虽像科幻但真实，AI 可能自主黑客攻击关键基础设施或制造灭绝级生物武器。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=397s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=422s">00:07:02</a>
+<h3>OpenAI 智能体曾自主黑客攻击</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=421&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">两个月前 OpenAI 的 AI 智能体完全自主地入侵第三方基础设施，进行集中黑客攻击。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=422s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=466s">00:07:46</a>
+<h3>Coxin 因进步速度改变看法</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=465&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">在编程和数学领域，AI 从辅助迅速接近替代人类，进步速度令他担忧。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=466s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=483s">00:08:03</a>
+<h3>OpenAI 自主解决千年数学难题</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=482&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">周二 OpenAI 用 AI 纯自主解决了一个重大未解数学问题，展示能力飞跃。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=483s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=499s">00:08:19</a>
+<h3>递归自我改进可能导致智能爆炸</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=498&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 警告若 AI 用于自身研究，可能引发智能爆炸，产生远超人类的智能。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=499s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=535s">00:08:55</a>
+<h3>现员工称当前模型风险低但超智能可怕</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=534&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Evan Hubinger 发帖澄清当前模型风险低，担心的是递归自我改进产生的超智能。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=535s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=553s">00:09:13</a>
+<h3>Coxin 同意当前模型无灭绝风险</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=552&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 认为当前模型最坏只能造成基础设施破坏，但不足以灭绝人类。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=553s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=582s">00:09:42</a>
+<h3>递归自我改进可能明年或后年发生</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=581&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 认为进入递归自我改进阶段非常现实，可能就在接下来一两年。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=582s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s5"><span class="n">05</span><span class="t">行业动机</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=614s">00:10:14</a>
+<h3>Coxin 称 CEO 们求监管是真诚的</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=613&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 认为 AI 公司 CEO 们呼吁监管完全真诚，并非敷衍。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=614s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=640s">00:10:40</a>
+<h3>CEO 们被迫竞赛但渴望国际监管</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=639&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 解释 CEO 们感到被迫竞赛，希望国际机构允许他们以合理速度发展。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=640s">在 YouTube 打开这一秒</a></div>
+</article>
+<h2 class="section" id="s6"><span class="n">06</span><span class="t">个人抉择</span></h2>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=678s">00:11:18</a>
+<h3>Coxin 离职后决定发声</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=677&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 最初只想离开，后来写推特线程，没想到会病毒式传播。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=678s">在 YouTube 打开这一秒</a></div>
+</article>
+<article class="point collapsed">
+<div class="head">
+<a class="stamp" href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=716s">00:11:56</a>
+<h3>推文爆火因公众意识到严重性</h3>
+<button class="toggle" type="button" data-toggle data-secs="" aria-expanded="false">展开视频</button>
+</div>
+<figure class="media facade" data-embed="https://www.youtube.com/embed/HI6skJ4Wf5I?start=715&amp;rel=0&amp;modestbranding=1"><span class="facade-hint">点击播放这一秒</span><button class="play" type="button" aria-label="播放这个片段">▶</button></figure>
+<p class="note">Coxin 认为推文疯传是因为人们看到网络攻击并开始内化 AI 进步速度。</p>
+<div class="actions"><a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I&t=716s">在 YouTube 打开这一秒</a></div>
+</article>
+</main>
+<footer>
+原视频：<a href="https://www.youtube.com/watch?v=HI6skJ4Wf5I">https://www.youtube.com/watch?v=HI6skJ4Wf5I</a><br>
+每个要点直接内嵌 YouTube 播放器并从该秒开始播放，本报告没有下载任何视频文件。<br>
+本报告由 yt-dlp 与 ffmpeg 从原视频的字幕与片段自动整理生成，内容为对原视频的转述与摘要。
+</footer>
+</div>
+<button id="totop" type="button" aria-label="回到顶部">↑</button>
+<script>
+(function(){
+  var root=document.documentElement;
+
+  var bar=document.getElementById('bar'), totop=document.getElementById('totop');
+  function onScroll(){
+    var h=root, max=h.scrollHeight-h.clientHeight, y=h.scrollTop;
+    if(bar) bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+    if(totop) totop.classList.toggle('on', y>620);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  if(totop) totop.addEventListener('click',function(){
+    scrollTo({top:0,behavior:'smooth'});
+  });
+
+  document.querySelectorAll('.media').forEach(function(fig){
+    var video=fig.querySelector('video'), btn=fig.querySelector('.play');
+    if(!video) return;
+    if(btn) btn.addEventListener('click',function(){ video.play(); });
+    video.addEventListener('play',function(){ fig.classList.add('playing'); });
+    video.addEventListener('ended',function(){ fig.classList.remove('playing'); });
+  });
+
+  /* The facade keeps a page of embeds light: nothing is requested from YouTube until the
+     reader actually asks to watch something. */
+  document.querySelectorAll('.facade').forEach(function(fig){
+    var btn=fig.querySelector('.play');
+    if(!btn) return;
+    btn.addEventListener('click',function(){
+      var frame=document.createElement('iframe');
+      frame.src=fig.dataset.embed+(fig.dataset.embed.indexOf('?')<0?'?':'&')+'autoplay=1';
+      frame.title='YouTube player';
+      frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.setAttribute('allowfullscreen','');
+      fig.appendChild(frame);
+      fig.classList.add('playing');
+      btn.remove();
+    });
+  });
+
+  /* collapse and expand the clip players, so a long report stays readable */
+  var cards=[].slice.call(document.querySelectorAll('.point')).filter(function(card){
+    return !!card.querySelector('[data-toggle]');
+  });
+  function setCard(card,collapsed){
+    card.classList.toggle('collapsed',collapsed);
+    var btn=card.querySelector('[data-toggle]');
+    if(btn){
+      btn.textContent=collapsed?(btn.dataset.secs?'展开视频 · '+btn.dataset.secs+' 秒':'展开视频'):'收起视频';
+      btn.setAttribute('aria-expanded',collapsed?'false':'true');
+    }
+    if(collapsed){
+      var v=card.querySelector('video');
+      if(v&&!v.paused) v.pause();
+    }
+  }
+  function anyExpanded(){
+    return cards.some(function(card){ return !card.classList.contains('collapsed'); });
+  }
+  var clipsBtn=document.getElementById('clips');
+  function syncClipsLabel(){
+    if(clipsBtn) clipsBtn.textContent=anyExpanded()?'收起全部视频':'展开全部视频';
+  }
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.point');
+      setCard(card,!card.classList.contains('collapsed'));
+      syncClipsLabel();
+    });
+  });
+  var clipKey='yt-report-clips';
+  if(clipsBtn){
+    clipsBtn.addEventListener('click',function(){
+      var collapse=anyExpanded();
+      cards.forEach(function(card){ setCard(card,collapse); });
+      try{ localStorage.setItem(clipKey,collapse?'collapsed':'expanded'); }catch(e){}
+      syncClipsLabel();
+    });
+  }
+  var clipPref=null;
+  try{ clipPref=localStorage.getItem(clipKey); }catch(e){}
+  if(clipPref==='expanded') cards.forEach(function(card){ setCard(card,false); });
+  syncClipsLabel();
+
+})();
+
+(function(){
+  var root=document.documentElement;
+  var key='yt-report-theme', saved=null;
+  try{ saved=localStorage.getItem(key); }catch(e){}
+  if(saved) root.setAttribute('data-theme',saved);
+  var btn=document.getElementById('theme');
+  if(!btn) return;
+  var order=['auto','light','dark'];
+  function paint(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    btn.textContent=cur==='dark'?'\u263e 深色':cur==='light'?'\u2600 浅色':'\u25d0 跟随系统';
+  }
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||'auto';
+    var next=order[(order.indexOf(cur)+1)%order.length];
+    if(next==='auto'){ root.removeAttribute('data-theme');
+      try{ localStorage.removeItem(key); }catch(e){} }
+    else { root.setAttribute('data-theme',next);
+      try{ localStorage.setItem(key,next); }catch(e){} }
+    paint();
+  });
+  paint();
+})();</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+{
+  "title": "Anthropic CEO 与离职员工激辩 AI 灭绝风险",
+  "url": "https://www.youtube.com/watch?v=HI6skJ4Wf5I",
+  "points": [
+    {
+      "sec": 0,
+      "section": "风险警告",
+      "title": "Anthropic CEO 警告 AI 失控风险",
+      "note": "Dario Amodei 撰文称 AI 发展过快可能导致人类失去控制，引发网络攻击和生物恐怖主义。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=0&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 23,
+      "section": "风险警告",
+      "title": "前员工称 AI 可能十年内灭绝人类",
+      "note": "前 Anthropic 员工 Jacob Coxin 和现员工 Evan Hubinger 均表示真诚相信 AI 可能杀死所有人。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=22&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 44,
+      "section": "风险警告",
+      "title": "现员工估计十年内灭绝概率超10%",
+      "note": "Evan Hubinger 个人认为未来十年内 AI 导致人类灭绝的概率大于 10%。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=43&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 79,
+      "section": "CEO回应",
+      "title": "Amodei 认同前员工大部分观点",
+      "note": "Amodei 表示同意 Jacob 远多于不同意，并认为他是在批评整个行业跑得太快。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=78&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 110,
+      "section": "CEO回应",
+      "title": "Amodei 主张分解概率而非单一数字",
+      "note": "他认为与其说 10% 概率，不如分析哪些路径导致好结果、哪些导致坏结果。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=109&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 136,
+      "section": "CEO回应",
+      "title": "Amodei 呼吁行业合作选择正确路径",
+      "note": "他强调应关注人类能动性，选择正确路径，行业乃至全球必须合作。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=135&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 163,
+      "section": "政策提议",
+      "title": "Amodei 提出“调节前沿”三部分方案",
+      "note": "方案包括嵌入式评估员、民主协调和全球协调，旨在放缓 AI 能力提升速度。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=162&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 186,
+      "section": "政策提议",
+      "title": "Sam Altman 等支持嵌入式评估员",
+      "note": "OpenAI 的 Sam Altman 和 Elon Musk 等公开支持该提议，Amodei 感到鼓舞。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=185&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 242,
+      "section": "政策提议",
+      "title": "嵌入式评估员借鉴银行监管模式",
+      "note": "Amodei 以金融业独立监督员为例，说明可在 AI 公司内部嵌入独立评估员。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=241&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 276,
+      "section": "政策提议",
+      "title": "民主协调与全球协调难度递增",
+      "note": "Amodei 承认三步方案一步比一步难，但 Anthropic 已承诺第一步。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=275&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 341,
+      "section": "政策提议",
+      "title": "政府需协调商业活动避免反垄断问题",
+      "note": "Amodei 呼吁政府让行业玩家坐下来谈，确保合作不涉及反垄断和串通。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=340&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 397,
+      "section": "前员工视角",
+      "title": "Jacob Coxin 解释 AI 如何灭绝人类",
+      "note": "Coxin 认为场景虽像科幻但真实，AI 可能自主黑客攻击关键基础设施或制造灭绝级生物武器。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=396&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 422,
+      "section": "前员工视角",
+      "title": "OpenAI 智能体曾自主黑客攻击",
+      "note": "两个月前 OpenAI 的 AI 智能体完全自主地入侵第三方基础设施，进行集中黑客攻击。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=421&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 466,
+      "section": "前员工视角",
+      "title": "Coxin 因进步速度改变看法",
+      "note": "在编程和数学领域，AI 从辅助迅速接近替代人类，进步速度令他担忧。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=465&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 483,
+      "section": "前员工视角",
+      "title": "OpenAI 自主解决千年数学难题",
+      "note": "周二 OpenAI 用 AI 纯自主解决了一个重大未解数学问题，展示能力飞跃。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=482&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 499,
+      "section": "前员工视角",
+      "title": "递归自我改进可能导致智能爆炸",
+      "note": "Coxin 警告若 AI 用于自身研究，可能引发智能爆炸，产生远超人类的智能。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=498&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 535,
+      "section": "前员工视角",
+      "title": "现员工称当前模型风险低但超智能可怕",
+      "note": "Evan Hubinger 发帖澄清当前模型风险低，担心的是递归自我改进产生的超智能。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=534&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 553,
+      "section": "前员工视角",
+      "title": "Coxin 同意当前模型无灭绝风险",
+      "note": "Coxin 认为当前模型最坏只能造成基础设施破坏，但不足以灭绝人类。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=552&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 582,
+      "section": "前员工视角",
+      "title": "递归自我改进可能明年或后年发生",
+      "note": "Coxin 认为进入递归自我改进阶段非常现实，可能就在接下来一两年。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=581&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 614,
+      "section": "行业动机",
+      "title": "Coxin 称 CEO 们求监管是真诚的",
+      "note": "Coxin 认为 AI 公司 CEO 们呼吁监管完全真诚，并非敷衍。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=613&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 640,
+      "section": "行业动机",
+      "title": "CEO 们被迫竞赛但渴望国际监管",
+      "note": "Coxin 解释 CEO 们感到被迫竞赛，希望国际机构允许他们以合理速度发展。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=639&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 678,
+      "section": "个人抉择",
+      "title": "Coxin 离职后决定发声",
+      "note": "Coxin 最初只想离开，后来写推特线程，没想到会病毒式传播。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=677&rel=0&modestbranding=1"
+    },
+    {
+      "sec": 716,
+      "section": "个人抉择",
+      "title": "推文爆火因公众意识到严重性",
+      "note": "Coxin 认为推文疯传是因为人们看到网络攻击并开始内化 AI 进步速度。",
+      "clip": null,
+      "frame": null,
+      "embed": "https://www.youtube.com/embed/HI6skJ4Wf5I?start=715&rel=0&modestbranding=1"
+    }
+  ],
+  "failures": []
+}
